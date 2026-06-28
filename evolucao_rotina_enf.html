@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolução de Rotina – Enfermagem</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #F0F4F8;
+    --surface: #FFFFFF;
+    --surface-2: #F7FAFC;
+    --border: #D1DCE8;
+    --border-focus: #2B6CB0;
+    --text-main: #1A2535;
+    --text-sub: #4A5E75;
+    --text-muted: #7A90A4;
+    --accent: #2B6CB0;
+    --accent-light: #EBF4FF;
+    --accent-dark: #1A4A80;
+    --green: #2D7D46;
+    --green-light: #EBF5EF;
+    --red: #C0392B;
+    --red-light: #FDECEA;
+    --yellow: #B7791F;
+    --yellow-light: #FFFBEB;
+    --tab-active: #2B6CB0;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.10);
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--accent);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .header-icon {
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,.18);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  header h1 { color: #fff; font-size: 17px; font-weight: 600; letter-spacing: -.2px; }
+  header p { color: rgba(255,255,255,.75); font-size: 12px; margin-top: 1px; }
+  .header-badge {
+    background: rgba(255,255,255,.15);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: .4px;
+  }
+
+  /* ── Layout ── */
+  .wrapper { display: flex; gap: 0; min-height: calc(100vh - 78px); }
+
+  /* ── Sidebar Nav ── */
+  .sidebar {
+    width: 230px;
+    min-width: 230px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    position: sticky;
+    top: 78px;
+    height: calc(100vh - 78px);
+    overflow-y: auto;
+  }
+  .sidebar-section { padding: 6px 16px 2px; font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 20px;
+    cursor: pointer;
+    color: var(--text-sub);
+    font-size: 13px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: all .15s;
+  }
+  .nav-item:hover { background: var(--accent-light); color: var(--accent); }
+  .nav-item.active { background: var(--accent-light); color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+  .nav-item .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+  .nav-badge { margin-left: auto; background: var(--accent); color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 10px; }
+
+  /* ── Main Content ── */
+  .main { flex: 1; padding: 28px 32px; max-width: 900px; }
+
+  /* ── Section ── */
+  .form-section { display: none; }
+  .form-section.active { display: block; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-icon {
+    width: 40px; height: 40px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .section-title { font-size: 18px; font-weight: 700; color: var(--text-main); }
+  .section-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-title {
+    font-size: 13px; font-weight: 600; color: var(--accent);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title::before { content: ''; display: block; width: 3px; height: 14px; background: var(--accent); border-radius: 2px; }
+
+  /* ── Grid ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .col-span-2 { grid-column: span 2; }
+  .col-span-3 { grid-column: span 3; }
+
+  /* ── Form Fields ── */
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 12px; font-weight: 600; color: var(--text-sub); letter-spacing: .2px; }
+  .field label span.req { color: var(--red); margin-left: 2px; }
+
+  input[type="text"], input[type="number"], input[type="date"], input[type="time"],
+  select, textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--text-main);
+    background: var(--surface);
+    transition: border-color .15s, box-shadow .15s;
+    appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(43,108,176,.12);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+
+  input[type="number"] { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+
+  /* ── Radio / Checkbox Groups ── */
+  .radio-group, .check-group {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .radio-group label, .check-group label {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-sub);
+    background: var(--surface-2);
+    transition: all .15s;
+    user-select: none;
+  }
+  .radio-group input, .check-group input { display: none; }
+  .radio-group label:has(input:checked),
+  .check-group label:has(input:checked) {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .radio-group label:hover, .check-group label:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── Vital ref box ── */
+  .ref-box {
+    background: var(--yellow-light);
+    border: 1px solid #F6E05E;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 11px;
+    color: var(--yellow);
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+  .ref-box strong { font-weight: 600; display: block; margin-bottom: 3px; }
+
+  /* ── Status badge ── */
+  .status-bar {
+    background: var(--green-light);
+    border: 1px solid #9AE6B4;
+    border-radius: var(--radius);
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--green);
+    font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px;
+  }
+  .status-bar.warn {
+    background: var(--yellow-light);
+    border-color: #F6E05E;
+    color: var(--yellow);
+  }
+
+  /* ── Scale tables ── */
+  .scale-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .scale-table th {
+    background: var(--accent);
+    color: #fff;
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .scale-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .scale-table tr:nth-child(even) td { background: var(--surface-2); }
+  .scale-table tr.selected td { background: var(--accent-light); font-weight: 600; }
+  .scale-table td:first-child { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--accent); width: 50px; }
+
+  /* ── Calculated field ── */
+  .calc-field {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 9px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-dark);
+    letter-spacing: .5px;
+  }
+
+  /* ── Divider ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  /* ── Optional toggle ── */
+  .optional-section { margin-top: 12px; }
+  .optional-toggle {
+    display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 6px 0;
+    user-select: none;
+  }
+  .optional-toggle::before {
+    content: '＋';
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform .2s;
+  }
+  .optional-toggle.open::before { content: '－'; }
+  .optional-body { display: none; margin-top: 12px; }
+  .optional-body.open { display: block; }
+
+  /* ── Device cards ── */
+  .device-block {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .device-header {
+    background: var(--surface-2);
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-sub);
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer;
+  }
+  .device-body { padding: 16px; display: none; }
+  .device-body.open { display: block; }
+
+  /* ── Bottom bar ── */
+  .bottom-bar {
+    position: sticky;
+    bottom: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 -2px 8px rgba(0,0,0,.06);
+    z-index: 99;
+  }
+  .btn {
+    padding: 9px 22px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all .15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-secondary { background: var(--surface-2); color: var(--text-sub); border: 1px solid var(--border); }
+  .btn-secondary:hover { background: var(--border); }
+  .btn-danger { background: var(--red-light); color: var(--red); border: 1px solid #FECACA; }
+  .btn-success { background: var(--green); color: #fff; }
+  .btn-success:hover { background: #1F5C34; }
+  .progress-text { font-size: 12px; color: var(--text-muted); }
+
+  /* ── Print / Export ── */
+  .output-box {
+    background: #1A2535;
+    border-radius: var(--radius);
+    padding: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #A8D8FF;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 16px; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .col-span-2, .col-span-3 { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="header-icon">🏥</div>
+    <div>
+      <h1>Evolução de Rotina – Enfermagem</h1>
+      <p>Registro clínico estruturado · Cuidado Céfalo-caudal</p>
+    </div>
+  </div>
+  <span class="header-badge">Trabalho Acadêmico</span>
+</header>
+
+<div class="wrapper">
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-section">Identificação</div>
+    <div class="nav-item active" data-section="identificacao"><span class="nav-icon">📋</span>Dados do Paciente</div>
+    <div class="nav-item" data-section="sinais-vitais"><span class="nav-icon">❤️</span>Sinais Vitais</div>
+    <div class="sidebar-section">Avaliação Céfalo-caudal</div>
+    <div class="nav-item" data-section="percepcao"><span class="nav-icon">🧠</span>Percepção e Cognição</div>
+    <div class="nav-item" data-section="cabeca"><span class="nav-icon">👁️</span>Cabeça e Pescoço</div>
+    <div class="nav-item" data-section="cardiovascular"><span class="nav-icon">🫀</span>Cardiovascular</div>
+    <div class="nav-item" data-section="pulmonar"><span class="nav-icon">🫁</span>Pulmonar</div>
+    <div class="nav-item" data-section="abdome"><span class="nav-icon">🩺</span>Abdome</div>
+    <div class="nav-item" data-section="genitalia"><span class="nav-icon">💧</span>Genitálias e Eliminações</div>
+    <div class="nav-item" data-section="pele"><span class="nav-icon">🖐️</span>Pele e Integridade</div>
+    <div class="nav-item" data-section="membros"><span class="nav-icon">🦵</span>MMSS e MMII</div>
+    <div class="sidebar-section">Dispositivos</div>
+    <div class="nav-item" data-section="dispositivos"><span class="nav-icon">🔌</span>Dispositivos Médicos</div>
+    <div class="sidebar-section">Escalas</div>
+    <div class="nav-item" data-section="escalas"><span class="nav-icon">📊</span>Escalas Clínicas</div>
+    <div class="sidebar-section">Saída</div>
+    <div class="nav-item" data-section="resumo"><span class="nav-icon">📝</span>Gerar Evolução</div>
+  </nav>
+
+  <!-- Main -->
+  <div class="main" id="main-content">
+
+    <!-- ====== IDENTIFICAÇÃO ====== -->
+    <div class="form-section active" id="sec-identificacao">
+      <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div>
+          <div class="section-title">Dados do Paciente</div>
+          <div class="section-subtitle">Informações básicas e data da evolução</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Identificação</div>
+        <div class="grid-3">
+          <div class="field col-span-2">
+            <label>Nome do Paciente <span class="req">*</span></label>
+            <input type="text" id="nome" placeholder="Nome completo">
+          </div>
+          <div class="field">
+            <label>Leito / Quarto</label>
+            <input type="text" id="leito" placeholder="Ex: UTI-04">
+          </div>
+          <div class="field">
+            <label>Data da Evolução <span class="req">*</span></label>
+            <input type="date" id="data-evolucao">
+          </div>
+          <div class="field">
+            <label>Horário</label>
+            <input type="time" id="hora-evolucao">
+          </div>
+          <div class="field">
+            <label>Profissional</label>
+            <input type="text" id="profissional" placeholder="Nome / COREN">
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Dados Clínicos Gerais</div>
+        <div class="grid-4">
+          <div class="field">
+            <label>Sexo</label>
+            <select id="sexo">
+              <option value="">Selecionar</option>
+              <option>Masculino</option>
+              <option>Feminino</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Idade (anos)</label>
+            <input type="number" id="idade" min="0" max="120" placeholder="0">
+          </div>
+          <div class="field">
+            <label>Peso (kg)</label>
+            <input type="number" id="peso" step="0.1" min="0" placeholder="0.0" oninput="calcIMC()">
+          </div>
+          <div class="field">
+            <label>Altura (cm)</label>
+            <input type="number" id="altura" step="0.1" min="0" placeholder="0" oninput="calcIMC()">
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="grid-3">
+          <div class="field">
+            <label>Faixa Etária</label>
+            <div class="calc-field" id="faixa-etaria">—</div>
+          </div>
+          <div class="field">
+            <label>IMC Calculado</label>
+            <div class="calc-field" id="imc-calc">—</div>
+          </div>
+          <div class="field">
+            <label>Classificação IMC</label>
+            <div class="calc-field" id="imc-class">—</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="field">
+          <label>Comorbidades</label>
+          <input type="text" id="comorbidades" placeholder="Ex: HAS, DM2, IRC…">
+        </div>
+        <div class="field" style="margin-top:14px">
+          <label>Necessidades Calóricas – Harris-Benedict (GET)</label>
+          <div class="calc-field" id="get-calc">—</div>
+        </div>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:4px">GET = TMB × 1,2 (fator de atividade hospitalar)</p>
+      </div>
+    </div>
+
+    <!-- ====== SINAIS VITAIS ====== -->
+    <div class="form-section" id="sec-sinais-vitais">
+      <div class="section-header">
+        <div class="section-icon">❤️</div>
+        <div>
+          <div class="section-title">Sinais Vitais</div>
+          <div class="section-subtitle">Parâmetros hemodinâmicos e respiratórios</div>
+        </div>
+      </div>
+      <div class="ref-box">
+        <strong>Referências Clínicas</strong>
+        FC: Bradicárdico &lt;60 / Normocárdico 60–100 / Taquicárdico &gt;100 bpm &nbsp;|&nbsp;
+        FR: Bradipneico &lt;12 / Eupneico 12–20 / Taquipneico &gt;20 irpm &nbsp;|&nbsp;
+        Temp: Afebril 36–37 / Febrícula 37,1–37,9 / Febre 38–39,9 / Hipertermia &gt;40°C &nbsp;|&nbsp;
+        SpO₂: Normal &gt;92%
+      </div>
+      <div class="card">
+        <div class="card-title">Medições</div>
+        <div class="grid-3">
+          <div class="field">
+            <label>Freq. Cardíaca – FC (bpm)</label>
+            <input type="number" id="fc" min="0" max="300" placeholder="—" oninput="classFC()">
+          </div>
+          <div class="field">
+            <label>Classificação FC</label>
+            <div class="calc-field" id="class-fc">—</div>
+          </div>
+          <div class="field">
+            <label>FC Máx Suportável (220 – idade)</label>
+            <div class="calc-field" id="fc-max">—</div>
+          </div>
+          <div class="field">
+            <label>PA Sistólica (mmHg)</label>
+            <input type="number" id="pas" min="0" placeholder="—" oninput="calcPA()">
+          </div>
+          <div class="field">
+            <label>PA Diastólica (mmHg)</label>
+            <input type="number" id="pad" min="0" placeholder="—" oninput="calcPA()">
+          </div>
+          <div class="field">
+            <label>PAM – [Sist + (2×Diast)] / 3</label>
+            <div class="calc-field" id="pam-calc">—</div>
+          </div>
+          <div class="field">
+            <label>Freq. Respiratória – FR (irpm)</label>
+            <input type="number" id="fr" min="0" placeholder="—" oninput="classFR()">
+          </div>
+          <div class="field">
+            <label>Classificação FR</label>
+            <div class="calc-field" id="class-fr">—</div>
+          </div>
+          <div class="field">
+            <label>SpO₂ (%)</label>
+            <input type="number" id="spo2" min="0" max="100" placeholder="—">
+          </div>
+          <div class="field">
+            <label>Temperatura (°C)</label>
+            <input type="number" id="temp" step="0.1" min="30" max="44" placeholder="—" oninput="classTemp()">
+          </div>
+          <div class="field">
+            <label>Classificação Temperatura</label>
+            <div class="calc-field" id="class-temp">—</div>
+          </div>
+          <div class="field">
+            <label>Glicemia (mg/dL)</label>
+            <input type="number" id="glicemia" min="0" placeholder="—">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== PERCEPÇÃO E COGNIÇÃO ====== -->
+    <div class="form-section" id="sec-percepcao">
+      <div class="section-header">
+        <div class="section-icon">🧠</div>
+        <div>
+          <div class="section-title">Percepção e Cognição</div>
+          <div class="section-subtitle">Nível de consciência, orientação e mobilidade</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Nível de Consciência</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Estado de Consciência</label>
+            <div class="radio-group" id="rg-consciencia">
+              <label><input type="radio" name="consciencia" value="Lúcido"> Lúcido</label>
+              <label><input type="radio" name="consciencia" value="Sonolento"> Sonolento</label>
+              <label><input type="radio" name="consciencia" value="Sedado"> Sedado</label>
+              <label><input type="radio" name="consciencia" value="Comatoso"> Comatoso</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Orientação</label>
+            <div class="radio-group">
+              <label><input type="radio" name="orientacao" value="Orientado"> Orientado</label>
+              <label><input type="radio" name="orientacao" value="Algorientado"> Algorientado</label>
+              <label><input type="radio" name="orientacao" value="Obnubilado"> Obnubilado</label>
+              <label><input type="radio" name="orientacao" value="Desorientado"> Desorientado</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Interação</label>
+            <div class="radio-group">
+              <label><input type="radio" name="interacao" value="Interagindo"> Interagindo</label>
+              <label><input type="radio" name="interacao" value="Pouca interação"> Pouca interação</label>
+              <label><input type="radio" name="interacao" value="Sem interações"> Sem interações</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Mobilidade / Deambulação</label>
+            <div class="radio-group">
+              <label><input type="radio" name="mobilidade" value="Deambulando sem auxílio"> Deambula sem auxílio</label>
+              <label><input type="radio" name="mobilidade" value="Deambulando com andador"> Com andador</label>
+              <label><input type="radio" name="mobilidade" value="Deambulando com acompanhante"> Com acompanhante</label>
+              <label><input type="radio" name="mobilidade" value="Acamado"> Acamado</label>
+              <label><input type="radio" name="mobilidade" value="Restrito ao leito"> Restrito ao leito</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Força Motora</label>
+            <div class="radio-group">
+              <label><input type="radio" name="forca-motora" value="preservada"> Preservada</label>
+              <label><input type="radio" name="forca-motora" value="reduzida"> Reduzida</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Sensibilidade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="sensibilidade" value="preservada"> Preservada</label>
+              <label><input type="radio" name="sensibilidade" value="reduzida"> Reduzida</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Glasgow -->
+      <div class="card">
+        <div class="card-title">Escala de Coma de Glasgow (opcional)</div>
+        <div class="grid-3">
+          <div class="field">
+            <label>Abertura Ocular (1–4 / NT)</label>
+            <select id="glasgow-o">
+              <option value="">Selecionar</option>
+              <option value="4">4 – Espontânea</option>
+              <option value="3">3 – Ao Som</option>
+              <option value="2">2 – A Pressão</option>
+              <option value="1">1 – Ausente</option>
+              <option value="NT">NT – Não Testável</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Resposta Verbal (1–5 / NT)</label>
+            <select id="glasgow-v">
+              <option value="">Selecionar</option>
+              <option value="5">5 – Orientada</option>
+              <option value="4">4 – Confusa</option>
+              <option value="3">3 – Palavras</option>
+              <option value="2">2 – Sons</option>
+              <option value="1">1 – Ausente</option>
+              <option value="NT">NT – Não Testável</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Resposta Motora (1–6 / NT)</label>
+            <select id="glasgow-m">
+              <option value="">Selecionar</option>
+              <option value="6">6 – Obedece comando</option>
+              <option value="5">5 – Localiza dor</option>
+              <option value="4">4 – Retirada</option>
+              <option value="3">3 – Flexão normal</option>
+              <option value="2">2 – Extensão anormal</option>
+              <option value="1">1 – Nenhuma</option>
+              <option value="NT">NT – Não Testável</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Reação Pupilar à Luz</label>
+            <select id="glasgow-p">
+              <option value="">Selecionar</option>
+              <option value="-0">0 – Ambas reativas</option>
+              <option value="-1">-1 – 1 não reativa</option>
+              <option value="-2">-2 – 2 não reativas</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Pontuação Total Glasgow</label>
+            <div class="calc-field" id="glasgow-total">—</div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:8px">
+          Grave: 3–8 &nbsp;|&nbsp; Moderado: 9–12 &nbsp;|&nbsp; Leve: 13–15
+        </p>
+      </div>
+
+      <!-- RASS -->
+      <div class="card">
+        <div class="card-title">Escala de Sedação RASS (opcional)</div>
+        <div class="field">
+          <label>Nível RASS</label>
+          <select id="rass">
+            <option value="">Não aplicado</option>
+            <option value="+4">+4 – Agressivo</option>
+            <option value="+3">+3 – Muito agitado</option>
+            <option value="+2">+2 – Agitado</option>
+            <option value="+1">+1 – Inquieto</option>
+            <option value="0">0 – Alerta / Calmo</option>
+            <option value="-1">-1 – Sonolento</option>
+            <option value="-2">-2 – Sedação leve</option>
+            <option value="-3">-3 – Sedação moderada</option>
+            <option value="-4">-4 – Sedação profunda</option>
+            <option value="-5">-5 – Não despertável</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== CABEÇA E PESCOÇO ====== -->
+    <div class="form-section" id="sec-cabeca">
+      <div class="section-header">
+        <div class="section-icon">👁️</div>
+        <div>
+          <div class="section-title">Cabeça e Pescoço</div>
+          <div class="section-subtitle">Inspeção do couro cabeludo, olhos, narinas, ouvidos, boca</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Couro Cabeludo</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Integridade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="cc-integ" value="íntegro"> Íntegro</label>
+              <label><input type="radio" name="cc-integ" value="hiperemiado"> Hiperemiado</label>
+              <label><input type="radio" name="cc-integ" value="lesionado"> Lesionado</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Limpeza</label>
+            <div class="radio-group">
+              <label><input type="radio" name="cc-limp" value="limpo"> Limpo</label>
+              <label><input type="radio" name="cc-limp" value="com sujidades"> Com sujidades</label>
+              <label><input type="radio" name="cc-limp" value="com presença de miíase"> Miíase</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Olhos</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Pupilas</label>
+            <div class="radio-group">
+              <label><input type="radio" name="pupilas" value="isocóricas"> Isocóricas</label>
+              <label><input type="radio" name="pupilas" value="anisocóricas"> Anisocóricas</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Fotorreatividade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="foto" value="fotorreagentes"> Fotorreagentes</label>
+              <label><input type="radio" name="foto" value="não fotorreagentes"> Não fotorreagentes</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Escleras</label>
+            <div class="radio-group">
+              <label><input type="radio" name="escleras" value="brancas"> Brancas</label>
+              <label><input type="radio" name="escleras" value="avermelhadas"> Avermelhadas</label>
+              <label><input type="radio" name="escleras" value="amareladas (ictéricas)"> Amareladas</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Cavidade Oral e Dentição</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Lábios – Integridade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="labios-integ" value="íntegros"> Íntegros</label>
+              <label><input type="radio" name="labios-integ" value="edemaciados"> Edemaciados</label>
+              <label><input type="radio" name="labios-integ" value="lesionados"> Lesionados</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Lábios – Coloração</label>
+            <div class="radio-group">
+              <label><input type="radio" name="labios-cor" value="normocorados"> Normocorados</label>
+              <label><input type="radio" name="labios-cor" value="hipocorados"> Hipocorados</label>
+              <label><input type="radio" name="labios-cor" value="hipercorados"> Hipercorados</label>
+              <label><input type="radio" name="labios-cor" value="cianóticos"> Cianóticos</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Mucosa Oral</label>
+            <div class="radio-group">
+              <label><input type="radio" name="mucosa-oral" value="íntegra"> Íntegra</label>
+              <label><input type="radio" name="mucosa-oral" value="hiperemiada"> Hiperemiada</label>
+              <label><input type="radio" name="mucosa-oral" value="lesionada"> Lesionada</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Mucosa Oral – Coloração</label>
+            <div class="radio-group">
+              <label><input type="radio" name="mucosa-cor" value="normocorada"> Normocorada</label>
+              <label><input type="radio" name="mucosa-cor" value="hipocorada"> Hipocorada</label>
+              <label><input type="radio" name="mucosa-cor" value="hipercorada"> Hipercorada</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Dentição</label>
+            <div class="radio-group">
+              <label><input type="radio" name="denticao" value="completa"> Completa</label>
+              <label><input type="radio" name="denticao" value="incompleta"> Incompleta</label>
+              <label><input type="radio" name="denticao" value="ausente"> Ausente</label>
+              <label><input type="radio" name="denticao" value="restos radiculares"> Restos Radicul.</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Narinas</label>
+            <div class="radio-group">
+              <label><input type="radio" name="narinas" value="íntegras"> Íntegras</label>
+              <label><input type="radio" name="narinas" value="lesionadas"> Lesionadas</label>
+              <label><input type="radio" name="narinas" value="obstruídas"> Obstruídas</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== CARDIOVASCULAR ====== -->
+    <div class="form-section" id="sec-cardiovascular">
+      <div class="section-header">
+        <div class="section-icon">🫀</div>
+        <div>
+          <div class="section-title">Avaliação Cardiovascular</div>
+          <div class="section-subtitle">Bulhas cardíacas, TPC, hemodinâmica</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Parâmetros Cardiovasculares</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Bulhas Cardíacas</label>
+            <div class="radio-group">
+              <label><input type="radio" name="bulhas" value="normofonéticas em 2 tempos"> Normofonéticas 2T</label>
+              <label><input type="radio" name="bulhas" value="abafadas"> Abafadas</label>
+              <label><input type="radio" name="bulhas" value="com presença de B3"> Com B3</label>
+              <label><input type="radio" name="bulhas" value="com presença de B4"> Com B4</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tempo de Preenchimento Capilar (TPC)</label>
+            <div class="radio-group">
+              <label><input type="radio" name="tpc" value="inferior a 3 segundos"> &lt;3 seg (inferior)</label>
+              <label><input type="radio" name="tpc" value="superior a 3 segundos"> &gt;3 seg (superior)</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Estado Hemodinâmico</label>
+            <div class="radio-group">
+              <label><input type="radio" name="hemodinamica" value="estável sem uso de aminas"> Estável s/aminas</label>
+              <label><input type="radio" name="hemodinamica" value="estável com uso de aminas"> Estável c/aminas</label>
+              <label><input type="radio" name="hemodinamica" value="instável sem uso de aminas"> Instável s/aminas</label>
+              <label><input type="radio" name="hemodinamica" value="instável com uso de aminas"> Instável c/aminas</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== PULMONAR ====== -->
+    <div class="form-section" id="sec-pulmonar">
+      <div class="section-header">
+        <div class="section-icon">🫁</div>
+        <div>
+          <div class="section-title">Avaliação Pulmonar</div>
+          <div class="section-subtitle">Ritmo respiratório, suporte de O₂, murmúrios vesiculares</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Respiração</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Ritmo Respiratório</label>
+            <div class="radio-group">
+              <label><input type="radio" name="ritmo-resp" value="normal"> Normal</label>
+              <label><input type="radio" name="ritmo-resp" value="dispneia"> Dispneia</label>
+              <label><input type="radio" name="ritmo-resp" value="com apneia"> Apneia</label>
+              <label><input type="radio" name="ritmo-resp" value="de Kussmaul"> Kussmaul</label>
+              <label><input type="radio" name="ritmo-resp" value="de Biot"> Biot</label>
+              <label><input type="radio" name="ritmo-resp" value="de Cheyne-Stokes"> Cheyne-Stokes</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Suporte de O₂</label>
+            <select id="suporte-o2">
+              <option value="">Ar ambiente</option>
+              <option value="cateter-nasal">Cateter Nasal (baixo fluxo)</option>
+              <option value="mascara-simples">Máscara Simples (baixo fluxo)</option>
+              <option value="macronebulizacao">Macronebulização (baixo fluxo)</option>
+              <option value="mascara-venturi">Máscara de Venturi (alto fluxo)</option>
+              <option value="mascara-nao-reinalante">Máscara Não Reinalante (alto fluxo)</option>
+              <option value="cnaf">CNAF – Alto Fluxo</option>
+              <option value="vm">Ventilação Mecânica</option>
+            </select>
+          </div>
+          <div class="field" id="field-o2-litros">
+            <label>Fluxo O₂ (L/min)</label>
+            <input type="number" id="o2-litros" min="0" max="60" step="0.5" placeholder="—">
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Murmúrios Vesiculares e Secreção</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Murmúrios Vesiculares</label>
+            <div class="radio-group">
+              <label><input type="radio" name="mv" value="universalmente audíveis"> Universalmente audíveis</label>
+              <label><input type="radio" name="mv" value="diminuídos à direita"> Dim. à D</label>
+              <label><input type="radio" name="mv" value="diminuídos à esquerda"> Dim. à E</label>
+              <label><input type="radio" name="mv" value="diminuídos bilateralmente"> Dim. bilat.</label>
+              <label><input type="radio" name="mv" value="abolidos à direita"> Abolidos à D</label>
+              <label><input type="radio" name="mv" value="abolidos à esquerda"> Abolidos à E</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Ruídos Adventícios</label>
+            <div class="check-group">
+              <label><input type="checkbox" name="ruidos-adv" value="sem ruídos adventícios"> Sem ruídos</label>
+              <label><input type="checkbox" name="ruidos-adv" value="roncos"> Roncos</label>
+              <label><input type="checkbox" name="ruidos-adv" value="crepitações"> Crepitações</label>
+              <label><input type="checkbox" name="ruidos-adv" value="sibilos"> Sibilos</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Secreção à Aspiração</label>
+            <div class="radio-group">
+              <label><input type="radio" name="secrecao-asp" value="Ausência de secreção à aspiração"> Ausente</label>
+              <label><input type="radio" name="secrecao-asp" value="fluida"> Fluida</label>
+              <label><input type="radio" name="secrecao-asp" value="espessa"> Espessa</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Quantidade de Secreção</label>
+            <div class="radio-group">
+              <label><input type="radio" name="secrecao-qtd" value="pouca"> Pouca</label>
+              <label><input type="radio" name="secrecao-qtd" value="média"> Média</label>
+              <label><input type="radio" name="secrecao-qtd" value="grande"> Grande</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Aspecto da Secreção</label>
+            <div class="radio-group">
+              <label><input type="radio" name="secrecao-asp2" value="seroso"> Seroso</label>
+              <label><input type="radio" name="secrecao-asp2" value="mucoso"> Mucoso</label>
+              <label><input type="radio" name="secrecao-asp2" value="purulento"> Purulento</label>
+              <label><input type="radio" name="secrecao-asp2" value="mucopurulento"> Mucopurulento</label>
+              <label><input type="radio" name="secrecao-asp2" value="hemático"> Hemático</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== ABDOME ====== -->
+    <div class="form-section" id="sec-abdome">
+      <div class="section-header">
+        <div class="section-icon">🩺</div>
+        <div>
+          <div class="section-title">Abdome e Nutrição</div>
+          <div class="section-subtitle">Exame físico abdominal, dieta e eliminação intestinal</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Exame Físico Abdominal</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Forma do Abdome</label>
+            <div class="radio-group">
+              <label><input type="radio" name="abdome-forma" value="plano"> Plano</label>
+              <label><input type="radio" name="abdome-forma" value="escavado"> Escavado</label>
+              <label><input type="radio" name="abdome-forma" value="globoso"> Globoso</label>
+              <label><input type="radio" name="abdome-forma" value="avental"> Avental</label>
+              <label><input type="radio" name="abdome-forma" value="pendular"> Pendular</label>
+              <label><input type="radio" name="abdome-forma" value="gravídico"> Gravídico</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tensão Abdominal</label>
+            <div class="radio-group">
+              <label><input type="radio" name="abdome-tensao" value="flácido"> Flácido</label>
+              <label><input type="radio" name="abdome-tensao" value="distendido"> Distendido</label>
+              <label><input type="radio" name="abdome-tensao" value="tenso"> Tenso</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Palpação</label>
+            <div class="radio-group">
+              <label><input type="radio" name="palpacao" value="Indolor"> Indolor</label>
+              <label><input type="radio" name="palpacao" value="Faces de dor superficial"> Dor superficial</label>
+              <label><input type="radio" name="palpacao" value="Faces de dor profunda"> Dor profunda</label>
+              <label><input type="radio" name="palpacao" value="Relato de dor superficial"> Relato dor superf.</label>
+              <label><input type="radio" name="palpacao" value="Relato de dor profunda"> Relato dor prof.</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Massas Palpáveis</label>
+            <div class="radio-group">
+              <label><input type="radio" name="massas" value="ausência de massas palpáveis"> Ausentes</label>
+              <label><input type="radio" name="massas" value="presença de massas palpáveis"> Presentes</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Ruídos Hidroaéreos (RHA)</label>
+            <div class="radio-group">
+              <label><input type="radio" name="rha" value="ausentes"> Ausentes</label>
+              <label><input type="radio" name="rha" value="hipoativos"> Hipoativos</label>
+              <label><input type="radio" name="rha" value="normoativos"> Normoativos</label>
+              <label><input type="radio" name="rha" value="hiperativos"> Hiperativos</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Dieta</div>
+        <div class="field">
+          <label>Tipo de Dieta</label>
+          <select id="tipo-dieta">
+            <option value="">Selecionar</option>
+            <option value="via-oral-solida">Via oral – sólida</option>
+            <option value="via-oral-pastosa">Via oral – pastosa</option>
+            <option value="via-oral-liquida">Via oral – líquida</option>
+            <option value="sne">Via SNE</option>
+            <option value="npt">Via NPT (CVC)</option>
+            <option value="zero-preop">Zero – pré-operatório</option>
+            <option value="zero-posop">Zero – pós-operatório</option>
+            <option value="zero-outros">Zero – outros motivos</option>
+            <option value="prova">Dieta de prova</option>
+          </select>
+        </div>
+        <div class="grid-2" style="margin-top:12px" id="dieta-aceitacao-box">
+          <div class="field">
+            <label>Aceitação da Dieta</label>
+            <div class="radio-group">
+              <label><input type="radio" name="aceitacao" value="boa"> Boa</label>
+              <label><input type="radio" name="aceitacao" value="parcial"> Parcial</label>
+              <label><input type="radio" name="aceitacao" value="insuficiente"> Insuficiente</label>
+              <label><input type="radio" name="aceitacao" value="apetência"> Apetência</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Auxílio para Alimentação</label>
+            <div class="radio-group">
+              <label><input type="radio" name="aux-alim" value="com auxílio"> Com auxílio</label>
+              <label><input type="radio" name="aux-alim" value="sem auxílio"> Sem auxílio</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Eliminação Intestinal</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Presença de Eliminação</label>
+            <div class="radio-group">
+              <label><input type="radio" name="elim-int" value="ausente"> Ausente</label>
+              <label><input type="radio" name="elim-int" value="presente"> Presente</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Consistência</label>
+            <div class="radio-group">
+              <label><input type="radio" name="fezes-consist" value="Líquida"> Líquida</label>
+              <label><input type="radio" name="fezes-consist" value="Pastosa"> Pastosa</label>
+              <label><input type="radio" name="fezes-consist" value="Consistente"> Consistente</label>
+              <label><input type="radio" name="fezes-consist" value="Endurecida"> Endurecida</label>
+              <label><input type="radio" name="fezes-consist" value="Diarreica"> Diarreica</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Coloração</label>
+            <div class="radio-group">
+              <label><input type="radio" name="fezes-cor" value="Padrão"> Padrão</label>
+              <label><input type="radio" name="fezes-cor" value="Esbranquiçada"> Esbranquiçada</label>
+              <label><input type="radio" name="fezes-cor" value="Amarelada"> Amarelada</label>
+              <label><input type="radio" name="fezes-cor" value="Esverdeada"> Esverdeada</label>
+              <label><input type="radio" name="fezes-cor" value="Avermelhada"> Avermelhada</label>
+              <label><input type="radio" name="fezes-cor" value="Negra (melena)"> Negra</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Odor</label>
+            <div class="radio-group">
+              <label><input type="radio" name="fezes-odor" value="característico"> Característico</label>
+              <label><input type="radio" name="fezes-odor" value="fétido"> Fétido</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== GENITÁLIAS E ELIMINAÇÕES ====== -->
+    <div class="form-section" id="sec-genitalia">
+      <div class="section-header">
+        <div class="section-icon">💧</div>
+        <div>
+          <div class="section-title">Genitálias e Eliminação Urinária</div>
+          <div class="section-subtitle">Integridade, secreção, CVD, balanço hídrico</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Genitálias</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Integridade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="genitalia" value="íntegras"> Íntegras</label>
+              <label><input type="radio" name="genitalia" value="lesionadas"> Lesionadas</label>
+              <label><input type="radio" name="genitalia" value="apresentando Síndrome de Fournier"> S. Fournier</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Secreção Genital</label>
+            <div class="radio-group">
+              <label><input type="radio" name="secrecao-gen" value="Ausência"> Ausente</label>
+              <label><input type="radio" name="secrecao-gen" value="Presença"> Presente</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Coloração da Secreção</label>
+            <div class="radio-group">
+              <label><input type="radio" name="sec-gen-cor" value="translúcida"> Translúcida</label>
+              <label><input type="radio" name="sec-gen-cor" value="esbranquiçada"> Esbranquiçada</label>
+              <label><input type="radio" name="sec-gen-cor" value="amarelada"> Amarelada</label>
+              <label><input type="radio" name="sec-gen-cor" value="esverdeada"> Esverdeada</label>
+              <label><input type="radio" name="sec-gen-cor" value="avermelhada"> Avermelhada</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Eliminação Urinária</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Via de Eliminação</label>
+            <select id="elim-urin-via">
+              <option value="">Selecionar</option>
+              <option value="espontanea-fralda">Espontânea – fralda</option>
+              <option value="espontanea-patinho">Espontânea – patinho</option>
+              <option value="espontanea-comadre">Espontânea – comadre</option>
+              <option value="espontanea-banheiro">Espontânea – banheiro</option>
+              <option value="cvd">CVD – Cateter Vesical de Demora</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Coloração da Urina</label>
+            <div class="radio-group">
+              <label><input type="radio" name="urina-cor" value="citrina"> Citrina</label>
+              <label><input type="radio" name="urina-cor" value="âmbar"> Âmbar</label>
+              <label><input type="radio" name="urina-cor" value="acastanhada"> Acastanhada</label>
+              <label><input type="radio" name="urina-cor" value="hematúria"> Hematúria</label>
+              <label><input type="radio" name="urina-cor" value="colúria"> Colúria</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Volume Urinário (mL / 24h)</label>
+            <input type="number" id="vol-urina" min="0" placeholder="—" oninput="calcDU()">
+          </div>
+          <div class="field">
+            <label>Débito Urinário (mL/kg/h)</label>
+            <div class="calc-field" id="du-calc">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Balanço Hídrico (opcional)</div>
+        <div class="grid-3">
+          <div class="field">
+            <label>Entrada (mL / 24h)</label>
+            <input type="number" id="bh-entrada" min="0" placeholder="—" oninput="calcBH()">
+          </div>
+          <div class="field">
+            <label>Saída (mL / 24h)</label>
+            <input type="number" id="bh-saida" min="0" placeholder="—" oninput="calcBH()">
+          </div>
+          <div class="field">
+            <label>Balanço Hídrico</label>
+            <div class="calc-field" id="bh-result">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== PELE ====== -->
+    <div class="form-section" id="sec-pele">
+      <div class="section-header">
+        <div class="section-icon">🖐️</div>
+        <div>
+          <div class="section-title">Pele e Integridade Tegumentar</div>
+          <div class="section-subtitle">Temperatura, aspecto, lesões por pressão e feridas</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Inspeção da Pele</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Integridade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="pele-integ" value="preservada"> Preservada</label>
+              <label><input type="radio" name="pele-integ" value="comprometida"> Comprometida</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Alterações Observadas (múltiplas)</label>
+            <div class="check-group">
+              <label><input type="checkbox" name="pele-alt" value="anasarca"> Anasarca</label>
+              <label><input type="checkbox" name="pele-alt" value="cianose"> Cianose</label>
+              <label><input type="checkbox" name="pele-alt" value="rubor"> Rubor</label>
+              <label><input type="checkbox" name="pele-alt" value="sudorese excessiva"> Sudorese</label>
+              <label><input type="checkbox" name="pele-alt" value="icterícia"> Icterícia</label>
+              <label><input type="checkbox" name="pele-alt" value="xerose cutânea"> Xerose</label>
+              <label><input type="checkbox" name="pele-alt" value="exsudação"> Exsudação</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Lesões (LPP / Feridas)</div>
+        <div class="field">
+          <label>Tipo de Lesão</label>
+          <select id="lpp-tipo">
+            <option value="">Nenhuma lesão registrada</option>
+            <option value="lpp1">LPP Estágio 1 – Hiperemia não reativa</option>
+            <option value="lpp2">LPP Estágio 2 – Exposição de derme</option>
+            <option value="lpp3">LPP Estágio 3 – Exposição de tecido adiposo</option>
+            <option value="lpp4">LPP Estágio 4 – Exposição de estrutura óssea</option>
+            <option value="lpp-ne">LPP Não Estadiável</option>
+            <option value="lpp-ltp">Lesão Tissular Profunda</option>
+            <option value="dermatite">Dermatite</option>
+            <option value="queimadura">Queimadura</option>
+          </select>
+        </div>
+        <div class="grid-2" style="margin-top:12px">
+          <div class="field">
+            <label>Localização da Lesão</label>
+            <select id="lpp-local">
+              <option value="">Selecionar</option>
+              <option>Occipital</option><option>Escapular</option><option>Sacral</option>
+              <option>Trocanter D</option><option>Trocanter E</option>
+              <option>Glútea</option><option>Interglútea</option>
+              <option>Calcânea D</option><option>Calcânea E</option>
+              <option>MMSS D</option><option>MMSS E</option>
+              <option>MMII D</option><option>MMII E</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Exsudato</label>
+            <div class="radio-group">
+              <label><input type="radio" name="exsudato" value="seroso"> Seroso</label>
+              <label><input type="radio" name="exsudato" value="purulento"> Purulento</label>
+              <label><input type="radio" name="exsudato" value="serosanguinolento"> Serossanguinolento</label>
+              <label><input type="radio" name="exsudato" value="sanguinolento"> Sanguinolento</label>
+            </div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:12px">
+          <label>Cobertura Utilizada no Curativo</label>
+          <input type="text" id="cobertura" placeholder="Ex: Alginato de Cálcio + Gaze não aderente">
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== MMSS / MMII ====== -->
+    <div class="form-section" id="sec-membros">
+      <div class="section-header">
+        <div class="section-icon">🦵</div>
+        <div>
+          <div class="section-title">Membros Superiores e Inferiores</div>
+          <div class="section-subtitle">Edemas, extremidades, panturrilhas</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">MMSS – Membros Superiores</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Edemas MMSS</label>
+            <div class="radio-group">
+              <label><input type="radio" name="edema-mmss" value="livre de edemas"> Sem edemas</label>
+              <label><input type="radio" name="edema-mmss" value="com edemas"> Com edemas</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Extremidades MMSS (múltiplas)</label>
+            <div class="check-group">
+              <label><input type="checkbox" name="ext-mmss" value="íntegras"> Íntegras</label>
+              <label><input type="checkbox" name="ext-mmss" value="gélidas"> Gélidas</label>
+              <label><input type="checkbox" name="ext-mmss" value="cianóticas"> Cianóticas</label>
+              <label><input type="checkbox" name="ext-mmss" value="ictéricas"> Ictéricas</label>
+              <label><input type="checkbox" name="ext-mmss" value="exsudativas"> Exsudativas</label>
+              <label><input type="checkbox" name="ext-mmss" value="com aquecimento"> Com aquecimento</label>
+              <label><input type="checkbox" name="ext-mmss" value="em contenção mecânica"> Contenção mecânica</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">MMII – Membros Inferiores</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Edemas MMII</label>
+            <div class="radio-group">
+              <label><input type="radio" name="edema-mmii" value="livre de edemas"> Sem edemas</label>
+              <label><input type="radio" name="edema-mmii" value="com edemas"> Com edemas</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Panturrilhas</label>
+            <div class="radio-group">
+              <label><input type="radio" name="panturrilha" value="livres"> Livres</label>
+              <label><input type="radio" name="panturrilha" value="empastadas à direita"> Empastadas D</label>
+              <label><input type="radio" name="panturrilha" value="empastadas à esquerda"> Empastadas E</label>
+              <label><input type="radio" name="panturrilha" value="empastadas bilateralmente"> Empastadas bilat.</label>
+            </div>
+          </div>
+          <div class="field col-span-2">
+            <label>Extremidades MMII (múltiplas)</label>
+            <div class="check-group">
+              <label><input type="checkbox" name="ext-mmii" value="íntegras"> Íntegras</label>
+              <label><input type="checkbox" name="ext-mmii" value="gélidas"> Gélidas</label>
+              <label><input type="checkbox" name="ext-mmii" value="cianóticas"> Cianóticas</label>
+              <label><input type="checkbox" name="ext-mmii" value="ictéricas"> Ictéricas</label>
+              <label><input type="checkbox" name="ext-mmii" value="exsudativas"> Exsudativas</label>
+              <label><input type="checkbox" name="ext-mmii" value="com aquecimento"> Com aquecimento</label>
+              <label><input type="checkbox" name="ext-mmii" value="em contenção mecânica"> Contenção mecânica</label>
+              <label><input type="checkbox" name="ext-mmii" value="com sistema de compressão intermitente"> Compressão intermitente</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== DISPOSITIVOS ====== -->
+    <div class="form-section" id="sec-dispositivos">
+      <div class="section-header">
+        <div class="section-icon">🔌</div>
+        <div>
+          <div class="section-title">Dispositivos Médicos</div>
+          <div class="section-subtitle">AVP, CVC, PAI, SNE, SNG, TOT/TQT e outros</div>
+        </div>
+      </div>
+
+      <!-- AVP -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>🩹 AVP – Acesso Venoso Periférico</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Localização AVP</label>
+              <div class="radio-group">
+                <label><input type="radio" name="avp-local" value="MSD"> MSD</label>
+                <label><input type="radio" name="avp-local" value="MSE"> MSE</label>
+                <label><input type="radio" name="avp-local" value="VJD (jugular ext. D)"> VJ D</label>
+                <label><input type="radio" name="avp-local" value="VJE (jugular ext. E)"> VJ E</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data da Punção AVP</label>
+              <input type="date" id="avp-data">
+            </div>
+            <div class="field">
+              <label>N° Cateter (G)</label>
+              <input type="number" id="avp-cateter" min="14" max="24" placeholder="Ex: 20">
+            </div>
+            <div class="field">
+              <label>Sinais Flogísticos</label>
+              <div class="radio-group">
+                <label><input type="radio" name="avp-flog" value="ausência de sinais flogísticos"> Ausentes</label>
+                <label><input type="radio" name="avp-flog" value="presença de sinais flogísticos"> Presentes</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CVC -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>🔵 CVC – Cateter Venoso Central</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Lúmen CVC</label>
+              <div class="radio-group">
+                <label><input type="radio" name="cvc-lumen" value="uni"> Uni</label>
+                <label><input type="radio" name="cvc-lumen" value="duplo"> Duplo</label>
+                <label><input type="radio" name="cvc-lumen" value="triplo"> Triplo</label>
+                <label><input type="radio" name="cvc-lumen" value="quádruplo"> Quádruplo</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Localização CVC</label>
+              <div class="radio-group">
+                <label><input type="radio" name="cvc-local" value="VJID"> VJID</label>
+                <label><input type="radio" name="cvc-local" value="VJIE"> VJIE</label>
+                <label><input type="radio" name="cvc-local" value="VSCD"> VSCD</label>
+                <label><input type="radio" name="cvc-local" value="VSCE"> VSCE</label>
+                <label><input type="radio" name="cvc-local" value="VFD"> VFD</label>
+                <label><input type="radio" name="cvc-local" value="VFE"> VFE</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Sinais Flogísticos CVC</label>
+              <div class="radio-group">
+                <label><input type="radio" name="cvc-flog" value="ausência de sinais flogísticos"> Ausentes</label>
+                <label><input type="radio" name="cvc-flog" value="presença de sinais flogísticos"> Presentes</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Fixação</label>
+              <div class="radio-group">
+                <label><input type="radio" name="cvc-fix" value="devidamente fixado"> Fixado</label>
+                <label><input type="radio" name="cvc-fix" value="apresentando pontos soltos"> Pontos soltos</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data da Punção CVC</label>
+              <input type="date" id="cvc-data">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOT / TQT -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>🌬️ TOT / TQT / Via Aérea Artificial</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Dispositivo</label>
+              <div class="radio-group">
+                <label><input type="radio" name="via-aerea" value="TOT"> TOT</label>
+                <label><input type="radio" name="via-aerea" value="TQT"> TQT</label>
+                <label><input type="radio" name="via-aerea" value="Máscara Laríngea"> M. Laríngea</label>
+                <label><input type="radio" name="via-aerea" value="Nenhum"> Nenhum</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data de Inserção</label>
+              <input type="date" id="vaa-data">
+            </div>
+            <div class="field">
+              <label>Numeração do Tubo</label>
+              <input type="number" id="tot-num" min="4" max="10" step="0.5" placeholder="Ex: 7.5">
+            </div>
+            <div class="field">
+              <label>Comissura Labial (cm) – TOT</label>
+              <input type="number" id="tot-comissura" min="10" max="30" placeholder="Ex: 22">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SNE / SNG -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>🍽️ SNE / SNG – Sonda Nasoentérica / Nasogástrica</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Tipo de Sonda</label>
+              <div class="radio-group">
+                <label><input type="radio" name="sonda-tipo" value="SNE"> SNE</label>
+                <label><input type="radio" name="sonda-tipo" value="SNG"> SNG</label>
+                <label><input type="radio" name="sonda-tipo" value="Nenhuma"> Nenhuma</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Localização / Narina</label>
+              <div class="radio-group">
+                <label><input type="radio" name="sonda-local" value="Narina Direita"> Narina D</label>
+                <label><input type="radio" name="sonda-local" value="Narina Esquerda"> Narina E</label>
+                <label><input type="radio" name="sonda-local" value="Cavidade Oral"> Cavidade oral</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data de Inserção</label>
+              <input type="date" id="sonda-data">
+            </div>
+            <div class="field">
+              <label>Fixação (cm)</label>
+              <input type="number" id="sonda-cm" min="0" placeholder="Ex: 55">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== ESCALAS ====== -->
+    <div class="form-section" id="sec-escalas">
+      <div class="section-header">
+        <div class="section-icon">📊</div>
+        <div>
+          <div class="section-title">Escalas Clínicas</div>
+          <div class="section-subtitle">BPS, EVA, CAM-ICU, Ramsay</div>
+        </div>
+      </div>
+      <!-- EVA -->
+      <div class="card">
+        <div class="card-title">Escala de Dor – EVA (opcional)</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Pontuação EVA (0–10)</label>
+            <input type="range" id="eva-score" min="0" max="10" step="1" value="0" oninput="updateEVA()">
+            <div class="calc-field" id="eva-display">0 – Sem dor</div>
+          </div>
+          <div class="field">
+            <label>Região da Dor</label>
+            <select id="eva-regiao">
+              <option value="">Selecionar</option>
+              <option>Cirúrgica</option><option>Cefálica</option><option>Torácica</option>
+              <option>Abdominal</option><option>MSD</option><option>MSE</option>
+              <option>MID</option><option>MIE</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- BPS -->
+      <div class="card">
+        <div class="card-title">Escala de Dor Comportamental – BPS (intubados)</div>
+        <div class="grid-3">
+          <div class="field">
+            <label>Expressão Facial</label>
+            <select id="bps-exp">
+              <option value="1">1 – Relaxada</option>
+              <option value="2">2 – Parcialmente tensa</option>
+              <option value="3">3 – Totalmente tensa</option>
+              <option value="4">4 – Faz careta</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Membros Superiores</label>
+            <select id="bps-mmss">
+              <option value="1">1 – Sem movimento</option>
+              <option value="2">2 – Flexão parcial</option>
+              <option value="3">3 – Flexão total</option>
+              <option value="4">4 – Retração permanente</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Adaptação VM</label>
+            <select id="bps-vm">
+              <option value="1">1 – Tolera movimentos</option>
+              <option value="2">2 – Tosse c/ movimentos</option>
+              <option value="3">3 – Briga c/ ventilador</option>
+              <option value="4">4 – Incapaz de controlar</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Pontuação BPS</label>
+            <div class="calc-field" id="bps-total">3</div>
+          </div>
+        </div>
+      </div>
+      <!-- Ramsay -->
+      <div class="card">
+        <div class="card-title">Escala de Ramsay (opcional)</div>
+        <div class="field">
+          <label>Nível Ramsay</label>
+          <select id="ramsay">
+            <option value="">Não aplicado</option>
+            <option value="1">1 – Acordado, ansioso/agitado</option>
+            <option value="2">2 – Acordado, cooperativo e tranquilo</option>
+            <option value="3">3 – Sonolento, atende comandos verbais</option>
+            <option value="4">4 – Dormindo, resposta rápida a estímulo</option>
+            <option value="5">5 – Dormindo, resposta lenta a estímulos</option>
+            <option value="6">6 – Dormindo, sem resposta (sedação profunda)</option>
+          </select>
+        </div>
+      </div>
+      <!-- Observações Gerais -->
+      <div class="card">
+        <div class="card-title">Observações / Condutas Adicionais</div>
+        <div class="field">
+          <label>Texto Livre</label>
+          <textarea id="obs-gerais" rows="5" placeholder="Registre aqui informações adicionais, intercorrências, condutas de enfermagem realizadas, prescrições executadas, etc."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== RESUMO / GERAR EVOLUÇÃO ====== -->
+    <div class="form-section" id="sec-resumo">
+      <div class="section-header">
+        <div class="section-icon">📝</div>
+        <div>
+          <div class="section-title">Gerar Texto de Evolução</div>
+          <div class="section-subtitle">Formatação automática no padrão céfalo-caudal</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Opções de Geração</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Formato da Evolução</label>
+            <div class="radio-group">
+              <label><input type="radio" name="formato-ev" value="cefalocaudal" checked> Céfalo-caudal</label>
+              <label><input type="radio" name="formato-ev" value="gordon"> Gordon/Gazolla</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success" onclick="gerarEvolucao()" style="font-size:14px;padding:12px 28px">
+          ✍️ Gerar Texto de Evolução
+        </button>
+        <button class="btn btn-secondary" onclick="limparSaida()" style="margin-left:10px">
+          Limpar
+        </button>
+      </div>
+      <div id="evolucao-output" style="display:none">
+        <div class="card">
+          <div class="card-title">Texto Gerado</div>
+          <div class="status-bar">✅ Evolução gerada com sucesso. Revise antes de registrar no prontuário.</div>
+          <div class="output-box" id="texto-evolucao"></div>
+          <div style="margin-top:14px;display:flex;gap:10px">
+            <button class="btn btn-primary" onclick="copiarTexto()">📋 Copiar Texto</button>
+            <button class="btn btn-secondary" onclick="window.print()">🖨️ Imprimir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /wrapper -->
+
+<div class="bottom-bar">
+  <span class="progress-text" id="progress-text">Seção 1 de 11</span>
+  <div style="display:flex;gap:10px">
+    <button class="btn btn-secondary" onclick="navPrev()" id="btn-prev">← Anterior</button>
+    <button class="btn btn-primary" onclick="navNext()" id="btn-next">Próximo →</button>
+  </div>
+</div>
+
+<script>
+  // ── Navigation ──────────────────────────────────────────────────────────────
+  const sections = [
+    'identificacao','sinais-vitais','percepcao','cabeca',
+    'cardiovascular','pulmonar','abdome','genitalia','pele','membros',
+    'dispositivos','escalas','resumo'
+  ];
+  let current = 0;
+
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const s = item.dataset.section;
+      const idx = sections.indexOf(s);
+      if (idx !== -1) goto(idx);
+    });
+  });
+
+  function goto(idx) {
+    document.querySelector('.form-section.active')?.classList.remove('active');
+    document.querySelector('.nav-item.active')?.classList.remove('active');
+    document.getElementById('sec-' + sections[idx])?.classList.add('active');
+    document.querySelector(`[data-section="${sections[idx]}"]`)?.classList.add('active');
+    current = idx;
+    updateNav();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function navNext() { if (current < sections.length - 1) goto(current + 1); }
+  function navPrev() { if (current > 0) goto(current - 1); }
+
+  function updateNav() {
+    document.getElementById('btn-prev').disabled = current === 0;
+    document.getElementById('btn-next').style.display = current === sections.length - 1 ? 'none' : '';
+    document.getElementById('progress-text').textContent = `Seção ${current + 1} de ${sections.length}`;
+  }
+  updateNav();
+
+  // Set today as default date/time
+  const now = new Date();
+  document.getElementById('data-evolucao').value = now.toISOString().split('T')[0];
+  document.getElementById('hora-evolucao').value = now.toTimeString().slice(0,5);
+
+  // ── Device toggles ──────────────────────────────────────────────────────────
+  function toggleDevice(header) {
+    const body = header.nextElementSibling;
+    body.classList.toggle('open');
+    header.querySelector('span:last-child').textContent = body.classList.contains('open') ? '▴' : '▾';
+  }
+
+  // ── Calculations ────────────────────────────────────────────────────────────
+  function calcIMC() {
+    const peso = parseFloat(document.getElementById('peso').value);
+    const altCm = parseFloat(document.getElementById('altura').value);
+    const idade = parseInt(document.getElementById('idade').value);
+    const sexo = document.getElementById('sexo').value;
+
+    // Faixa etária
+    if (!isNaN(idade)) {
+      let faixa = '';
+      if (idade >= 10 && idade <= 19) faixa = 'Adolescente (10–19)';
+      else if (idade >= 20 && idade <= 59) faixa = 'Adulto (20–59)';
+      else if (idade >= 60) faixa = 'Idoso (≥60)';
+      document.getElementById('faixa-etaria').textContent = faixa || '—';
+      // FC máx
+      document.getElementById('fc-max').textContent = isNaN(idade) ? '—' : (220 - idade) + ' bpm';
+    }
+
+    if (!isNaN(peso) && !isNaN(altCm) && altCm > 0) {
+      const alt = altCm / 100;
+      const imc = peso / (alt * alt);
+      document.getElementById('imc-calc').textContent = imc.toFixed(1) + ' kg/m²';
+      let cls = '';
+      if (imc < 18.5) cls = 'Magreza';
+      else if (imc < 25) cls = 'Peso ideal';
+      else if (imc < 30) cls = 'Sobrepeso';
+      else if (imc < 35) cls = 'Obesidade grau I';
+      else if (imc < 40) cls = 'Obesidade grau II';
+      else cls = 'Obesidade grau III';
+      document.getElementById('imc-class').textContent = cls;
+    }
+
+    // Harris-Benedict
+    if (!isNaN(peso) && !isNaN(altCm) && !isNaN(idade) && sexo) {
+      let tmb;
+      if (sexo === 'Masculino') tmb = 66 + (13.7 * peso) + (5 * altCm) - (6.8 * idade);
+      else tmb = 655 + (9.6 * peso) + (1.8 * altCm) - (4.7 * idade);
+      const get = tmb * 1.2;
+      document.getElementById('get-calc').textContent = Math.round(get) + ' kcal/dia';
+    }
+  }
+
+  document.getElementById('idade').addEventListener('input', calcIMC);
+  document.getElementById('sexo').addEventListener('change', calcIMC);
+
+  function calcPA() {
+    const s = parseFloat(document.getElementById('pas').value);
+    const d = parseFloat(document.getElementById('pad').value);
+    if (!isNaN(s) && !isNaN(d)) {
+      const pam = (s + (2 * d)) / 3;
+      const est = pam >= 65 ? 'Estável' : 'Instável';
+      document.getElementById('pam-calc').textContent = pam.toFixed(0) + ' mmHg – ' + est;
+    }
+  }
+
+  function classFC() {
+    const fc = parseFloat(document.getElementById('fc').value);
+    if (isNaN(fc)) return;
+    let c = fc < 60 ? 'Bradicárdico' : fc <= 100 ? 'Normocárdico' : 'Taquicárdico';
+    document.getElementById('class-fc').textContent = c;
+    const idade = parseInt(document.getElementById('idade').value);
+    if (!isNaN(idade)) document.getElementById('fc-max').textContent = (220 - idade) + ' bpm';
+  }
+
+  function classFR() {
+    const fr = parseFloat(document.getElementById('fr').value);
+    if (isNaN(fr)) return;
+    let c = fr < 12 ? 'Bradipneico' : fr <= 20 ? 'Eupneico' : 'Taquipneico';
+    document.getElementById('class-fr').textContent = c;
+  }
+
+  function classTemp() {
+    const t = parseFloat(document.getElementById('temp').value);
+    if (isNaN(t)) return;
+    let c;
+    if (t < 32) c = 'Hipotermia grave';
+    else if (t < 34) c = 'Hipotermia moderada';
+    else if (t < 36) c = 'Hipotermia';
+    else if (t <= 37) c = 'Afebril';
+    else if (t < 38) c = 'Febrícula';
+    else if (t < 40) c = 'Febre';
+    else c = 'Hipertermia';
+    document.getElementById('class-temp').textContent = c;
+  }
+
+  function calcDU() {
+    const vol = parseFloat(document.getElementById('vol-urina').value);
+    const peso = parseFloat(document.getElementById('peso').value);
+    if (!isNaN(vol) && !isNaN(peso) && peso > 0) {
+      const du = vol / (peso * 24);
+      let tag = du < 0.1 ? '⚠️ Anúrico' : du < 0.5 ? '⚠️ Oligúrico' : '✅ Adequado';
+      document.getElementById('du-calc').textContent = du.toFixed(2) + ' mL/kg/h – ' + tag;
+    }
+  }
+
+  function calcBH() {
+    const ent = parseFloat(document.getElementById('bh-entrada').value);
+    const sai = parseFloat(document.getElementById('bh-saida').value);
+    if (!isNaN(ent) && !isNaN(sai)) {
+      const bh = ent - sai;
+      const cls = bh >= 0 ? '▲ Positivo' : '▼ Negativo';
+      document.getElementById('bh-result').textContent = (bh >= 0 ? '+' : '') + Math.round(bh) + ' mL – ' + cls;
+    }
+  }
+
+  // Glasgow
+  ['glasgow-o','glasgow-v','glasgow-m','glasgow-p'].forEach(id => {
+    document.getElementById(id).addEventListener('change', calcGlasgow);
+  });
+  function calcGlasgow() {
+    const o = document.getElementById('glasgow-o').value;
+    const v = document.getElementById('glasgow-v').value;
+    const m = document.getElementById('glasgow-m').value;
+    const p = document.getElementById('glasgow-p').value;
+    if (o && v && m) {
+      if (o === 'NT' || v === 'NT' || m === 'NT') {
+        document.getElementById('glasgow-total').textContent = 'NT';
+        return;
+      }
+      const total = parseInt(o) + parseInt(v) + parseInt(m) + (p ? parseInt(p) : 0);
+      document.getElementById('glasgow-total').textContent = total + ' pts';
+    }
+  }
+
+  // BPS
+  ['bps-exp','bps-mmss','bps-vm'].forEach(id => {
+    document.getElementById(id).addEventListener('change', () => {
+      const e = parseInt(document.getElementById('bps-exp').value);
+      const m = parseInt(document.getElementById('bps-mmss').value);
+      const v = parseInt(document.getElementById('bps-vm').value);
+      document.getElementById('bps-total').textContent = (e + m + v) + ' pts';
+    });
+  });
+
+  // EVA
+  function updateEVA() {
+    const v = parseInt(document.getElementById('eva-score').value);
+    let cls = v <= 2 ? 'Leve' : v <= 7 ? 'Moderada' : 'Intensa';
+    document.getElementById('eva-display').textContent = v + ' – Dor ' + cls;
+  }
+
+  // ── Helper functions ─────────────────────────────────────────────────────────
+  function getRadio(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : '';
+  }
+  function getChecks(name) {
+    return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(e => e.value);
+  }
+  function getVal(id) { return document.getElementById(id)?.value || ''; }
+
+  // ── Generate Evolution Text ───────────────────────────────────────────────────
+  function gerarEvolucao() {
+    const fmt = getRadio('formato-ev');
+    let txt = '';
+
+    const nome = getVal('nome') || 'Paciente';
+    const data = getVal('data-evolucao');
+    const hora = getVal('hora-evolucao');
+    const prof = getVal('profissional');
+    const leito = getVal('leito');
+    const sexo = getVal('sexo');
+    const idade = getVal('idade');
+    const peso = getVal('peso');
+    const altura = getVal('altura');
+    const comorbidades = getVal('comorbidades');
+
+    const fc = getVal('fc'); const classFC = document.getElementById('class-fc').textContent.replace('—','');
+    const pas = getVal('pas'); const pad = getVal('pad'); const pam = document.getElementById('pam-calc').textContent.replace('—','');
+    const fr = getVal('fr'); const classFR = document.getElementById('class-fr').textContent.replace('—','');
+    const spo2 = getVal('spo2');
+    const temp = getVal('temp'); const classTemp = document.getElementById('class-temp').textContent.replace('—','');
+    const imc = document.getElementById('imc-calc').textContent.replace('—','');
+    const imcClass = document.getElementById('imc-class').textContent.replace('—','');
+    const get = document.getElementById('get-calc').textContent.replace('—','');
+
+    // Percepção
+    const consciencia = getRadio('consciencia');
+    const orientacao = getRadio('orientacao');
+    const interacao = getRadio('interacao');
+    const mobilidade = getRadio('mobilidade');
+    const forca = getRadio('forca-motora');
+    const sensib = getRadio('sensibilidade');
+    const rass = getVal('rass');
+    const ramsay = getVal('ramsay');
+    const glasgowTotal = document.getElementById('glasgow-total').textContent.replace('—','');
+
+    // Cabeça
+    const ccInteg = getRadio('cc-integ');
+    const ccLimp = getRadio('cc-limp');
+    const pupilas = getRadio('pupilas');
+    const foto = getRadio('foto');
+    const escleras = getRadio('escleras');
+    const labiosInteg = getRadio('labios-integ');
+    const labiosCor = getRadio('labios-cor');
+    const mucosaOral = getRadio('mucosa-oral');
+    const mucosaCor = getRadio('mucosa-cor');
+    const denticao = getRadio('denticao');
+    const narinas = getRadio('narinas');
+
+    // Cardiovascular
+    const bulhas = getRadio('bulhas');
+    const tpc = getRadio('tpc');
+    const hemodi = getRadio('hemodinamica');
+
+    // Pulmonar
+    const ritmoResp = getRadio('ritmo-resp');
+    const mv = getRadio('mv');
+    const ruidos = getChecks('ruidos-adv');
+    const secAsp = getRadio('secrecao-asp');
+    const secQtd = getRadio('secrecao-qtd');
+    const secAsp2 = getRadio('secrecao-asp2');
+
+    // Abdome
+    const abdForma = getRadio('abdome-forma');
+    const abdTensao = getRadio('abdome-tensao');
+    const palpacao = getRadio('palpacao');
+    const massas = getRadio('massas');
+    const rha = getRadio('rha');
+    const tipoDieta = getVal('tipo-dieta');
+    const aceitacao = getRadio('aceitacao');
+    const auxAlim = getRadio('aux-alim');
+
+    // Genitália / Urina
+    const genInteg = getRadio('genitalia');
+    const secGen = getRadio('secrecao-gen');
+    const urinaCor = getRadio('urina-cor');
+    const elimVia = getVal('elim-urin-via');
+    const volUrina = getVal('vol-urina');
+    const du = document.getElementById('du-calc').textContent.replace('—','');
+    const bhResult = document.getElementById('bh-result').textContent.replace('—','');
+
+    // Fezes
+    const elimInt = getRadio('elim-int');
+    const fezesConsist = getRadio('fezes-consist');
+    const fezesCor = getRadio('fezes-cor');
+    const fezesOdor = getRadio('fezes-odor');
+
+    // Pele
+    const peleInteg = getRadio('pele-integ');
+    const peleAlt = getChecks('pele-alt');
+    const lppTipo = getVal('lpp-tipo');
+    const lppLocal = getVal('lpp-local');
+
+    // Membros
+    const edemaMMSS = getRadio('edema-mmss');
+    const extMMSS = getChecks('ext-mmss');
+    const edemaMMII = getRadio('edema-mmii');
+    const panturrilha = getRadio('panturrilha');
+    const extMMII = getChecks('ext-mmii');
+
+    // Dispositivos
+    const avpLocal = getRadio('avp-local');
+    const avpData = getVal('avp-data');
+    const avpCat = getVal('avp-cateter');
+    const avpFlog = getRadio('avp-flog');
+    const cvcLumen = getRadio('cvc-lumen');
+    const cvcLocal = getRadio('cvc-local');
+    const cvcFlog = getRadio('cvc-flog');
+    const cvcFix = getRadio('cvc-fix');
+    const viaAerea = getRadio('via-aerea');
+    const vaaData = getVal('vaa-data');
+    const totNum = getVal('tot-num');
+    const totCom = getVal('tot-comissura');
+    const sondaTipo = getRadio('sonda-tipo');
+    const sondaLocal = getRadio('sonda-local');
+    const sondaData = getVal('sonda-data');
+    const sondaCm = getVal('sonda-cm');
+
+    // EVA / BPS
+    const evaScore = getVal('eva-score');
+    const evaDisplay = document.getElementById('eva-display').textContent;
+    const evaRegiao = getVal('eva-regiao');
+    const bpsTotal = document.getElementById('bps-total').textContent;
+    const obs = getVal('obs-gerais');
+
+    // ── Build text ──
+    const header = `EVOLUÇÃO DE ENFERMAGEM\nData: ${data} | Hora: ${hora}${leito ? ' | Leito: ' + leito : ''}${prof ? ' | Profissional: ' + prof : ''}\n${'='.repeat(70)}\n\n`;
+
+    let corpo = '';
+
+    if (fmt === 'cefalocaudal') {
+      // Identificação
+      corpo += `Paciente ${nome}`;
+      if (sexo) corpo += `, ${sexo.toLowerCase()}`;
+      if (idade) corpo += `, ${idade} anos`;
+      if (peso && altura) corpo += `, ${peso}kg e ${altura}cm`;
+      if (imcClass) corpo += `, IMC ${imc} (${imcClass})`;
+      if (get) corpo += `, com necessidades calóricas estimadas em ${get} segundo Harris-Benedict`;
+      if (comorbidades) corpo += `. Comorbidades: ${comorbidades}`;
+      corpo += '.\n\n';
+
+      // Sinais vitais
+      corpo += 'SINAIS VITAIS:\n';
+      if (fc && classFC) corpo += `FC: ${classFC} (${fc} bpm)`;
+      if (pas && pad) corpo += `, PA: ${pas}x${pad} mmHg (PAM ${pam})`;
+      if (fr && classFR) corpo += `, FR: ${classFR} (${fr} irpm)`;
+      if (temp && classTemp) corpo += `, Temperatura: ${classTemp} (${temp}°C)`;
+      if (spo2) corpo += `, SpO₂: ${spo2}%`;
+      corpo += '.\n\n';
+
+      // Percepção
+      corpo += 'PERCEPÇÃO E COGNIÇÃO:\n';
+      if (consciencia || orientacao || interacao) {
+        corpo += `Paciente ${[consciencia, orientacao, interacao].filter(Boolean).join(', ')}`;
+        if (mobilidade) corpo += `, ${mobilidade}`;
+        if (forca) corpo += `, com força motora ${forca}`;
+        if (sensib) corpo += ` e sensibilidade ${sensib}`;
+        corpo += '.';
+      }
+      if (glasgowTotal && glasgowTotal !== '—') corpo += ` ECG: ${glasgowTotal}.`;
+      if (rass && rass !== '') corpo += ` RASS: ${rass}.`;
+      if (ramsay && ramsay !== '') corpo += ` Escala de Ramsay: ${ramsay}.`;
+      corpo += '\n\n';
+
+      // Cabeça e pescoço
+      corpo += 'CABEÇA E PESCOÇO:\n';
+      if (ccInteg || ccLimp) corpo += `Couro cabeludo ${[ccInteg, ccLimp].filter(Boolean).join(', ')}. `;
+      if (pupilas || foto || escleras) corpo += `Olhos com pupilas ${pupilas}, ${foto} e escleras ${escleras}. `;
+      if (narinas) corpo += `Narinas ${narinas}. `;
+      if (labiosInteg || labiosCor) corpo += `Lábios ${[labiosInteg, labiosCor].filter(Boolean).join(', ')}. `;
+      if (mucosaOral || mucosaCor) corpo += `Cavidade oral ${[mucosaOral, mucosaCor].filter(Boolean).join(', ')}. `;
+      if (denticao) corpo += `Dentição ${denticao}.`;
+      corpo += '\n\n';
+
+      // Cardiovascular
+      corpo += 'AVALIAÇÃO CARDIOVASCULAR:\n';
+      if (classFC && fc) corpo += `${classFC} (${fc} bpm)`;
+      if (pas && pad) corpo += `, ${pas}x${pad} mmHg – média de ${pam}`;
+      if (bulhas) corpo += `, apresentando bulhas cardíacas ${bulhas}`;
+      if (tpc) corpo += `, com tempo de preenchimento capilar ${tpc}`;
+      if (hemodi) corpo += `, hemodinamicamente ${hemodi}`;
+      corpo += '.\n\n';
+
+      // Pulmonar
+      corpo += 'AVALIAÇÃO PULMONAR:\n';
+      if (classFR && fr) corpo += `${classFR} (${fr} irpm)`;
+      if (ritmoResp) corpo += `, ritmo respiratório ${ritmoResp}`;
+      if (spo2) corpo += `, saturando a ${spo2}%`;
+      if (mv) corpo += `. Murmúrios vesiculares ${mv}`;
+      if (ruidos.length > 0) corpo += `, ${ruidos.join(', ')}`;
+      if (secAsp && secAsp !== 'Ausência de secreção à aspiração') {
+        corpo += `. Presença de secreção ${secAsp}${secQtd ? ' em ' + secQtd + ' quantidade' : ''}${secAsp2 ? ', de aspecto ' + secAsp2 : ''}`;
+      } else if (secAsp) {
+        corpo += `. ${secAsp}`;
+      }
+      corpo += '.\n\n';
+
+      // Abdome
+      corpo += 'ABDOME:\n';
+      if (abdForma || abdTensao) corpo += `Abdome ${[abdForma, abdTensao].filter(Boolean).join(', ')}`;
+      if (palpacao) corpo += `, ${palpacao} à palpação`;
+      if (massas) corpo += `, ${massas}`;
+      if (rha) corpo += `, com ruídos hidroaéreos ${rha}`;
+      if (tipoDieta) {
+        const dietaTexto = {
+          'via-oral-solida':'via oral, consistência sólida',
+          'via-oral-pastosa':'via oral, consistência pastosa',
+          'via-oral-liquida':'via oral, consistência líquida',
+          'sne':'via SNE','npt':'via NPT em via exclusiva no CVC',
+          'zero-preop':'em zero (pré-operatório)','zero-posop':'em zero (pós-operatório)',
+          'zero-outros':'em zero (outros motivos)','prova':'dieta de prova'
+        }[tipoDieta] || tipoDieta;
+        corpo += `. Dieta ${dietaTexto}`;
+        if (aceitacao) corpo += `, aceitação ${aceitacao}`;
+        if (auxAlim) corpo += `, ${auxAlim} de auxílio para alimentação`;
+      }
+      corpo += '.\n\n';
+
+      // Genitálias / Eliminações
+      corpo += 'GENITÁLIAS E ELIMINAÇÕES:\n';
+      if (genInteg) corpo += `Genitálias ${genInteg}. `;
+      if (secGen === 'Presença') corpo += 'Presença de secreção genital. ';
+      if (elimVia || urinaCor) {
+        corpo += `Eliminações vesicais`;
+        if (elimVia) corpo += ` por ${elimVia}`;
+        if (urinaCor) corpo += ` de coloração ${urinaCor}`;
+        if (volUrina) corpo += `, volume de ${volUrina} mL`;
+        if (du && du !== '—') corpo += ` (DU: ${du})`;
+        corpo += '. ';
+      }
+      if (bhResult && bhResult !== '—') corpo += `Balanço hídrico: ${bhResult}. `;
+      if (elimInt === 'presente') {
+        corpo += `Eliminações intestinais presentes, de consistência ${fezesConsist || '—'}, coloração ${fezesCor || '—'}, odor ${fezesOdor || '—'}.`;
+      } else if (elimInt === 'ausente') {
+        corpo += 'Eliminações intestinais ausentes.';
+      }
+      corpo += '\n\n';
+
+      // Pele
+      corpo += 'PELE:\n';
+      if (temp && classTemp) corpo += `${classTemp} (${temp}°C), `;
+      if (peleInteg) corpo += `integridade da pele ${peleInteg}`;
+      if (peleAlt.length > 0) corpo += ` (${peleAlt.join(', ')})`;
+      if (lppTipo && lppTipo !== '') {
+        const lppTexto = {
+          'lpp1':'LPP Estágio 1','lpp2':'LPP Estágio 2','lpp3':'LPP Estágio 3',
+          'lpp4':'LPP Estágio 4','lpp-ne':'LPP Não Estadiável',
+          'lpp-ltp':'Lesão Tissular Profunda','dermatite':'Dermatite','queimadura':'Queimadura'
+        }[lppTipo] || lppTipo;
+        corpo += `. ${lppTexto}${lppLocal ? ' em região ' + lppLocal : ''}`;
+      }
+      corpo += '.\n\n';
+
+      // Membros
+      corpo += 'MMSS E MMII:\n';
+      if (edemaMMSS || extMMSS.length > 0) {
+        corpo += `MMSS ${edemaMMSS}`;
+        if (extMMSS.length > 0) corpo += `, extremidades ${extMMSS.join(', ')}`;
+        corpo += '. ';
+      }
+      if (edemaMMII || panturrilha || extMMII.length > 0) {
+        corpo += `MMII ${edemaMMII}`;
+        if (panturrilha) corpo += `, panturrilhas ${panturrilha}`;
+        if (extMMII.length > 0) corpo += `, extremidades ${extMMII.join(', ')}`;
+        corpo += '.';
+      }
+      corpo += '\n\n';
+
+      // Dispositivos
+      const disp = [];
+      if (avpLocal) {
+        let avp = `AVP localizado em ${avpLocal}`;
+        if (avpData) avp += `, puncionado em ${avpData}`;
+        if (avpCat) avp += `, cateter n° ${avpCat}G`;
+        if (avpFlog) avp += `, ${avpFlog}`;
+        disp.push(avp);
+      }
+      if (cvcLumen && cvcLocal) {
+        let cvc = `CVC ${cvcLumen} lúmen localizado em ${cvcLocal}`;
+        if (cvcFlog) cvc += `, ${cvcFlog}`;
+        if (cvcFix) cvc += `, ${cvcFix}`;
+        disp.push(cvc);
+      }
+      if (viaAerea && viaAerea !== 'Nenhum') {
+        let va = `${viaAerea} inserido`;
+        if (vaaData) va += ` em ${vaaData}`;
+        if (viaAerea === 'TOT') {
+          if (totNum) va += `, numeração ${totNum}`;
+          if (totCom) va += ` e comissura labial de ${totCom} cm`;
+        }
+        disp.push(va);
+      }
+      if (sondaTipo && sondaTipo !== 'Nenhuma') {
+        let snd = `${sondaTipo} inserida`;
+        if (sondaData) snd += ` em ${sondaData}`;
+        if (sondaLocal) snd += `, ${sondaLocal}`;
+        if (sondaCm) snd += `, fixada a ${sondaCm} cm`;
+        disp.push(snd);
+      }
+      if (disp.length > 0) {
+        corpo += 'DISPOSITIVOS MÉDICOS:\n' + disp.map(d => '• ' + d + '.').join('\n') + '\n\n';
+      }
+
+      // Escalas
+      const escal = [];
+      if (evaScore && parseInt(evaScore) > 0) escal.push(`EVA: ${evaDisplay}${evaRegiao ? ' em região ' + evaRegiao : ''}`);
+      if (bpsTotal && bpsTotal !== '3 pts') escal.push(`BPS: ${bpsTotal}`);
+      if (rass) escal.push(`RASS: ${rass}`);
+      if (ramsay) escal.push(`Ramsay: ${ramsay}`);
+      if (escal.length > 0) corpo += 'ESCALAS:\n' + escal.join(' | ') + '\n\n';
+
+      // Obs
+      if (obs) corpo += 'OBSERVAÇÕES / CONDUTAS:\n' + obs + '\n\n';
+
+    } else {
+      // Gordon / Gazolla
+      corpo += 'DOMÍNIO PROMOÇÃO DA SAÚDE\n';
+      corpo += `${sexo || '—'}, ${idade || '—'} anos, ${peso || '—'}kg, ${altura || '—'}cm`;
+      if (comorbidades) corpo += `. Comorbidades: ${comorbidades}`;
+      corpo += `.\nSinais vitais: PA ${pas}x${pad} mmHg | FC ${fc} bpm | FR ${fr} irpm | Temp ${temp}°C | SpO₂ ${spo2}%\n\n`;
+
+      corpo += 'DOMÍNIO NUTRIÇÃO\n';
+      if (imc) corpo += `IMC ${imc}, classificado como ${imcClass}, necessidades calóricas de ${get}. `;
+      if (tipoDieta) corpo += `Dieta por ${tipoDieta}. `;
+      if (labiosInteg) corpo += `Lábios ${labiosInteg} e ${labiosCor}. `;
+      if (mucosaOral) corpo += `Cavidade oral ${mucosaOral}. `;
+      if (denticao) corpo += `Dentição ${denticao}.`;
+      corpo += '\n\n';
+
+      corpo += 'DOMÍNIO ELIMINAÇÃO E TROCA\n';
+      if (elimVia || urinaCor) corpo += `Eliminações vesicais por ${elimVia || '—'}, coloração ${urinaCor || '—'}${volUrina ? ', ' + volUrina + ' mL' : ''}. `;
+      if (bhResult !== '—') corpo += `Balanço hídrico: ${bhResult}. `;
+      if (elimInt === 'presente') corpo += `Eliminações intestinais: consistência ${fezesConsist}, coloração ${fezesCor}. `;
+      if (abdForma || rha) corpo += `Abdome ${abdForma}, RHA ${rha}.`;
+      corpo += '\n\n';
+
+      corpo += 'DOMÍNIO ATIVIDADE E REPOUSO\n';
+      if (classFR && fr) corpo += `${classFR} (${fr} irpm), ritmo ${ritmoResp}, SpO₂ ${spo2}%, murmúrios ${mv}. `;
+      if (classFC && fc) corpo += `${classFC} (${fc} bpm), PA ${pas}x${pad} mmHg, bulhas ${bulhas}, TPC ${tpc}, ${hemodi}.`;
+      corpo += '\n\n';
+
+      corpo += 'DOMÍNIO PERCEPÇÃO E COGNIÇÃO\n';
+      corpo += `Paciente ${[consciencia, orientacao, interacao].filter(Boolean).join(', ')}. `;
+      corpo += `Pupilas ${pupilas}, ${foto}, escleras ${escleras}.`;
+      if (glasgowTotal && glasgowTotal !== '—') corpo += ` ECG: ${glasgowTotal}.`;
+      corpo += '\n\n';
+
+      corpo += 'DOMÍNIO SEGURANÇA E PROTEÇÃO\n';
+      if (temp && classTemp) corpo += `${classTemp} (${temp}°C). `;
+      if (ccInteg) corpo += `Couro cabeludo ${ccInteg} e ${ccLimp}. `;
+      if (genInteg) corpo += `Genitálias ${genInteg}. `;
+      if (edemaMMSS) corpo += `MMSS: ${edemaMMSS}, extremidades ${extMMSS.join(', ')}. `;
+      if (edemaMMII) corpo += `MMII: ${edemaMMII}, panturrilhas ${panturrilha}. `;
+      if (peleInteg) corpo += `Integridade da pele: ${peleInteg}${peleAlt.length > 0 ? ' (' + peleAlt.join(', ') + ')' : ''}.`;
+      corpo += '\n\n';
+
+      corpo += 'DOMÍNIO CONFORTO\n';
+      if (evaScore && parseInt(evaScore) > 0) corpo += `EVA: ${evaDisplay}${evaRegiao ? ' em ' + evaRegiao : ''}.`;
+      else corpo += 'Sem queixas álgicas referidas.';
+      corpo += '\n\n';
+
+      if (obs) corpo += 'OBSERVAÇÕES / CONDUTAS:\n' + obs + '\n\n';
+    }
+
+    corpo += `\n${'_'.repeat(70)}\nAssinatura / Carimbo: ___________________________     COREN: ____________`;
+
+    const full = header + corpo;
+    document.getElementById('texto-evolucao').textContent = full;
+    document.getElementById('evolucao-output').style.display = 'block';
+    document.getElementById('evolucao-output').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function limparSaida() {
+    document.getElementById('evolucao-output').style.display = 'none';
+  }
+
+  function copiarTexto() {
+    const txt = document.getElementById('texto-evolucao').textContent;
+    navigator.clipboard.writeText(txt).then(() => {
+      alert('✅ Texto copiado para a área de transferência!');
+    });
+  }
+</script>
+</body>
+</html>
