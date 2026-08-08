@@ -180,6 +180,22 @@
 
   input[type="number"] { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
 
+  button {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+  }
+
+  button:hover {
+    font-weight: bold;
+  }
+
+  button:active {
+    transform: scale(0.98);
+  }
+
   /* ── Radio / Checkbox Groups ── */
   .radio-group, .check-group {
     display: flex; flex-wrap: wrap; gap: 6px;
@@ -362,6 +378,12 @@
     margin-top: 16px;
   }
 
+  /* ── Custom ── */
+  .consciencia, #c-rass, #c-glasgow, #c-ramsey, .deambulacao, .altCalcJoe, .lesao-couro, .lateralizacao-av, .lateralizacao-au, .ap-auditivo, .lesao-labial,
+  .lateralizacao-labial, .pc-feminino {
+    display: none;
+  }
+
   @media (max-width: 768px) {
     .sidebar { display: none; }
     .main { padding: 16px; }
@@ -392,7 +414,8 @@
     <div class="nav-item" data-section="sinais-vitais"><span class="nav-icon">❤️</span>Sinais Vitais</div>
     <div class="sidebar-section">Avaliação Céfalo-caudal</div>
     <div class="nav-item" data-section="percepcao"><span class="nav-icon">🧠</span>Percepção e Cognição</div>
-    <div class="nav-item" data-section="cabeca"><span class="nav-icon">👁️</span>Cabeça e Pescoço</div>
+    <div class="nav-item" data-section="cabeca"><span class="nav-icon">🙂</span>Cabeça</div>
+    <div class="nav-item" data-section="pescoco-torax"><span class="nav-icon">👤</span>Pescoço e Tórax</div>
     <div class="nav-item" data-section="cardiovascular"><span class="nav-icon">🫀</span>Cardiovascular</div>
     <div class="nav-item" data-section="pulmonar"><span class="nav-icon">🫁</span>Pulmonar</div>
     <div class="nav-item" data-section="abdome"><span class="nav-icon">🩺</span>Abdome</div>
@@ -424,7 +447,7 @@
         <div class="grid-3">
           <div class="field col-span-2">
             <label>Nome do Paciente <span class="req">*</span></label>
-            <input type="text" id="nome" placeholder="Nome completo">
+            <input type="text" id="nome" placeholder="Nome completo" required>
           </div>
           <div class="field">
             <label>Leito / Quarto</label>
@@ -453,7 +476,6 @@
               <option value="">Selecionar</option>
               <option>Masculino</option>
               <option>Feminino</option>
-              <option>Outro</option>
             </select>
           </div>
           <div class="field">
@@ -467,6 +489,30 @@
           <div class="field">
             <label>Altura (cm)</label>
             <input type="number" id="altura" step="0.1" min="0" placeholder="0" oninput="calcIMC()">
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="grid-3" style="align-items: center;">
+          <div class="field">
+            <div class="radio-group" id="pesoPredito">
+              <button onclick="calcPesoPredito()"><label> Não sei o peso</label></button>
+            </div>
+            <p style="font-size:11px;color:var(--text-muted);margin-left: 10px;">
+              Necessário altura
+            </p>
+          </div>
+          <div class="field">
+            <div class="radio-group" id="chunlea">
+              <button onclick="calcChunlea()"><label> Não sei a altura</label></button>
+            </div>
+            <br>
+          </div>
+          <div class="field">
+            <label>Altura do calcanhar ao joelho (cm)</label>
+            <input type="number" id="altCalcJoe" step="0.1" min="0" placeholder="0.0" oninput="calcAlturaPeso()">
+            <p style="font-size:11px;color:var(--text-muted);">
+              Caso não saiba altura
+            </p>
           </div>
         </div>
         <hr class="divider">
@@ -485,15 +531,10 @@
           </div>
         </div>
         <hr class="divider">
-        <div class="field">
-          <label>Comorbidades</label>
-          <input type="text" id="comorbidades" placeholder="Ex: HAS, DM2, IRC…">
-        </div>
         <div class="field" style="margin-top:14px">
           <label>Necessidades Calóricas – Harris-Benedict (GET)</label>
           <div class="calc-field" id="get-calc">—</div>
         </div>
-        <p style="font-size:11px;color:var(--text-muted);margin-top:4px">GET = TMB × 1,2 (fator de atividade hospitalar)</p>
       </div>
     </div>
 
@@ -505,13 +546,6 @@
           <div class="section-title">Sinais Vitais</div>
           <div class="section-subtitle">Parâmetros hemodinâmicos e respiratórios</div>
         </div>
-      </div>
-      <div class="ref-box">
-        <strong>Referências Clínicas</strong>
-        FC: Bradicárdico &lt;60 / Normocárdico 60–100 / Taquicárdico &gt;100 bpm &nbsp;|&nbsp;
-        FR: Bradipneico &lt;12 / Eupneico 12–20 / Taquipneico &gt;20 irpm &nbsp;|&nbsp;
-        Temp: Afebril 36–37 / Febrícula 37,1–37,9 / Febre 38–39,9 / Hipertermia &gt;40°C &nbsp;|&nbsp;
-        SpO₂: Normal &gt;92%
       </div>
       <div class="card">
         <div class="card-title">Medições</div>
@@ -525,20 +559,20 @@
             <div class="calc-field" id="class-fc">—</div>
           </div>
           <div class="field">
-            <label>FC Máx Suportável (220 – idade)</label>
-            <div class="calc-field" id="fc-max">—</div>
+            <label>PAM</label>
+            <div class="calc-field" id="pam-calc">—</div>
           </div>
           <div class="field">
             <label>PA Sistólica (mmHg)</label>
-            <input type="number" id="pas" min="0" placeholder="—" oninput="calcPA()">
+            <input type="number" id="pas" min="0" placeholder="—" oninput="calcPA(), classPA()">
           </div>
           <div class="field">
             <label>PA Diastólica (mmHg)</label>
-            <input type="number" id="pad" min="0" placeholder="—" oninput="calcPA()">
+            <input type="number" id="pad" min="0" placeholder="—" oninput="calcPA(), classPA()">
           </div>
           <div class="field">
-            <label>PAM – [Sist + (2×Diast)] / 3</label>
-            <div class="calc-field" id="pam-calc">—</div>
+            <label>Classificação PA</label>
+            <div class="calc-field" id="class-pa">—</div>
           </div>
           <div class="field">
             <label>Freq. Respiratória – FR (irpm)</label>
@@ -559,10 +593,6 @@
           <div class="field">
             <label>Classificação Temperatura</label>
             <div class="calc-field" id="class-temp">—</div>
-          </div>
-          <div class="field">
-            <label>Glicemia (mg/dL)</label>
-            <input type="number" id="glicemia" min="0" placeholder="—">
           </div>
         </div>
       </div>
@@ -589,7 +619,7 @@
               <label><input type="radio" name="consciencia" value="Comatoso"> Comatoso</label>
             </div>
           </div>
-          <div class="field">
+          <div class="field consciencia">
             <label>Orientação</label>
             <div class="radio-group">
               <label><input type="radio" name="orientacao" value="Orientado"> Orientado</label>
@@ -598,7 +628,7 @@
               <label><input type="radio" name="orientacao" value="Desorientado"> Desorientado</label>
             </div>
           </div>
-          <div class="field">
+          <div class="field consciencia">
             <label>Interação</label>
             <div class="radio-group">
               <label><input type="radio" name="interacao" value="Interagindo"> Interagindo</label>
@@ -606,36 +636,56 @@
               <label><input type="radio" name="interacao" value="Sem interações"> Sem interações</label>
             </div>
           </div>
-          <div class="field">
-            <label>Mobilidade / Deambulação</label>
-            <div class="radio-group">
-              <label><input type="radio" name="mobilidade" value="Deambulando sem auxílio"> Deambula sem auxílio</label>
-              <label><input type="radio" name="mobilidade" value="Deambulando com andador"> Com andador</label>
-              <label><input type="radio" name="mobilidade" value="Deambulando com acompanhante"> Com acompanhante</label>
+          <div class="field consciencia">
+            <label>Mobilidade</label>
+            <div class="radio-group" id="rg-mobilidade">
+              <label><input type="radio" name="mobilidade" value="Deambulando"> Deambulando</label>
               <label><input type="radio" name="mobilidade" value="Acamado"> Acamado</label>
               <label><input type="radio" name="mobilidade" value="Restrito ao leito"> Restrito ao leito</label>
             </div>
           </div>
-          <div class="field">
+          <div class="field consciencia">
+            <label>Estado Emocional</label>
+            <div class="radio-group">
+              <label><input type="radio" name="estado-emocional" value="calmo"> Calmo</label>
+              <label><input type="radio" name="estado-emocional" value="alerta"> Alerta</label>
+              <label><input type="radio" name="estado-emocional" value="ansioso"> Ansioso</label>
+              <label><input type="radio" name="estado-emocional" value="estressado"> Estressado</label>
+              <label><input type="radio" name="estado-emocional" value="inquieto"> Inquieto</label>
+            </div>
+          </div>
+          <div class="field deambulacao">
+            <label>Deambulação</label>
+            <div class="radio-group">
+              <label><input type="radio" name="deambulando" value="Deambulando sem auxílio"> sem auxílio</label>
+              <label><input type="radio" name="deambulando" value="Deambulando com acompanhante"> com acompanhante</label>
+              <label><input type="radio" name="deambulando" value="Deambulando com profissional"> com profissional</label>
+              <label><input type="radio" name="deambulando" value="Deambulando com andador"> com andador</label>
+              <label><input type="radio" name="deambulando" value="Deambulando com cadeira de rodas"> com cadeira de rodas</label>
+            </div>
+          </div>
+          <div class="field deambulacao">
             <label>Força Motora</label>
             <div class="radio-group">
               <label><input type="radio" name="forca-motora" value="preservada"> Preservada</label>
               <label><input type="radio" name="forca-motora" value="reduzida"> Reduzida</label>
+              <label><input type="radio" name="forca-motora" value="não avaliada"> Não avaliada</label>
             </div>
           </div>
-          <div class="field">
+          <div class="field deambulacao">
             <label>Sensibilidade</label>
             <div class="radio-group">
               <label><input type="radio" name="sensibilidade" value="preservada"> Preservada</label>
               <label><input type="radio" name="sensibilidade" value="reduzida"> Reduzida</label>
+              <label><input type="radio" name="sensibilidade" value="não avaliada"> Não avaliada</label>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Glasgow -->
-      <div class="card">
-        <div class="card-title">Escala de Coma de Glasgow (opcional)</div>
+      <div class="card" id="c-glasgow">
+        <div class="card-title">Escala de Coma de Glasgow</div>
         <div class="grid-3">
           <div class="field">
             <label>Abertura Ocular (1–4 / NT)</label>
@@ -645,7 +695,7 @@
               <option value="3">3 – Ao Som</option>
               <option value="2">2 – A Pressão</option>
               <option value="1">1 – Ausente</option>
-              <option value="NT">NT – Não Testável</option>
+              <option value="0">NT – Não Testável</option>
             </select>
           </div>
           <div class="field">
@@ -657,7 +707,7 @@
               <option value="3">3 – Palavras</option>
               <option value="2">2 – Sons</option>
               <option value="1">1 – Ausente</option>
-              <option value="NT">NT – Não Testável</option>
+              <option value="0">NT – Não Testável</option>
             </select>
           </div>
           <div class="field">
@@ -670,16 +720,17 @@
               <option value="3">3 – Flexão normal</option>
               <option value="2">2 – Extensão anormal</option>
               <option value="1">1 – Nenhuma</option>
-              <option value="NT">NT – Não Testável</option>
+              <option value="0">NT – Não Testável</option>
             </select>
           </div>
           <div class="field">
             <label>Reação Pupilar à Luz</label>
             <select id="glasgow-p">
               <option value="">Selecionar</option>
-              <option value="-0">0 – Ambas reativas</option>
-              <option value="-1">-1 – 1 não reativa</option>
-              <option value="-2">-2 – 2 não reativas</option>
+              <option value="0">0 – Ambas reativas</option>
+              <option value="1">-1 – Uma não reativa</option>
+              <option value="2">-2 – Duas não reativas</option>
+              <option value="0">NT – Não Testável</option>
             </select>
           </div>
           <div class="field">
@@ -693,8 +744,8 @@
       </div>
 
       <!-- RASS -->
-      <div class="card">
-        <div class="card-title">Escala de Sedação RASS (opcional)</div>
+      <div class="card" id="c-rass">
+        <div class="card-title">Escala de Sedação RASS</div>
         <div class="field">
           <label>Nível RASS</label>
           <select id="rass">
@@ -714,13 +765,30 @@
       </div>
     </div>
 
-    <!-- ====== CABEÇA E PESCOÇO ====== -->
+    <!-- Ramsay -->
+      <div class="card" id="c-ramsey">
+        <div class="card-title">Escala de Ramsay</div>
+        <div class="field">
+          <label>Nível Ramsay</label>
+          <select id="ramsay">
+            <option value="">Não aplicado</option>
+            <option value="1">1 – Acordado, ansioso/agitado</option>
+            <option value="2">2 – Acordado, cooperativo e tranquilo</option>
+            <option value="3">3 – Sonolento, atende comandos verbais</option>
+            <option value="4">4 – Dormindo, resposta rápida a estímulo</option>
+            <option value="5">5 – Dormindo, resposta lenta a estímulos</option>
+            <option value="6">6 – Dormindo, sem resposta (sedação profunda)</option>
+          </select>
+        </div>
+      </div>
+
+    <!-- ====== CABEÇA ====== -->
     <div class="form-section" id="sec-cabeca">
       <div class="section-header">
-        <div class="section-icon">👁️</div>
+        <div class="section-icon">🙂</div>
         <div>
-          <div class="section-title">Cabeça e Pescoço</div>
-          <div class="section-subtitle">Inspeção do couro cabeludo, olhos, narinas, ouvidos, boca</div>
+          <div class="section-title">Cabeça</div>
+          <div class="section-subtitle">Inspeção do couro cabeludo, olhos, narinas, ouvidos e boca</div>
         </div>
       </div>
       <div class="card">
@@ -728,19 +796,36 @@
         <div class="grid-2">
           <div class="field">
             <label>Integridade</label>
-            <div class="radio-group">
+            <div class="radio-group" id="rg-cc-lesao">
               <label><input type="radio" name="cc-integ" value="íntegro"> Íntegro</label>
+              <label><input type="radio" name="cc-integ" value="descamando"> Descamando</label>
               <label><input type="radio" name="cc-integ" value="hiperemiado"> Hiperemiado</label>
-              <label><input type="radio" name="cc-integ" value="lesionado"> Lesionado</label>
+              <label><input type="radio" name="cc-integ" value="lesionado em região"> Lesionado</label>
             </div>
           </div>
           <div class="field">
             <label>Limpeza</label>
             <div class="radio-group">
               <label><input type="radio" name="cc-limp" value="limpo"> Limpo</label>
-              <label><input type="radio" name="cc-limp" value="com sujidades"> Com sujidades</label>
+              <label><input type="radio" name="cc-limp" value="com sujidades"> Sujidades</label>
               <label><input type="radio" name="cc-limp" value="com presença de miíase"> Miíase</label>
+              <label><input type="radio" name="cc-limp" value="com presença de pediculose"> Pediculose</label>
             </div>
+          </div>
+        </div>
+        <br>
+        <div class="field lesao-couro">
+          <label>Localização da Lesão</label>
+          <p style="font-size:11px;color:var(--text-muted);margin-top: 5px; margin-bottom: 5px;">
+            Seleção Múltipla
+          </p>
+          <div class="radio-group" id="lesao-couro-cabeludo">
+              <label><input type="checkbox" name="cc-lesao" value="frontal"> Frontal</label>
+              <label><input type="checkbox" name="cc-lesao" value="occipital"> Occipital</label>
+              <label><input type="checkbox" name="cc-lesao" value="parietal esquerdo"> Parietal esquerdo</label>
+              <label><input type="checkbox" name="cc-lesao" value="parietal direito"> Parietal direito</label>
+              <label><input type="checkbox" name="cc-lesao" value="temporal esquerdo"> Temporal esquerdo</label>
+              <label><input type="checkbox" name="cc-lesao" value="temporal direito"> Temporal direito</label>
           </div>
         </div>
       </div>
@@ -758,7 +843,8 @@
             <label>Fotorreatividade</label>
             <div class="radio-group">
               <label><input type="radio" name="foto" value="fotorreagentes"> Fotorreagentes</label>
-              <label><input type="radio" name="foto" value="não fotorreagentes"> Não fotorreagentes</label>
+              <label><input type="radio" name="foto" value="não fotorreagentes em midríase"> Midríase</label>
+              <label><input type="radio" name="foto" value="não fotorreagentes em miose"> Miose</label>
             </div>
           </div>
           <div class="field">
@@ -769,21 +855,89 @@
               <label><input type="radio" name="escleras" value="amareladas (ictéricas)"> Amareladas</label>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Cavidade Oral e Dentição</div>
-        <div class="grid-2">
           <div class="field">
-            <label>Lábios – Integridade</label>
-            <div class="radio-group">
-              <label><input type="radio" name="labios-integ" value="íntegros"> Íntegros</label>
-              <label><input type="radio" name="labios-integ" value="edemaciados"> Edemaciados</label>
-              <label><input type="radio" name="labios-integ" value="lesionados"> Lesionados</label>
+            <label>Alterações Oculares</label>
+            <div class="radio-group" id="alteracoes-oculares">
+              <label><input type="checkbox" name="alteracoes-oculares" value="exoftalmia"> Exoftalmia</label>
+              <label><input type="checkbox" name="alteracoes-oculares" value="diplopia"> Diplopia</label>
+              <label><input type="checkbox" name="alteracoes-oculares" value="xantelasma"> Xantelasma</label>
             </div>
           </div>
           <div class="field">
-            <label>Lábios – Coloração</label>
+            <label>Acuidade Visual</label>
+            <div class="radio-group" id="acuidade-visual">
+              <label><input type="radio" name="acuidade-visual" value="preservada"> Preservada</label>
+              <label><input type="radio" name="acuidade-visual" value="diminuída"> Diminuída</label>
+              <label><input type="radio" name="acuidade-visual" value="comprometida"> Comprometida</label>
+            </div>
+          </div>
+          <div class="field lateralizacao-av">
+            <label>Lateralização</label>
+            <div class="radio-group">
+              <label><input type="radio" name="lt-acuidade-visual" value="à esquerda"> À esquerda</label>
+              <label><input type="radio" name="lt-acuidade-visual" value="à direita"> À direita</label>
+              <label><input type="radio" name="lt-acuidade-visual" value="bilateralmente"> Bilateralmente</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Narinas e Ouvidos</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Integridade Nasal</label>
+            <div class="radio-group" id="rg-na-lesao">
+              <label><input type="radio" name="na-integ" value="íntegras"> Íntegras</label>
+              <label><input type="radio" name="na-integ" value="lesionadas"> Lesionadas</label>
+              <label><input type="radio" name="na-integ" value="obstruída à direita"> Obstruída à direita</label>
+              <label><input type="radio" name="na-integ" value="obstruída à esquerda"> Obstruída à esquerda</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Integridade Auricular</label>
+            <div class="radio-group" id="rg-au-lesao">
+              <label><input type="radio" name="au-integ" value="íntegras"> Íntegras</label>
+              <label><input type="radio" name="au-integ" value="hiperemiadas"> Hiperemiadas</label>
+              <label><input type="radio" name="au-integ" value="lesionada à direita"> Lesionada à direita</label>
+              <label><input type="radio" name="au-integ" value="lesionada à esquerda"> Lesionada à esquerda</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Acuidade Auditiva</label>
+            <div class="radio-group" id="acuidade-auditiva">
+              <label><input type="radio" name="acuidade-auditiva" value="preservada"> Preservada</label>
+              <label><input type="radio" name="acuidade-auditiva" value="diminuída"> Diminuída</label>
+              <label><input type="radio" name="acuidade-auditiva" value="acusia"> Acusia</label>
+            </div>
+          </div>
+          <div class="field lateralizacao-au">
+            <label>Lateralização</label>
+            <div class="radio-group">
+              <label><input type="radio" name="lt-acuidade-auditiva" value="à esquerda"> À esquerda</label>
+              <label><input type="radio" name="lt-acuidade-auditiva" value="à direita"> À direita</label>
+              <label><input type="radio" name="lt-acuidade-auditiva" value="bilateralmente"> Bilateralmente</label>
+            </div>
+          </div>
+          <div class="field ap-auditivo">
+            <label><input type="checkbox" value="em uso de aparelho auditivo durante internação"> Paciente em uso de aparelho auditivo durante internação</label>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Cavidade Oral</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Integridade Labial</label>
+            <div class="radio-group" id="integ-labios">
+              <label><input type="radio" name="labios-integ" value="íntegros"> Íntegros</label>
+              <label><input type="radio" name="labios-integ" value="edemaciados"> Edemaciados</label>
+              <label><input type="radio" name="labios-integ" value="apresentando lesão"> Lesionados</label>
+              <label><input type="radio" name="labios-integ" value="rachaduras"> Rachaduras</label>
+              <label><input type="radio" name="labios-integ" value="queilite"> Queilite</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Coloração Labial</label>
             <div class="radio-group">
               <label><input type="radio" name="labios-cor" value="normocorados"> Normocorados</label>
               <label><input type="radio" name="labios-cor" value="hipocorados"> Hipocorados</label>
@@ -791,8 +945,24 @@
               <label><input type="radio" name="labios-cor" value="cianóticos"> Cianóticos</label>
             </div>
           </div>
+          <div class="field lesao-labial">
+            <label>Lábio Lesionado</label>
+            <div class="radio-group">
+              <label><input type="radio" name="labios-lesao" value="na parte superior"> Superior</label>
+              <label><input type="radio" name="labios-lesao" value="na parte inferior"> Inferior</label>
+              <label><input type="radio" name="labios-lesao" value="em ambos os lábios"> Ambos</label>
+            </div>
+          </div>
+          <div class="field lateralizacao-labial">
+            <label>Lateralidade da Lesão Labial</label>
+            <div class="radio-group">
+              <label><input type="radio" name="labios-lateralidade" value="à direita"> À direita</label>
+              <label><input type="radio" name="labios-lateralidade" value="à esquerda"> À esquerda</label>
+              <label><input type="radio" name="labios-lateralidade" value="ao centro"> Centralizada</label>
+            </div>
+          </div>
           <div class="field">
-            <label>Mucosa Oral</label>
+            <label>Integridade da Mucosa Oral</label>
             <div class="radio-group">
               <label><input type="radio" name="mucosa-oral" value="íntegra"> Íntegra</label>
               <label><input type="radio" name="mucosa-oral" value="hiperemiada"> Hiperemiada</label>
@@ -800,7 +970,7 @@
             </div>
           </div>
           <div class="field">
-            <label>Mucosa Oral – Coloração</label>
+            <label>Coloração da Mucosa Oral</label>
             <div class="radio-group">
               <label><input type="radio" name="mucosa-cor" value="normocorada"> Normocorada</label>
               <label><input type="radio" name="mucosa-cor" value="hipocorada"> Hipocorada</label>
@@ -808,20 +978,172 @@
             </div>
           </div>
           <div class="field">
-            <label>Dentição</label>
+            <label>Alteração Lingual</label>
+            <div class="radio-group" id="alt-lingua">
+              <label><input type="checkbox" name="alt-lingua" value="lesões"> Lesões</label>
+              <label><input type="checkbox" name="alt-lingua" value="rachaduras"> Rachaduras</label>
+              <label><input type="checkbox" name="alt-lingua" value="glossite"> Glossite</label>
+              <label><input type="checkbox" name="alt-lingua" value="palidez"> Palidez</label>
+              <label><input type="checkbox" name="alt-lingua" value="hiperemia"> Hiperemia</label>
+              <label><input type="checkbox" name="alt-lingua" value="alteração de coloração"> Alteração de Cor</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Alteração da Cavidade Oral</label>
+            <div class="radio-group">
+              <label><input type="checkbox" name="alt-cav-oral" value="cáseos amigdalianos"> Cáseos Amigdalianos</label>
+              <label><input type="checkbox" name="alt-cav-oral" value="halitose"> Halitose</label>
+              <label><input type="checkbox" name="alt-cav-oral" value="afagia"> Afagia</label>
+              <label><input type="checkbox" name="alt-cav-oral" value="disfonia"> Disfonia</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Paladar</label>
+            <div class="radio-group">
+              <label><input type="radio" name="paladar" value="preservado"> Preservado</label>
+              <label><input type="radio" name="paladar" value="digeusia"> Alterado</label>
+              <label><input type="radio" name="paladar" value="hipergeusia"> Aumentado</label>
+              <label><input type="radio" name="paladar" value="hipogeusia"> Diminuído</label>
+              <label><input type="radio" name="paladar" value="ageusia"> Ausente</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Dentição</div>
+        <div class="grid-1">
+          <div class="field">
+            <label>Arcada Dentrária</label>
             <div class="radio-group">
               <label><input type="radio" name="denticao" value="completa"> Completa</label>
               <label><input type="radio" name="denticao" value="incompleta"> Incompleta</label>
               <label><input type="radio" name="denticao" value="ausente"> Ausente</label>
-              <label><input type="radio" name="denticao" value="restos radiculares"> Restos Radicul.</label>
+              <label><input type="radio" name="denticao" value="restos radiculares"> Restos Radiculares</label>
+            </div>
+          </div>
+          <br>
+          <div class="field">
+              <label><input type="checkbox" name="alt-arc-dent" value="com presença de cáries"> Com presença de cáries</label>
+          </div>
+          <br>
+          <div class="field">
+              <label><input type="checkbox" name="alt-arc-dent" value="em uso de prótese dentária durante internação"> Em uso de prótese dentária durante internação</label>
+          </div>
+          <br>
+          <div class="field">
+              <label><input type="checkbox" name="alt-arc-dent" value="em uso de aparelho ortodôntico"> Em uso de aparelho ortodôntico</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== PESCOÇO E TÓRAX ====== -->
+    <div class="form-section" id="sec-pescoco-torax">
+      <div class="section-header">
+        <div class="section-icon">👤</div>
+        <div>
+          <div class="section-title">Pescoço e Tórax</div>
+          <div class="section-subtitle">Avaliação do pescoço e do tórax</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Pescoço</div>
+        <div class="grid-1">
+          <div class="field">
+              <label><input type="checkbox" name="pescoco" value="Região do pescoço com presença de linfonodos palpáveis."> Região do pescoço com presença de linfonodos palpáveis</label>
+          </div>
+          <br>
+          <div class="field">
+              <label><input type="checkbox" name="pescoco" value="Em uso de imobilizador cervical."> Em uso de imobilizador cervical</label>
+          </div>
+          <br>
+          <div class="field">
+              <label><input type="checkbox" name="pescoco" value="Mobilidade da traqueia alterada com desvio de traqueia."> Mobilidade da traqueia alterada com desvio de traqueia</label>
+          </div>
+          <br>
+          <div class="field">
+              <label><input type="checkbox" name="pescoco" value="Mobilidade da traqueia alterada com traqueomalácia."> Mobilidade da traqueia alterada com traqueomalácia</label>
+          </div>
+          <br>
+          <div class="field">
+              <label><input type="checkbox" name="pescoco" value="Sinal de Brudzinski positivo, apresentando rigidez nucal."> Sinal de Brudzinski positivo</label>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Avaliação Torácica</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Tipo de Tórax</label>
+            <div class="radio-group">
+              <label><input type="radio" name="torax" value="normal"> Normal</label>
+              <label><input type="radio" name="torax" value="barril"> Barril</label>
+              <label><input type="radio" name="torax" value="cifótico"> Cifótico</label>
+              <label><input type="radio" name="torax" value="infundibuliforme"> Escavado</label>
+              <label><input type="radio" name="torax" value="cariniforme"> Peito de pombo</label>
             </div>
           </div>
           <div class="field">
-            <label>Narinas</label>
+            <label>Linfonodos Axilares Palpáveis</label>
             <div class="radio-group">
-              <label><input type="radio" name="narinas" value="íntegras"> Íntegras</label>
-              <label><input type="radio" name="narinas" value="lesionadas"> Lesionadas</label>
-              <label><input type="radio" name="narinas" value="obstruídas"> Obstruídas</label>
+              <label><input type="radio" name="linfonodos-ax" value="à direita"> À direita</label>
+              <label><input type="radio" name="linfonodos-ax" value="à esquerda"> À esquerda</label>
+              <label><input type="radio" name="linfonodos-ax" value="bilateralmente"> Bilateralmente</label>
+            </div>
+          </div>
+          <div class="field pc-feminino">
+            <label>Mastectomia</label>
+            <div class="radio-group">
+              <label><input type="radio" name="mastectomia" value="à direita"> À direita</label>
+              <label><input type="radio" name="mastectomia" value="à esquerda"> À esquerda</label>
+              <label><input type="radio" name="mastectomia" value="bilateralmente"> Bilateralmente</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card pc-feminino">
+        <div class="card-title">Avaliação das Mamas das Gestantes</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Simetria</label>
+            <div class="radio-group">
+              <label><input type="radio" name="simetria-mama" value="simétricas"> Simétricas</label>
+              <label><input type="radio" name="simetria-mama" value="com presença de abaulamentos"> Abauladas</label>
+              <label><input type="radio" name="simetria-mama" value="retraídas"> Retraídas</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tonicidade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="tonicidade-mama" value="flácidas"> Flácidas</label>
+              <label><input type="radio" name="tonicidade-mama" value="rígidas"> Rígidas</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Alterações de Pele</label>
+            <div class="radio-group">
+              <label><input type="radio" name="alt-pele-mama" value="ausência"> Ausência</label>
+              <label><input type="radio" name="alt-pele-mama" value="presença"> Presença</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Mamilo</label>
+            <div class="radio-group">
+              <label><input type="radio" name="mamilo" value="planos"> Planos</label>
+              <label><input type="radio" name="mamilo" value="protusos"> Protusos</label>
+              <label><input type="radio" name="mamilo" value="invertidos"> Invertidos</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Alterações das Mamas</label>
+            <div class="field">
+                <label><input type="checkbox" name="alt-mama" value="presença de colostro"> Presença de colostro</label>
+            </div>
+            <div class="field">
+                <label><input type="checkbox" name="alt-mama" value="ingurgitamento mamário"> Ingurgitamento mamário</label>
+            </div>
+            <div class="field">
+                <label><input type="checkbox" name="alt-mama" value="saída espontânea de leite materno"> Saída espontânea de leite materno</label>
             </div>
           </div>
         </div>
@@ -841,28 +1163,98 @@
         <div class="card-title">Parâmetros Cardiovasculares</div>
         <div class="grid-2">
           <div class="field">
-            <label>Bulhas Cardíacas</label>
+            <label>Auscuta Cardíaca</label>
             <div class="radio-group">
-              <label><input type="radio" name="bulhas" value="normofonéticas em 2 tempos"> Normofonéticas 2T</label>
-              <label><input type="radio" name="bulhas" value="abafadas"> Abafadas</label>
-              <label><input type="radio" name="bulhas" value="com presença de B3"> Com B3</label>
-              <label><input type="radio" name="bulhas" value="com presença de B4"> Com B4</label>
+              <label><input type="radio" name="auscuta" value="normofonéticas"> Normofonéticas</label>
+              <label><input type="radio" name="auscuta" value="abafadas"> Abafadas</label>
+              <label><input type="radio" name="auscuta" value="hiperfonéticas"> Hiperfonéticas</label>
             </div>
           </div>
           <div class="field">
-            <label>Tempo de Preenchimento Capilar (TPC)</label>
+            <label>Bulhas Cardíacas</label>
+            <div class="radio-group">
+              <label><input type="checkbox" name="bulhas" value="em dois tempos"> Dois Tempos</label>
+              <label><input type="checkbox" name="bulhas" value="com presença de B3"> Com B3</label>
+              <label><input type="checkbox" name="bulhas" value="com presença de B4"> Com B4</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tempo de Preenchimento Capilar</label>
             <div class="radio-group">
               <label><input type="radio" name="tpc" value="inferior a 3 segundos"> &lt;3 seg (inferior)</label>
               <label><input type="radio" name="tpc" value="superior a 3 segundos"> &gt;3 seg (superior)</label>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Avaliação de Pulso</div>
+        <div class="grid-3">
           <div class="field">
-            <label>Estado Hemodinâmico</label>
+            <label>Localização</label>
             <div class="radio-group">
-              <label><input type="radio" name="hemodinamica" value="estável sem uso de aminas"> Estável s/aminas</label>
-              <label><input type="radio" name="hemodinamica" value="estável com uso de aminas"> Estável c/aminas</label>
-              <label><input type="radio" name="hemodinamica" value="instável sem uso de aminas"> Instável s/aminas</label>
-              <label><input type="radio" name="hemodinamica" value="instável com uso de aminas"> Instável c/aminas</label>
+              <label><input type="radio" name="localizacao-pulso" value="cariotídeo"> Carotídeo</label>
+              <label><input type="radio" name="localizacao-pulso" value="braquial"> Braquial</label>
+              <label><input type="radio" name="localizacao-pulso" value="radial"> Radial</label>
+              <label><input type="radio" name="localizacao-pulso" value="femoral"> Femoral</label>
+              <label><input type="radio" name="localizacao-pulso" value="pedioso"> Pedioso</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Amplitude de Pulso</label>
+            <div class="radio-group">
+              <label><input type="radio" name="amplitude-pulso" value="forte"> Forte</label>
+              <label><input type="radio" name="amplitude-pulso" value="regular"> Regular</label>
+              <label><input type="radio" name="amplitude-pulso" value="diminuído"> Diminuído</label>
+              <label><input type="radio" name="amplitude-pulso" value="ausente"> Ausente</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Lateralização</label>
+            <div class="radio-group">
+              <label><input type="radio" name="lateralizacao-pulso" value="à direita"> Direito</label>
+              <label><input type="radio" name="lateralizacao-pulso" value="à esquerda"> Esquedo</label>
+              <label><input type="radio" name="lateralizacao-pulso" value="bilateralmente"> Bilateral</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Sopro Cardíaco</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Foco Cardíaco</label>
+            <div class="radio-group">
+              <label><input type="radio" name="foco-cardiaco" value="aórtico"> Aórtico</label>
+              <label><input type="radio" name="foco-cardiaco" value="pulmonar"> Pulmonar</label>
+              <label><input type="radio" name="foco-cardiaco" value="tricúspide"> Tricúspide</label>
+              <label><input type="radio" name="foco-cardiaco" value="mitral"> Mitral</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tempo Cardíaco</label>
+            <div class="radio-group">
+              <label><input type="radio" name="tempo-cardiaco" value="sístole"> Sístole</label>
+              <label><input type="radio" name="tempo-cardiaco" value="diástole"> Diástole</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Sopro Carotídeo</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Lateralidade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="foco-carotideo" value="esquerda"> Esquedo</label>
+              <label><input type="radio" name="foco-carotideo" value="direita"> Direito</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tempo Cardíaco</label>
+            <div class="radio-group">
+              <label><input type="radio" name="tempo-carotideo" value="sístole"> Sístole</label>
+              <label><input type="radio" name="tempo-carotideo" value="diástole"> Diástole</label>
             </div>
           </div>
         </div>
@@ -1569,22 +1961,6 @@
           </div>
         </div>
       </div>
-      <!-- Ramsay -->
-      <div class="card">
-        <div class="card-title">Escala de Ramsay (opcional)</div>
-        <div class="field">
-          <label>Nível Ramsay</label>
-          <select id="ramsay">
-            <option value="">Não aplicado</option>
-            <option value="1">1 – Acordado, ansioso/agitado</option>
-            <option value="2">2 – Acordado, cooperativo e tranquilo</option>
-            <option value="3">3 – Sonolento, atende comandos verbais</option>
-            <option value="4">4 – Dormindo, resposta rápida a estímulo</option>
-            <option value="5">5 – Dormindo, resposta lenta a estímulos</option>
-            <option value="6">6 – Dormindo, sem resposta (sedação profunda)</option>
-          </select>
-        </div>
-      </div>
       <!-- Observações Gerais -->
       <div class="card">
         <div class="card-title">Observações / Condutas Adicionais</div>
@@ -1650,7 +2026,7 @@
 <script>
   // ── Navigation ──────────────────────────────────────────────────────────────
   const sections = [
-    'identificacao','sinais-vitais','percepcao','cabeca',
+    'identificacao','sinais-vitais','percepcao','cabeca', 'pescoco-torax',
     'cardiovascular','pulmonar','abdome','genitalia','pele','membros',
     'dispositivos','escalas','resumo'
   ];
@@ -1697,6 +2073,37 @@
   }
 
   // ── Calculations ────────────────────────────────────────────────────────────
+  function calcPesoPredito() {
+    const altura = parseFloat(document.getElementById('altura').value);
+    const sexo = document.getElementById('sexo').value;
+    const peso = document.getElementById('peso');
+    if (sexo === 'Masculino'){
+      const pesoPredito = 50 + 0.91 * (altura - 152.4);
+      peso.value = parseFloat(pesoPredito).toFixed(2);
+    }
+    else {
+      const pesoPredito = 45.5 + 0.91 * (altura - 152.4);
+      peso.value = parseFloat(pesoPredito).toFixed(2);
+    }
+    calcIMC();
+  }
+
+  function calcChunlea() {
+    const sexo = document.getElementById('sexo').value;
+    const idade = parseInt(document.getElementById('idade').value);
+    const altCalcJoe = parseFloat(document.getElementById('altCalcJoe').value);
+    const altura = document.getElementById('altura');
+    if (sexo === 'Masculino') {
+      const calcChunlea = 64.19 - (0.04 * idade) + (2.02 * altCalcJoe);
+      altura.value = parseFloat(calcChunlea).toFixed(2);
+    }
+    else {
+      const calcChunlea = 84.88 - (0.24 * idade) + (1.83 * altCalcJoe);
+      altura.value = parseFloat(calcChunlea).toFixed(2);
+    }
+    calcIMC();
+  }
+
   function calcIMC() {
     const peso = parseFloat(document.getElementById('peso').value);
     const altCm = parseFloat(document.getElementById('altura').value);
@@ -1710,8 +2117,6 @@
       else if (idade >= 20 && idade <= 59) faixa = 'Adulto (20–59)';
       else if (idade >= 60) faixa = 'Idoso (≥60)';
       document.getElementById('faixa-etaria').textContent = faixa || '—';
-      // FC máx
-      document.getElementById('fc-max').textContent = isNaN(idade) ? '—' : (220 - idade) + ' bpm';
     }
 
     if (!isNaN(peso) && !isNaN(altCm) && altCm > 0) {
@@ -1741,6 +2146,23 @@
   document.getElementById('idade').addEventListener('input', calcIMC);
   document.getElementById('sexo').addEventListener('change', calcIMC);
 
+  function classPA() {
+    const s = parseFloat(document.getElementById('pas').value);
+    const d = parseFloat(document.getElementById('pad').value);
+    let classPA = '';
+    if (!isNaN(s) && !isNaN(d)) {
+      if ((s >= 90 && s <= 140) && (d >= 60 && d <= 90))
+        classPA = 'Normotenso';
+      else if (s < 90 || d < 60)
+        classPA = 'Hipotenso';
+      else if (s > 140 || d > 90)
+        classPA = 'Hipertenso';
+      else
+        classPA = '—';
+      document.getElementById('class-pa').textContent = classPA;
+    }
+  }
+
   function calcPA() {
     const s = parseFloat(document.getElementById('pas').value);
     const d = parseFloat(document.getElementById('pad').value);
@@ -1753,11 +2175,10 @@
 
   function classFC() {
     const fc = parseFloat(document.getElementById('fc').value);
-    if (isNaN(fc)) return;
-    let c = fc < 60 ? 'Bradicárdico' : fc <= 100 ? 'Normocárdico' : 'Taquicárdico';
-    document.getElementById('class-fc').textContent = c;
     const idade = parseInt(document.getElementById('idade').value);
-    if (!isNaN(idade)) document.getElementById('fc-max').textContent = (220 - idade) + ' bpm';
+    if (isNaN(fc)) return;
+    let c = fc < 60 ? 'Bradicárdico' : fc <= 100 ? 'Normocárdico' : fc <= (220 - idade) ? 'Taquicárdico' : 'Taquicardia Extrema';
+    document.getElementById('class-fc').textContent = c;
   }
 
   function classFR() {
@@ -1774,12 +2195,51 @@
     if (t < 32) c = 'Hipotermia grave';
     else if (t < 34) c = 'Hipotermia moderada';
     else if (t < 36) c = 'Hipotermia';
-    else if (t <= 37) c = 'Afebril';
+    else if (t < 37) c = 'Afebril';
     else if (t < 38) c = 'Febrícula';
     else if (t < 40) c = 'Febre';
     else c = 'Hipertermia';
     document.getElementById('class-temp').textContent = c;
   }
+
+  document.getElementById('rg-consciencia').addEventListener('change', function(e) {
+    const consciencia = e.target.value;
+    const deambulacao = document.getElementById('rg-mobilidade');
+    const camposConsc = document.querySelectorAll('.consciencia');
+    const camposDeamb = document.querySelectorAll('.deambulacao');
+    const esconder = consciencia === 'Sedado' || consciencia === 'Comatoso';
+    camposConsc.forEach(campo => {
+      campo.style.display = esconder ? 'none' : 'block';
+    });
+    camposDeamb.forEach(campo => {
+      if (esconder)
+        campo.style.display = 'none';
+    });
+    if (esconder) {
+      document.querySelectorAll('input[name="mobilidade"]').forEach(input => {
+      input.checked = false;
+    });
+    }
+    if (consciencia == 'Lúcido' || consciencia == 'Sonolento'){ 
+      document.getElementById('c-glasgow').style.display = "block";
+      document.getElementById('c-rass').style.display = "none";
+      document.getElementById('c-ramsey').style.display = "none";
+    }
+    else {
+      document.getElementById('c-glasgow').style.display = "none";
+      document.getElementById('c-rass').style.display = "block";
+      document.getElementById('c-ramsey').style.display = "block";
+    }
+  });
+
+  document.getElementById('rg-mobilidade').addEventListener('change', function(e) {
+    const deambulacao = e.target.value;
+    const campos = document.querySelectorAll('.deambulacao');
+    const esconder = deambulacao == 'Deambulando';
+    campos.forEach(campo => {
+      campo.style.display = esconder ? 'block' : 'none';
+    });
+  });
 
   function calcDU() {
     const vol = parseFloat(document.getElementById('vol-urina').value);
@@ -1811,14 +2271,59 @@
     const m = document.getElementById('glasgow-m').value;
     const p = document.getElementById('glasgow-p').value;
     if (o && v && m) {
-      if (o === 'NT' || v === 'NT' || m === 'NT') {
-        document.getElementById('glasgow-total').textContent = 'NT';
-        return;
-      }
-      const total = parseInt(o) + parseInt(v) + parseInt(m) + (p ? parseInt(p) : 0);
+      const total = parseInt(o) + parseInt(v) + parseInt(m) - (p ? parseInt(p) : 0);
       document.getElementById('glasgow-total').textContent = total + ' pts';
     }
   }
+
+  // Cabeça
+  document.getElementById('rg-cc-lesao').addEventListener('change', function(e) {
+    const lesao = e.target.value;
+    const exibe = lesao === 'lesionado em região' ? true : false;
+    const selecaoLesao = document.querySelector('.lesao-couro');
+    selecaoLesao.style.display = exibe ? 'block' : 'none';
+  });
+
+  document.getElementById('acuidade-visual').addEventListener('change', function(e) {
+    const acuidade = e.target.value;
+    const exibe = acuidade !== 'preservada' ? true : false;
+    const selecaoLateralizacao = document.querySelector('.lateralizacao-av');
+    selecaoLateralizacao.style.display = exibe ? 'block' : 'none';
+  });
+
+  document.getElementById('acuidade-auditiva').addEventListener('change', function(e) {
+    const acuidade = e.target.value;
+    const exibe = acuidade !== 'preservada' ? true : false;
+    const selecaoLateralizacao = document.querySelector('.lateralizacao-au');
+    selecaoLateralizacao.style.display = exibe ? 'block' : 'none';
+  });
+
+  document.getElementById('acuidade-auditiva').addEventListener('change', function(e) {
+    const acuidade = e.target.value;
+    const exibe = acuidade !== 'preservada' ? true : false;
+    const apAuditivo = document.querySelector('.ap-auditivo');
+    apAuditivo.style.display = exibe ? 'block' : 'none';
+  });
+
+  document.getElementById('integ-labios').addEventListener('change', function(e) {
+    const integridade = e.target.value;
+    const exibe = integridade === 'apresentando lesão' ? true : false;
+    const lesaoLabial = document.querySelector('.lesao-labial');
+    const lateralizacaoLabial = document.querySelector('.lateralizacao-labial')
+    lesaoLabial.style.display = exibe ? 'block' : 'none';
+    lateralizacaoLabial.style.display = exibe ? 'block' : 'none';
+  });
+
+  // Pescoço e Tórax
+  document.getElementById('sexo').addEventListener('change', function(e) {
+    const sexo = e.target.value;
+    console.log(sexo)
+    const exibe = sexo === 'Feminino' ? true : false;
+    const pcFeminino = document.querySelectorAll('.pc-feminino');
+    pcFeminino.forEach(element => {
+      element.style.display = exibe ? 'block' : 'none';
+    });
+  });
 
   // BPS
   ['bps-exp','bps-mmss','bps-vm'].forEach(id => {
@@ -1861,7 +2366,6 @@
     const idade = getVal('idade');
     const peso = getVal('peso');
     const altura = getVal('altura');
-    const comorbidades = getVal('comorbidades');
 
     const fc = getVal('fc'); const classFC = document.getElementById('class-fc').textContent.replace('—','');
     const pas = getVal('pas'); const pad = getVal('pad'); const pam = document.getElementById('pam-calc').textContent.replace('—','');
@@ -1885,6 +2389,7 @@
 
     // Cabeça
     const ccInteg = getRadio('cc-integ');
+    const ccLesao = getRadio('cc-lesao');
     const ccLimp = getRadio('cc-limp');
     const pupilas = getRadio('pupilas');
     const foto = getRadio('foto');
@@ -1985,7 +2490,6 @@
       if (peso && altura) corpo += `, ${peso}kg e ${altura}cm`;
       if (imcClass) corpo += `, IMC ${imc} (${imcClass})`;
       if (get) corpo += `, com necessidades calóricas estimadas em ${get} segundo Harris-Benedict`;
-      if (comorbidades) corpo += `. Comorbidades: ${comorbidades}`;
       corpo += '.\n\n';
 
       // Sinais vitais
@@ -1998,6 +2502,10 @@
       corpo += '.\n\n';
 
       // Percepção
+      const o = document.getElementById('glasgow-o').value;
+      const v = document.getElementById('glasgow-v').value;
+      const m = document.getElementById('glasgow-m').value;
+      const p = document.getElementById('glasgow-p').value;
       corpo += 'PERCEPÇÃO E COGNIÇÃO:\n';
       if (consciencia || orientacao || interacao) {
         corpo += `Paciente ${[consciencia, orientacao, interacao].filter(Boolean).join(', ')}`;
@@ -2006,14 +2514,14 @@
         if (sensib) corpo += ` e sensibilidade ${sensib}`;
         corpo += '.';
       }
-      if (glasgowTotal && glasgowTotal !== '—') corpo += ` ECG: ${glasgowTotal}.`;
+      if (glasgowTotal && glasgowTotal !== '—') corpo += ` ECG: (${o} + ${v} + ${m} - ${p}) ${glasgowTotal}.`;
       if (rass && rass !== '') corpo += ` RASS: ${rass}.`;
       if (ramsay && ramsay !== '') corpo += ` Escala de Ramsay: ${ramsay}.`;
       corpo += '\n\n';
 
       // Cabeça e pescoço
       corpo += 'CABEÇA E PESCOÇO:\n';
-      if (ccInteg || ccLimp) corpo += `Couro cabeludo ${[ccInteg, ccLimp].filter(Boolean).join(', ')}. `;
+      if (ccInteg || ccLimp) corpo += `Couro cabeludo ${[ccInteg + ccLesao, ccLimp].filter(Boolean).join(', ')}. `;
       if (pupilas || foto || escleras) corpo += `Olhos com pupilas ${pupilas}, ${foto} e escleras ${escleras}. `;
       if (narinas) corpo += `Narinas ${narinas}. `;
       if (labiosInteg || labiosCor) corpo += `Lábios ${[labiosInteg, labiosCor].filter(Boolean).join(', ')}. `;
@@ -2165,7 +2673,6 @@
       // Gordon / Gazolla
       corpo += 'DOMÍNIO PROMOÇÃO DA SAÚDE\n';
       corpo += `${sexo || '—'}, ${idade || '—'} anos, ${peso || '—'}kg, ${altura || '—'}cm`;
-      if (comorbidades) corpo += `. Comorbidades: ${comorbidades}`;
       corpo += `.\nSinais vitais: PA ${pas}x${pad} mmHg | FC ${fc} bpm | FR ${fr} irpm | Temp ${temp}°C | SpO₂ ${spo2}%\n\n`;
 
       corpo += 'DOMÍNIO NUTRIÇÃO\n';
