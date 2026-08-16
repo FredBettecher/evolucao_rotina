@@ -380,7 +380,7 @@
 
   /* ── Custom ── */
   .consciencia, #c-rass, #c-glasgow, #c-ramsey, .deambulacao, .altCalcJoe, .lesao-couro, .lateralizacao-av, .lateralizacao-au, .ap-auditivo, .lesao-labial,
-  .lateralizacao-labial, .pc-feminino {
+  .lateralizacao-labial, .pc-feminino, .mc-programado, .field-suporte-o2, .field-vm, .field-murmurios, .field-ruidos, .field-secrecao-asp {
     display: none;
   }
 
@@ -593,6 +593,26 @@
           <div class="field">
             <label>Classificação Temperatura</label>
             <div class="calc-field" id="class-temp">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>🩺 Alterações Pressóricas</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-1">
+            <div class="field">
+                <label><input type="checkbox" name="pescoco" value="devido a labilidade pressórica"> Labilidade pressórica</label>
+            </div>
+            <br>
+            <div class="field">
+                <label><input type="checkbox" name="pescoco" value="apresentando hipotensão postural"> Hipotensão postural</label>
+            </div>
+            <br>
+            <div class="field">
+                <label><input type="checkbox" name="pescoco" value="apresentando hipotensão paradoxal"> Hipotensão paradoxal</label>
+            </div>
           </div>
         </div>
       </div>
@@ -1218,45 +1238,168 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Sopro Cardíaco</div>
-        <div class="grid-2">
-          <div class="field">
-            <label>Foco Cardíaco</label>
-            <div class="radio-group">
-              <label><input type="radio" name="foco-cardiaco" value="aórtico"> Aórtico</label>
-              <label><input type="radio" name="foco-cardiaco" value="pulmonar"> Pulmonar</label>
-              <label><input type="radio" name="foco-cardiaco" value="tricúspide"> Tricúspide</label>
-              <label><input type="radio" name="foco-cardiaco" value="mitral"> Mitral</label>
+        <div style="display: flex;">
+          <button style="background-color: green; color: white; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px; border-radius: 8px; margin-top: 10px; cursor: pointer; font-size: large; margin-left: auto; margin-right: 0; border: none;">
+            +
+          </button>
+        </div>
+        </div>
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Marcapasso</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Inserção</label>
+              <div class="radio-group">
+                <label><input type="radio" name="marcapasso-insercao" value="VSCD"> VSCD</label>
+                <label><input type="radio" name="marcapasso-insercao" value="VSCE"> VSCE</label>
+                <label><input type="radio" name="marcapasso-insercao" value="VJID"> VJID</label>
+                <label><input type="radio" name="marcapasso-insercao" value="VJIE"> VJIE</label>
+                <label><input type="radio" name="marcapasso-insercao" value="mediastino"> Mediastino</label>
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <label>Tempo Cardíaco</label>
-            <div class="radio-group">
-              <label><input type="radio" name="tempo-cardiaco" value="sístole"> Sístole</label>
-              <label><input type="radio" name="tempo-cardiaco" value="diástole"> Diástole</label>
+            <div class="field">
+              <label>Situação</label>
+              <div class="radio-group" id="mc-situacao">
+                <label><input type="radio" name="marcapasso-situacao" value="em stand by"> Stand By</label>
+                <label><input type="radio" name="marcapasso-situacao" value="conectado a unidade geradora"> Unidade geradora</label>
+              </div>
+            </div>
+            <div class="field mc-programado">
+              <label>Programado</label>
+              <input type="number" id="marcapasso-md" min="0" max="300" placeholder="—">
             </div>
           </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title">Sopro Carotídeo</div>
-        <div class="grid-2">
-          <div class="field">
-            <label>Lateralidade</label>
-            <div class="radio-group">
-              <label><input type="radio" name="foco-carotideo" value="esquerda"> Esquedo</label>
-              <label><input type="radio" name="foco-carotideo" value="direita"> Direito</label>
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Turgência Jugular</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Lateralidade</label>
+              <div class="radio-group">
+                <label><input type="radio" name="lateralizacao-jugular" value="à direita"> Direito</label>
+                <label><input type="radio" name="lateralizacao-jugular" value="à esquerda"> Esquedo</label>
+                <label><input type="radio" name="lateralizacao-jugular" value="bilateralmente"> Bilateral</label>
+              </div>
             </div>
           </div>
-          <div class="field">
-            <label>Tempo Cardíaco</label>
-            <div class="radio-group">
-              <label><input type="radio" name="tempo-carotideo" value="sístole"> Sístole</label>
-              <label><input type="radio" name="tempo-carotideo" value="diástole"> Diástole</label>
+        </div>
+      </div>
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Sopro Cardíaco</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Foco Cardíaco</label>
+              <div class="radio-group">
+                <label><input type="radio" name="foco-cardiaco" value="aórtico"> Aórtico</label>
+                <label><input type="radio" name="foco-cardiaco" value="pulmonar"> Pulmonar</label>
+                <label><input type="radio" name="foco-cardiaco" value="tricúspide"> Tricúspide</label>
+                <label><input type="radio" name="foco-cardiaco" value="mitral"> Mitral</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Tempo Cardíaco</label>
+              <div class="radio-group">
+                <label><input type="radio" name="tempo-cardiaco" value="sístole"> Sístole</label>
+                <label><input type="radio" name="tempo-cardiaco" value="diástole"> Diástole</label>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Sopro Carotídeo</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Lateralidade</label>
+              <div class="radio-group">
+                <label><input type="radio" name="foco-carotideo" value="esquerda"> Esquedo</label>
+                <label><input type="radio" name="foco-carotideo" value="direita"> Direito</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Tempo Cardíaco</label>
+              <div class="radio-group">
+                <label><input type="radio" name="tempo-carotideo" value="sístole"> Sístole</label>
+                <label><input type="radio" name="tempo-carotideo" value="diástole"> Diástole</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Teste de Allen</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Membro Avaliado</label>
+              <div class="radio-group">
+                <label><input type="radio" name="allen-membro" value="MSD"> MSD</label>
+                <label><input type="radio" name="allen-membro" value="MSE"> MSE</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Artéria Avaliada</label>
+              <div class="radio-group">
+                <label><input type="radio" name="allen-arteria" value="radial"> Radial</label>
+                <label><input type="radio" name="allen-arteria" value="ulnar"> Ulnar</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Índice Tornozelo-Braquial</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Membros à Direita</label>
+              <label>MSD</label>
+              <input type="number" id="itb-md-1" min="0" max="300" placeholder="—" oninput="calcITB()">
+              <label>Art. tibial posterior</label>
+              <input type="number" id="itb-md-2" min="0" max="300" placeholder="—" oninput="calcITB()">
+              <label>Art. pediosa</label>
+              <input type="number" id="itb-md-3" min="0" max="300" placeholder="—" oninput="calcITB()">
+            </div>
+            <div class="field">
+              <label>Membros à Esquerda</label>
+              <label>MSE</label>
+              <input type="number" id="itb-me-1" min="0" max="300" placeholder="—" oninput="calcITB()"> 
+              <label>Art. tibial posterior</label>
+              <input type="number" id="itb-me-2" min="0" max="300" placeholder="—" oninput="calcITB()">
+              <label>Art. pediosa</label>
+              <input type="number" id="itb-me-3" min="0" max="300" placeholder="—" oninput="calcITB()">
+            </div>
+          </div>
+          <div class="grid-2" style="margin-top: 10px;">
+            <div class="field">
+              <label>ITB Membro Inferior Direito</label>
+              <div class="calc-field" id="calc-itb-d">—</div>
+            </div>
+            <div class="field">
+              <label>ITB Membro Inferior Esquerdo</label>
+              <div class="calc-field" id="calc-itb-e">—</div>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--text-muted);margin-top: 10px; text-align: center;">
+            Utilizar apenas o valor de pressão arterial sistólica
+          </p>
         </div>
       </div>
     </div>
@@ -1278,6 +1421,7 @@
             <div class="radio-group">
               <label><input type="radio" name="ritmo-resp" value="normal"> Normal</label>
               <label><input type="radio" name="ritmo-resp" value="dispneia"> Dispneia</label>
+              <label><input type="radio" name="ritmo-resp" value="ortopineia"> Ortopneia</label>
               <label><input type="radio" name="ritmo-resp" value="com apneia"> Apneia</label>
               <label><input type="radio" name="ritmo-resp" value="de Kussmaul"> Kussmaul</label>
               <label><input type="radio" name="ritmo-resp" value="de Biot"> Biot</label>
@@ -1286,71 +1430,151 @@
           </div>
           <div class="field">
             <label>Suporte de O₂</label>
-            <select id="suporte-o2">
-              <option value="">Ar ambiente</option>
-              <option value="cateter-nasal">Cateter Nasal (baixo fluxo)</option>
-              <option value="mascara-simples">Máscara Simples (baixo fluxo)</option>
-              <option value="macronebulizacao">Macronebulização (baixo fluxo)</option>
-              <option value="mascara-venturi">Máscara de Venturi (alto fluxo)</option>
-              <option value="mascara-nao-reinalante">Máscara Não Reinalante (alto fluxo)</option>
-              <option value="cnaf">CNAF – Alto Fluxo</option>
-              <option value="vm">Ventilação Mecânica</option>
+            <div class="radio-group" id="suporte-o2">
+              <label><input type="radio" name="ritmo-resp" value="ar ambiente"> Ar ambiente</label>
+              <label><input type="radio" name="ritmo-resp" value="suporte de O₂"> Suporte de O₂</label>
+              <label><input type="radio" name="ritmo-resp" value="ventilação mecânica"> Ventilação Mecânica</label>
+            </div>
+          </div>
+          <!-- Suporte O₂ -->
+          <div class="field field-suporte-o2">
+            <label>Fluxo O₂ (L/min)</label>
+            <input type="number" id="o2-litros" min="0" max="60" step="1" placeholder="—">
+          </div>
+          <div class="field field-suporte-o2">
+            <label>Suporte de O₂</label>
+            <select id="options-suporte-o2">
+              <option value="baixo fluxo do tipo cateter nasal">Cateter Nasal</option>
+              <option value="baixo fluxo do tipo máscara simples">Máscara Simples</option>
+              <option value="baixo fluxo do tipo macronebulizacao">Macronebulização</option>
+              <option value="alto fluxo do tipo máscara de venturi">Máscara de Venturi</option>
+              <option value="alto fluxo do tipo máscara não reinalante">Máscara Não Reinalante</option>
+              <option value="alto fluxo do tipo máscara tenda">Máscara Tenda</option>
+              <option value="alto fluxo do tipo máscara reservatório">Máscara Reservatório</option>
+              <option value="Cateter Nasal de Alto Fluxo">CNAF</option>
             </select>
           </div>
-          <div class="field" id="field-o2-litros">
-            <label>Fluxo O₂ (L/min)</label>
-            <input type="number" id="o2-litros" min="0" max="60" step="0.5" placeholder="—">
+          <!-- Ventilação Mecânica -->
+           <div class="field field-vm">
+            <label>Equipamentos em Uso</label>
+            <div class="check-group" style="margin-top: 5px;">
+              <label><input type="checkbox" name="equipamento-vm" value="sistema de aspiração fechado"> TrakCare</label>
+              <label><input type="checkbox" name="equipamento-vm" value="filtro bacteriológico"> Filtro Bacteriológico</label>
+            </div>
+          </div>
+          <div class="field field-vm">
+            <label>Modo Ventilatório</label>
+            <select id="options-vm">
+              <option value="PCV">PCV</option>
+              <option value="PRVC">PRVC</option>
+              <option value="VCV">VCV</option>
+              <option value="PSV/CPAP">PSV/CPAP</option>
+            </select>
+          </div>
+          <div class="field field-vm">
+            <label>FiO₂ (%)</label>
+            <input type="number" id="fio2" min="21" max="100" step="1" placeholder="—">
+          </div>
+          <div class="field field-vm">
+            <label>PEEP (cmH₂O)</label>
+            <input type="number" id="peep" min="0" max="50" step="1" placeholder="—">
+          </div>
+          <div class="field field-vm">
+            <label>Frequência Respiratória</label>
+            <input type="number" id="frequencia-respiratoria-vm" min="0" max="100" step="1" placeholder="—">
+          </div>
+          <div class="field field-vm">
+            <label>Volume Corrente (L/min)</label>
+            <input type="number" id="volume-corrente" min="0" max="30" step="0.1" placeholder="—">
           </div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Murmúrios Vesiculares e Secreção</div>
+        <div class="card-title">Auscuta Pulmonar</div>
         <div class="grid-2">
           <div class="field">
             <label>Murmúrios Vesiculares</label>
-            <div class="radio-group">
+            <div class="radio-group" id="murmurios-vesiculares">
               <label><input type="radio" name="mv" value="universalmente audíveis"> Universalmente audíveis</label>
-              <label><input type="radio" name="mv" value="diminuídos à direita"> Dim. à D</label>
-              <label><input type="radio" name="mv" value="diminuídos à esquerda"> Dim. à E</label>
-              <label><input type="radio" name="mv" value="diminuídos bilateralmente"> Dim. bilat.</label>
-              <label><input type="radio" name="mv" value="abolidos à direita"> Abolidos à D</label>
-              <label><input type="radio" name="mv" value="abolidos à esquerda"> Abolidos à E</label>
+              <label><input type="radio" name="mv" value=""> Alterados</label>
             </div>
           </div>
           <div class="field">
             <label>Ruídos Adventícios</label>
-            <div class="check-group">
-              <label><input type="checkbox" name="ruidos-adv" value="sem ruídos adventícios"> Sem ruídos</label>
-              <label><input type="checkbox" name="ruidos-adv" value="roncos"> Roncos</label>
-              <label><input type="checkbox" name="ruidos-adv" value="crepitações"> Crepitações</label>
-              <label><input type="checkbox" name="ruidos-adv" value="sibilos"> Sibilos</label>
+            <div class="radio-group" id="ruidos-adventicios">
+              <label><input type="radio" name="ra" value="sem ruídos adventícios"> Ausente</label>
+              <label><input type="radio" name="ra" value=""> Presente</label>
             </div>
           </div>
+          <div class="field field-murmurios">
+            <label>Murmúrios Vesiculares (Pulmão Direito)</label>
+            <select id="options-auscuta-pulmonar-d">
+              <option value="diminuído"> Diminuído</option>
+              <option value="abolido"> Abolido</option>
+            </select>
+          </div>
+          <div class="field field-murmurios">
+            <label>Murmúrios Vesiculares (Pulmão Esquerdo)</label>
+            <select id="options-auscuta-pulmonar-e">
+              <option value="diminuído"> Diminuído</option>
+              <option value="abolido"> Abolido</option>
+            </select>
+          </div>
+          <div class="field field-ruidos">
+            <label>Ruídos Adventícios (Pulmão Direito)</label>
+            <select id="options-ruidos-d">
+             <option value="sem ruídos adventícios"> Sem ruídos</option>
+             <option value="roncos"> Roncos</option>
+             <option value="crepitações"> Crepitações</option>
+             <option value="sibilos"> Sibilos</option>
+            </select>
+          </div>
+          <div class="field field-ruidos">
+            <label>Ruídos Adventícios (Pulmão Esquerdo)</label>
+            <select id="options-ruidos-e">
+             <option value="sem ruídos adventícios"> Sem ruídos</option>
+             <option value="roncos"> Roncos</option>
+             <option value="crepitações"> Crepitações</option>
+             <option value="sibilos"> Sibilos</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Secreção Pulmonar</div>
+        <div class="grid-2">
           <div class="field">
             <label>Secreção à Aspiração</label>
-            <div class="radio-group">
+            <div class="radio-group" id="secrecao-asp">
               <label><input type="radio" name="secrecao-asp" value="Ausência de secreção à aspiração"> Ausente</label>
-              <label><input type="radio" name="secrecao-asp" value="fluida"> Fluida</label>
-              <label><input type="radio" name="secrecao-asp" value="espessa"> Espessa</label>
+              <label><input type="radio" name="secrecao-asp" value=""> Presente</label>
             </div>
           </div>
-          <div class="field">
+          <div></div>
+          <div class="field field-secrecao-asp">
+            <label>Viscosidade da Secreção</label>
+            <select id="options-secrecao-visc">
+             <option value="fluida"> Fluida</option>
+             <option value="espessa"> Espessa</option>
+            </select>
+          </div>
+          <div class="field field-secrecao-asp">
             <label>Quantidade de Secreção</label>
-            <div class="radio-group">
-              <label><input type="radio" name="secrecao-qtd" value="pouca"> Pouca</label>
-              <label><input type="radio" name="secrecao-qtd" value="média"> Média</label>
-              <label><input type="radio" name="secrecao-qtd" value="grande"> Grande</label>
-            </div>
+            <select id="options-secrecao-quant">
+             <option value="pouca"> Pouca</option>
+             <option value="média"> Média</option>
+             <option value="grande"> Grande</option>
+            </select>
           </div>
-          <div class="field">
+          <div class="field field-secrecao-asp">
             <label>Aspecto da Secreção</label>
-            <div class="radio-group">
-              <label><input type="radio" name="secrecao-asp2" value="seroso"> Seroso</label>
-              <label><input type="radio" name="secrecao-asp2" value="mucoso"> Mucoso</label>
-              <label><input type="radio" name="secrecao-asp2" value="purulento"> Purulento</label>
-              <label><input type="radio" name="secrecao-asp2" value="mucopurulento"> Mucopurulento</label>
-              <label><input type="radio" name="secrecao-asp2" value="hemático"> Hemático</label>
-            </div>
+            <select id="options-secrecao-quant">
+             <option value="seroso"> Seroso</option>
+             <option value="mucoso"> Mucoso</option>
+             <option value="purulento"> Purulento</option>
+             <option value="mucopurulento"> Mucopurulento</option>
+             <option value="sanguinolento"> Sanguinolento</option>
+            </select>
           </div>
         </div>
       </div>
@@ -2054,7 +2278,7 @@
   function navPrev() { if (current > 0) goto(current - 1); }
 
   function updateNav() {
-    document.getElementById('btn-prev').disabled = current === 0;
+    document.getElementById('btn-prev').style.display = current === 0 ? 'none' : '';
     document.getElementById('btn-next').style.display = current === sections.length - 1 ? 'none' : '';
     document.getElementById('progress-text').textContent = `Seção ${current + 1} de ${sections.length}`;
   }
@@ -2317,10 +2541,117 @@
   // Pescoço e Tórax
   document.getElementById('sexo').addEventListener('change', function(e) {
     const sexo = e.target.value;
-    console.log(sexo)
     const exibe = sexo === 'Feminino' ? true : false;
     const pcFeminino = document.querySelectorAll('.pc-feminino');
     pcFeminino.forEach(element => {
+      element.style.display = exibe ? 'block' : 'none';
+    });
+  });
+
+  // Cardiovascular
+  document.getElementById('mc-situacao').addEventListener('change', function(e) {
+    const situacao = e.target.value;
+    const exibe = situacao === 'conectado a unidade geradora';
+    const container = document.querySelector('.mc-programado');
+    const input = document.getElementById('marcapasso-md');
+    container.style.display = exibe ? 'block' : 'none';
+    if (!exibe) {
+        input.value = '';
+    }
+  });
+
+  function calcITB() {
+    let d1 = 0, d2 = 0, d3 = 0;
+    let e1 = 0, e2 = 0, e3 = 0;
+
+    // Elementos
+    let itbmd1 = document.getElementById('itb-md-1').value;
+    let itbmd2 = document.getElementById('itb-md-2').value;
+    let itbmd3 = document.getElementById('itb-md-3').value;
+    let itbme1 = document.getElementById('itb-me-1').value;
+    let itbme2 = document.getElementById('itb-me-2').value;
+    let itbme3 = document.getElementById('itb-me-3').value;
+    let calcDir = document.getElementById('calc-itb-d');
+    let calcEsq = document.getElementById('calc-itb-e');
+
+    // ITB Direita
+    if (itbmd1 >= itbme1) {
+      d1 = itbmd1;
+      e1 = itbmd1;
+    }
+    else {
+      d1 = itbme1;
+      e1 = itbme1;
+    }
+
+    // ITB Esquerda
+    if (itbmd2 >= itbmd3)
+      d2 = itbmd2
+    else
+      d2 = itbmd3
+    if (itbme2 >= itbme3)
+      e2 = itbme2
+    else
+      e2 = itbme3
+
+    // Cálculo
+    d3 = d2/d1;
+    e3 = e2/e1;
+
+    // Condições
+    const condDir = d3 < 0.4 ? 'DAOP Grave' : d3 >= 0.4 && d3 < 0.7 ? 'DAOP Moderada' : d3 >= 0.7 && d3 <= 0.9 ? 'DAOP Leve' : d3 > 0.9 && d3 < 1 ? 'Limítrofe' :
+                    d3 >= 1 && d3 < 1.3 ? 'Normal' : 'Artérias Incompressíveis';
+    
+    const condEsq = e3 < 0.4 ? 'DAOP Grave' : e3 >= 0.4 && e3 < 0.7 ? 'DAOP Moderada' : e3 >= 0.7 && e3 <= 0.9 ? 'DAOP Leve' : e3 > 0.9 && e3 < 1 ? 'Limítrofe' :
+                    e3 >= 1 && e3 < 1.3 ? 'Normal' : 'Artérias Incompressíveis';
+
+    // Cálculo final
+    calcDir.textContent = d3 > 0 ? d3.toFixed(2) + ' — ' + condDir : '—';
+    calcEsq.textContent = e3 > 0 ? e3.toFixed(2) + ' — ' + condEsq : '—';
+  }
+
+  // Pulmonar
+  document.getElementById('suporte-o2').addEventListener('change', function(e) {
+    const suporte = e.target.value;
+    const exibe = suporte === 'suporte de O₂';
+    const suporteO2 = document.querySelectorAll('.field-suporte-o2');
+    suporteO2.forEach(element => {
+      element.style.display = exibe ? 'block' : 'none';
+    });
+  });
+
+  document.getElementById('suporte-o2').addEventListener('change', function(e) {
+    const suporte = e.target.value;
+    const exibe = suporte === 'ventilação mecânica';
+    const suporteO2 = document.querySelectorAll('.field-vm');
+    suporteO2.forEach(element => {
+      element.style.display = exibe ? 'block' : 'none';
+    });
+  });
+
+  document.getElementById('murmurios-vesiculares').addEventListener('change', function(e) {
+    const murmurios = e.target.value;
+    const exibe = murmurios === '';
+    const fieldMurmurios = document.querySelectorAll('.field-murmurios');
+    fieldMurmurios.forEach(element => {
+      element.style.display = exibe ? 'block' : 'none';
+    });
+  });
+
+  document.getElementById('ruidos-adventicios').addEventListener('change', function(e) {
+    const ruidos = e.target.value;
+    const exibe = ruidos === '';
+    const fieldRuidos = document.querySelectorAll('.field-ruidos');
+    fieldRuidos.forEach(element => {
+      element.style.display = exibe ? 'block' : 'none';
+    });
+  });
+
+  document.getElementById('secrecao-asp').addEventListener('change', function(e) {
+    const secrecao = e.target.value;
+    const exibe = secrecao === '';
+    const fieldSecrecao = document.querySelectorAll('.field-secrecao-asp');
+    fieldSecrecao.forEach(element => {
       element.style.display = exibe ? 'block' : 'none';
     });
   });
