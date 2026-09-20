@@ -158,7 +158,7 @@
   .field label { font-size: 12px; font-weight: 600; color: var(--text-sub); letter-spacing: .2px; }
   .field label span.req { color: var(--red); margin-left: 2px; }
 
-  input[type="text"], input[type="number"], input[type="date"], input[type="time"],
+  input[type="text"], input[type="number"], input[type="date"], input[type="datetime-local"], input[type="time"],
   select, textarea {
     width: 100%;
     padding: 9px 12px;
@@ -380,7 +380,8 @@
 
   /* ── Custom ── */
   .consciencia, #c-rass, #c-glasgow, #c-ramsey, .deambulacao, .altCalcJoe, .lesao-couro, .lateralizacao-av, .lateralizacao-au, .ap-auditivo, .lesao-labial,
-  .lateralizacao-labial, .pc-feminino, .mc-programado, .field-suporte-o2, .field-vm, .field-murmurios, .field-ruidos, .field-secrecao-asp {
+  .lateralizacao-labial, .pc-feminino, .mc-programado, .field-suporte-o2, .field-vm, .field-murmurios, .field-ruidos, .field-secrecao-asp, .dieta-oral, .dieta-zero,
+  .dieta-sne-npt, .inicio-dieta-pre, .selecao-dieta-pos, .dieta-zero-zero, .incisao-recente, .sec-gen-pres, .elim-urin-cvd {
     display: none;
   }
 
@@ -1209,41 +1210,43 @@
       </div>
       <div class="card">
         <div class="card-title">Avaliação de Pulso</div>
-        <div class="grid-3">
+        <div id="container-avaliacoes-pulso">
+          <div class="grid-3" id="avaliacoes-pulso" style="margin-bottom: 10px;">
           <div class="field">
             <label>Localização</label>
             <div class="radio-group">
-              <label><input type="radio" name="localizacao-pulso" value="cariotídeo"> Carotídeo</label>
-              <label><input type="radio" name="localizacao-pulso" value="braquial"> Braquial</label>
-              <label><input type="radio" name="localizacao-pulso" value="radial"> Radial</label>
-              <label><input type="radio" name="localizacao-pulso" value="femoral"> Femoral</label>
-              <label><input type="radio" name="localizacao-pulso" value="pedioso"> Pedioso</label>
+              <label><input type="radio" name="localizacao-pulso-0" value="cariotídeo"> Carotídeo</label>
+              <label><input type="radio" name="localizacao-pulso-0" value="braquial"> Braquial</label>
+              <label><input type="radio" name="localizacao-pulso-0" value="radial"> Radial</label>
+              <label><input type="radio" name="localizacao-pulso-0" value="femoral"> Femoral</label>
+              <label><input type="radio" name="localizacao-pulso-0" value="pedioso"> Pedioso</label>
             </div>
           </div>
           <div class="field">
             <label>Amplitude de Pulso</label>
             <div class="radio-group">
-              <label><input type="radio" name="amplitude-pulso" value="forte"> Forte</label>
-              <label><input type="radio" name="amplitude-pulso" value="regular"> Regular</label>
-              <label><input type="radio" name="amplitude-pulso" value="diminuído"> Diminuído</label>
-              <label><input type="radio" name="amplitude-pulso" value="ausente"> Ausente</label>
+              <label><input type="radio" name="amplitude-pulso-0" value="forte"> Forte</label>
+              <label><input type="radio" name="amplitude-pulso-0" value="regular"> Regular</label>
+              <label><input type="radio" name="amplitude-pulso-0" value="diminuído"> Diminuído</label>
+              <label><input type="radio" name="amplitude-pulso-0" value="ausente"> Ausente</label>
             </div>
           </div>
           <div class="field">
             <label>Lateralização</label>
             <div class="radio-group">
-              <label><input type="radio" name="lateralizacao-pulso" value="à direita"> Direito</label>
-              <label><input type="radio" name="lateralizacao-pulso" value="à esquerda"> Esquedo</label>
-              <label><input type="radio" name="lateralizacao-pulso" value="bilateralmente"> Bilateral</label>
+              <label><input type="radio" name="lateralizacao-pulso-0" value="à direita"> Direito</label>
+              <label><input type="radio" name="lateralizacao-pulso-0" value="à esquerda"> Esquerdo</label>
+              <label><input type="radio" name="lateralizacao-pulso-0" value="bilateralmente"> Bilateral</label>
             </div>
           </div>
         </div>
+        </div>
         <div style="display: flex;">
-          <button style="background-color: green; color: white; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px; border-radius: 8px; margin-top: 10px; cursor: pointer; font-size: large; margin-left: auto; margin-right: 0; border: none;">
+          <button style="background-color: green; color: white; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px; border-radius: 8px; margin-top: 10px; cursor: pointer; font-size: large; margin-left: auto; margin-right: 0; border: none;" onclick="duplicarAvaliacoes()">
             +
           </button>
         </div>
-        </div>
+      </div>
       <div class="device-block">
         <div class="device-header" onclick="toggleDevice(this)">
           <span>Marcapasso</span><span>▾</span>
@@ -1284,7 +1287,7 @@
               <label>Lateralidade</label>
               <div class="radio-group">
                 <label><input type="radio" name="lateralizacao-jugular" value="à direita"> Direito</label>
-                <label><input type="radio" name="lateralizacao-jugular" value="à esquerda"> Esquedo</label>
+                <label><input type="radio" name="lateralizacao-jugular" value="à esquerda"> Esquerdo</label>
                 <label><input type="radio" name="lateralizacao-jugular" value="bilateralmente"> Bilateral</label>
               </div>
             </div>
@@ -1325,7 +1328,7 @@
             <div class="field">
               <label>Lateralidade</label>
               <div class="radio-group">
-                <label><input type="radio" name="foco-carotideo" value="esquerda"> Esquedo</label>
+                <label><input type="radio" name="foco-carotideo" value="esquerda"> Esquerdo</label>
                 <label><input type="radio" name="foco-carotideo" value="direita"> Direito</label>
               </div>
             </div>
@@ -1509,6 +1512,7 @@
           <div class="field field-murmurios">
             <label>Murmúrios Vesiculares (Pulmão Direito)</label>
             <select id="options-auscuta-pulmonar-d">
+              <option value=""> Selecionar</option>
               <option value="diminuído"> Diminuído</option>
               <option value="abolido"> Abolido</option>
             </select>
@@ -1516,6 +1520,7 @@
           <div class="field field-murmurios">
             <label>Murmúrios Vesiculares (Pulmão Esquerdo)</label>
             <select id="options-auscuta-pulmonar-e">
+              <option value=""> Selecionar</option>
               <option value="diminuído"> Diminuído</option>
               <option value="abolido"> Abolido</option>
             </select>
@@ -1523,6 +1528,7 @@
           <div class="field field-ruidos">
             <label>Ruídos Adventícios (Pulmão Direito)</label>
             <select id="options-ruidos-d">
+              <option value=""> Selecionar</option>
              <option value="sem ruídos adventícios"> Sem ruídos</option>
              <option value="roncos"> Roncos</option>
              <option value="crepitações"> Crepitações</option>
@@ -1532,6 +1538,7 @@
           <div class="field field-ruidos">
             <label>Ruídos Adventícios (Pulmão Esquerdo)</label>
             <select id="options-ruidos-e">
+              <option value=""> Selecionar</option>
              <option value="sem ruídos adventícios"> Sem ruídos</option>
              <option value="roncos"> Roncos</option>
              <option value="crepitações"> Crepitações</option>
@@ -1586,7 +1593,7 @@
         <div class="section-icon">🩺</div>
         <div>
           <div class="section-title">Abdome e Nutrição</div>
-          <div class="section-subtitle">Exame físico abdominal, dieta e eliminação intestinal</div>
+          <div class="section-subtitle">Exame físico abdominal e dieta</div>
         </div>
       </div>
       <div class="card">
@@ -1612,13 +1619,13 @@
             </div>
           </div>
           <div class="field">
-            <label>Palpação</label>
+            <label>Dor a Palpação</label>
             <div class="radio-group">
               <label><input type="radio" name="palpacao" value="Indolor"> Indolor</label>
               <label><input type="radio" name="palpacao" value="Faces de dor superficial"> Dor superficial</label>
               <label><input type="radio" name="palpacao" value="Faces de dor profunda"> Dor profunda</label>
-              <label><input type="radio" name="palpacao" value="Relato de dor superficial"> Relato dor superf.</label>
-              <label><input type="radio" name="palpacao" value="Relato de dor profunda"> Relato dor prof.</label>
+              <label><input type="radio" name="palpacao" value="Relato de dor superficial"> Relato dor superficial</label>
+              <label><input type="radio" name="palpacao" value="Relato de dor profunda"> Relato dor profunda</label>
             </div>
           </div>
           <div class="field">
@@ -1641,22 +1648,26 @@
       </div>
       <div class="card">
         <div class="card-title">Dieta</div>
-        <div class="field">
+        <div class="field" style="margin-bottom: 16px;">
           <label>Tipo de Dieta</label>
           <select id="tipo-dieta">
             <option value="">Selecionar</option>
-            <option value="via-oral-solida">Via oral – sólida</option>
-            <option value="via-oral-pastosa">Via oral – pastosa</option>
-            <option value="via-oral-liquida">Via oral – líquida</option>
-            <option value="sne">Via SNE</option>
-            <option value="npt">Via NPT (CVC)</option>
-            <option value="zero-preop">Zero – pré-operatório</option>
-            <option value="zero-posop">Zero – pós-operatório</option>
-            <option value="zero-outros">Zero – outros motivos</option>
-            <option value="prova">Dieta de prova</option>
+            <option value="via oral">Via oral</option>
+            <option value="SNE">Via SNE</option>
+            <option value="NPT">Via NPT (CVC)</option>
+            <option value="zero">Zero</option>
+            <option value="de prova, em acompanhamento com a nutrição">Dieta de prova</option>
           </select>
         </div>
-        <div class="grid-2" style="margin-top:12px" id="dieta-aceitacao-box">
+        <div class="grid-3 dieta-oral">
+          <div class="field">
+            <label>Tipo de Dieta</label>
+            <div class="radio-group">
+              <label><input type="radio" name="tipo-dieta-oral" value="sólida"> Sólida</label>
+              <label><input type="radio" name="tipo-dieta-oral" value="pastosa"> Pastosa</label>
+              <label><input type="radio" name="tipo-dieta-oral" value="líquida"> Líquida</label>
+            </div>
+          </div>
           <div class="field">
             <label>Aceitação da Dieta</label>
             <div class="radio-group">
@@ -1669,8 +1680,331 @@
           <div class="field">
             <label>Auxílio para Alimentação</label>
             <div class="radio-group">
-              <label><input type="radio" name="aux-alim" value="com auxílio"> Com auxílio</label>
-              <label><input type="radio" name="aux-alim" value="sem auxílio"> Sem auxílio</label>
+              <label><input type="radio" name="aux-alim" value="com"> Com auxílio</label>
+              <label><input type="radio" name="aux-alim" value="sem"> Sem auxílio</label>
+            </div>
+          </div>
+        </div>
+        <div class="dieta-zero">
+          <div class="field" style="margin-bottom: 16px;">
+            <label>Tipo de Dieta</label>
+            <div class="radio-group">
+              <label><input type="radio" name="tipo-dieta-zero" value="zero"> Zero</label>
+              <label><input type="radio" name="tipo-dieta-zero" value="pré-operatória"> Pré-operatória</label>
+              <label><input type="radio" name="tipo-dieta-zero" value="pós-operatória"> Pós-operatória</label>
+            </div>
+          </div>
+          <div class="field inicio-dieta-pre" style="width: 50%;">
+            <label>Quando inciou?</label>
+            <input type="datetime-local" id="inicio-dieta-pre">
+          </div>
+          <div class="grid-2 selecao-dieta-pos" style="justify-content: space-between;">
+            <div class="field">
+              <label>Retorna Hoje?</label>
+              <div class="radio-group">
+                <label><input type="radio" name="retorno-dieta-zero" value="com"> Sim</label>
+                <label><input type="radio" name="retorno-dieta-zero" value="sem"> Não</label>
+              </div>
+            </div>
+            <div class="field" style="width: 50%;">
+              <label>Hora da previsão de retorno</label>
+              <input type="time" id="inicio-dieta-pos" disabled>
+            </div>
+          </div>
+          <div class="field dieta-zero-zero">
+            <label>Motivo</label>
+            <select id="tipo-dieta-zero" style="width: 50%;">
+              <option value="">Selecionar</option>
+              <option value="procedimento médico realizado">Procedimento médico realizado</option>
+              <option value="procedimento médico previsto">Procedimento médico previsto</option>
+              <option value="doses elevadas de aminas">Doses elevadas de aminas</option>
+              <option value="baixa mobilidade intestinal">Baixa mobilidade intestinal</option>
+              <option value="instabilidade hemodinâmica">Instabilidade hemodinâmica</option>
+              <option value="solicitação médica">Solicitação médica</option>
+              <option value="alteração laboratorial">Alteração laboratorial</option>
+            </select>
+          </div>
+        </div>
+        <div class="field dieta-sne-npt">
+            <label>Vazão (ml/h)</label>
+            <input type="number" min="0" max="200" step="0.1" style="width: 50%;">
+        </div>
+      </div>
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Cicatriz Cirúrgica</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="field">
+            <label>Incisão Cirúrgica</label>
+            <div class="radio-group cicatriz-incisao">
+              <label><input type="radio" name="cicatriz-incisao" value="recente"> Recente</label>
+              <label><input type="radio" name="cicatriz-incisao" value="prévia"> Prévia</label>
+            </div>
+          </div>
+          <div class="incisao-recente" style="margin-top: 16px; width: 50%;">
+            <div class="field">
+              <label>Característica</label>
+              <select id="cicatriz-caracteristica">
+                <option value="">Selecionar</option>
+                <option value="seca">Seca</option>
+                <option value="exsudativa de aspecto seroso">Exsudativa seroso</option>
+                <option value="exsudativa de aspecto purulento">Exsudativa purulenta</option>
+                <option value="exsudativa de aspecto serosanguinolento">Exsudativa serosanguinolento</option>
+                <option value="exsudativa de aspecto sanguinolento">Exsudativa sanguinolento</option>
+              </select>
+            </div>
+            <div class="field" style="margin-top: 16px;">
+              <label>Integridade dos Pontos</label>
+              <div class="radio-group">
+                <label><input type="radio" name="cicatriz-incisao" value="íntegros"> Íntegros</label>
+                <label><input type="radio" name="cicatriz-incisao" value="rompidos"> Rompidos</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="device-block pc-feminino">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Gestante</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Movimento Fetal</label>
+              <div class="radio-group">
+                <label><input type="radio" name="movimento-fetal" value="presente"> Presente</label>
+                <label><input type="radio" name="movimento-fetal" value="ausente"> Ausente</label>
+              </div>
+            </div>
+            <div class="field" style="width: 33%;">
+              <label>Altura Uterina (cm)</label>
+              <input type="number" min="0" max="50" step="0.1">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="device-block pc-feminino">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Feto</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Situação Fetal</label>
+              <div class="radio-group">
+                <label><input type="radio" name="situacao-fetal" value="longitudinal"> Longitudinal</label>
+                <label><input type="radio" name="situacao-fetal" value="transversal"> Transversal</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Apresentação Fetal</label>
+              <div class="radio-group">
+                <label><input type="radio" name="apresentacao-fetal" value="cefálica"> Cefálica</label>
+                <label><input type="radio" name="apresentacao-fetal" value="pélvica"> Pélvica</label>
+                <label><input type="radio" name="apresentacao-fetal" value="córmica"> Córmica</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Dorso Fetal</label>
+              <div class="radio-group">
+                <label><input type="radio" name="dorso-fetal" value="esquerda"> Esquerda</label>
+                <label><input type="radio" name="dorso-fetal" value="direita"> Direita</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Batimento Fetal (bpm)</label>
+              <input type="number" min="0" max="300">
+            </div>
+            <div class="field">
+              <label>Rítmo Cardíaco</label>
+              <div class="radio-group">
+                <label><input type="radio" name="ritmo-cardiaco-fetal" value="regular"> Regular</label>
+                <label><input type="radio" name="ritmo-cardiaco-fetal" value="irregular"> Irregular</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Auscuta Cardíaca</label>
+              <div class="radio-group">
+                <label><input type="radio" name="auscuta-fetal" value="QSD"> QSD</label>
+                <label><input type="radio" name="auscuta-fetal" value="QSE"> QSE</label>
+                <label><input type="radio" name="auscuta-fetal" value="QID"> QID</label>
+                <label><input type="radio" name="auscuta-fetal" value="QIE"> QIE</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="device-block pc-feminino">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Puérpera</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Involução Uterina (cm)</label>
+              <input type="number" min="0" max="50" step="0.1" style="width: 33%;">
+            </div>
+            <div class="field">
+              <label>Cólicas</label>
+              <div class="radio-group">
+                <label><input type="radio" name="colicas" value="ausentes"> Ausente</label>
+                <label><input type="radio" name="colicas" value="leves"> Leve</label>
+                <label><input type="radio" name="colicas" value="moderadas"> Moderada</label>
+                <label><input type="radio" name="colicas" value="fortes"> Forte</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Lóquios</label>
+              <div class="radio-group">
+                <label><input type="radio" name="colicas" value="ausentes"> Ausente</label>
+                <label><input type="radio" name="colicas" value="em pequena quantide"> Pequena</label>
+                <label><input type="radio" name="colicas" value="em média quantide"> Média</label>
+                <label><input type="radio" name="colicas" value="em grande quantide"> Grande</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== GENITÁLIAS E ELIMINAÇÕES ====== -->
+    <div class="form-section" id="sec-genitalia">
+      <div class="section-header">
+        <div class="section-icon">💧</div>
+        <div>
+          <div class="section-title">Genitálias e Eliminação Urinária</div>
+          <div class="section-subtitle">Integridade, secreção, CVD, balanço hídrico</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Genitálias</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Integridade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="genitalia" value="íntegras"> Íntegras</label>
+              <label><input type="radio" name="genitalia" value="lesionadas"> Lesionadas</label>
+              <label><input type="radio" name="genitalia" value="apresentando Síndrome de Fournier"> S. Fournier</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Secreção Genital</label>
+            <div class="radio-group" id="secrecao-gen">
+              <label><input type="radio" name="secrecao-gen" value="Ausência"> Ausente</label>
+              <label><input type="radio" name="secrecao-gen" value="Presença"> Presente</label>
+            </div>
+          </div>
+          <div class="field sec-gen-pres">
+            <label>Coloração da Secreção</label>
+            <div class="radio-group">
+              <label><input type="radio" name="sec-gen-cor" value="translúcida"> Translúcida</label>
+              <label><input type="radio" name="sec-gen-cor" value="esbranquiçada"> Esbranquiçada</label>
+              <label><input type="radio" name="sec-gen-cor" value="amarelada"> Amarelada</label>
+              <label><input type="radio" name="sec-gen-cor" value="esverdeada"> Esverdeada</label>
+              <label><input type="radio" name="sec-gen-cor" value="avermelhada"> Avermelhada</label>
+            </div>
+          </div>
+          <div class="field sec-gen-pres">
+            <label>Quantidade da Secreção</label>
+            <div class="radio-group">
+              <label><input type="radio" name="sec-gen-qnt" value="pouca"> Pouca</label>
+              <label><input type="radio" name="sec-gen-qnt" value="moderada"> Moderada</label>
+              <label><input type="radio" name="sec-gen-qnt" value="grande"> Grande</label>
+            </div>
+          </div>
+          <div class="field sec-gen-pres">
+            <label>Odor da Secreção</label>
+            <div class="radio-group">
+              <label><input type="radio" name="sec-gen-odor" value="ausente"> Ausente</label>
+              <label><input type="radio" name="sec-gen-odor" value="característico"> Característico</label>
+              <label><input type="radio" name="sec-gen-odor" value="fétido"> Fétido</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Eliminação Vesical</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Via de Eliminação</label>
+            <select id="elim-urin-via">
+              <option value="">Selecionar</option>
+              <option value="espontanea em fralda">Espontânea – fralda</option>
+              <option value="espontanea em uso de patinho">Espontânea – patinho</option>
+              <option value="espontanea em uso de comadre">Espontânea – comadre</option>
+              <option value="espontanea no banheiro">Espontânea – banheiro</option>
+              <option value="CVD">Cateter Vesical de Demora - CVD</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Coloração da Urina</label>
+            <select id="elim-urin-col">
+              <option value="">Selecionar</option>
+              <option value="incolor"> Incolor</option>
+              <option value="citrina"> Citrina</option>
+              <option value="concentrada"> Concentrada</option>
+              <option value="âmbar"> Âmbar</option>
+              <option value="acastanhada"> Acastanhada</option>
+              <option value="hematúria"> Hematúria</option>
+              <option value="colúria"> Colúria</option>
+              <option value="esverdeada"> Esverdeada</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Volume Estimado (mL)</label>
+            <input type="number" id="elim-vol-est" min="0" placeholder="—">
+          </div>
+          <div class="field">
+            <label>Aspecto</label>
+            <div class="radio-group">
+              <label><input type="radio" name="elim-urin-asp" value="límpido"> Límpido</label>
+              <label><input type="radio" name="elim-urin-asp" value="turvo"> Turvo</label>
+            </div>
+          </div>
+          <div class="field elim-urin-cvd">
+            <label>Número de Lúmen</label>
+            <div class="radio-group">
+              <label><input type="radio" name="elim-urin-lum" value="duplo"> Duplo</label>
+              <label><input type="radio" name="elim-urin-lum" value="triplo"> Triplo</label>
+            </div>
+          </div>
+          <div class="field elim-urin-cvd">
+            <label>Grumos</label>
+            <div class="radio-group">
+              <label><input type="radio" name="elim-urin-gum" value="com"> Presente</label>
+              <label><input type="radio" name="elim-urin-gum" value="sem"> Ausente</label>
+            </div>
+          </div>
+        </div>
+        <div class="field" style="margin-top: 16px;">
+          <label>Relatos do Paciente</label>
+          <div class="grid-4">
+            <div class="field">
+              <label><input type="checkbox" name="elim-sint-uri" value="disúria"> Disúria</label>
+            </div>
+            <div class="field">
+                <label><input type="checkbox" name="elim-sint-uri" value="polaciúria"> Polaciúria</label>
+            </div>
+            <div class="field">
+                <label><input type="checkbox" name="elim-sint-uri" value="noctúria"> Noctúria</label>
+            </div>
+            <div class="field">
+                <label><input type="checkbox" name="elim-sint-uri" value="nictúria"> Nictúria</label>
+            </div>
+          </div>
+        </div>
+        <div class="field" style="margin-top: 16px;">
+          <label>Adicionais</label>
+          <div class="grid-3">
+            <div class="field">
+                <label><input type="checkbox" name="elim-adc-irr" value="Paciente em irrigação vesical contínua com SF 0,9%"> Irrigação vesical contínua</label>
+            </div>
+            <div class="field">
+                <label><input type="checkbox" name="elim-adc-gio" value="Sinal de Giordano positivo, com suspeita de infecção urinária"> Sinal de Giordano positivo</label>
+            </div>
+            <div class="field">
+                <label><input type="checkbox" name="elim-adc-per" value="Com perdas insensíveis resultantes da VM estipuladas em "> Perdas insensíveis</label>
             </div>
           </div>
         </div>
@@ -1684,6 +2018,10 @@
               <label><input type="radio" name="elim-int" value="ausente"> Ausente</label>
               <label><input type="radio" name="elim-int" value="presente"> Presente</label>
             </div>
+          </div>
+          <div class="field">
+            <label>Data da Última Eliminação</label>
+            <input type="date" id="data-ult-elim" >
           </div>
           <div class="field">
             <label>Consistência</label>
@@ -1713,86 +2051,23 @@
               <label><input type="radio" name="fezes-odor" value="fétido"> Fétido</label>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ====== GENITÁLIAS E ELIMINAÇÕES ====== -->
-    <div class="form-section" id="sec-genitalia">
-      <div class="section-header">
-        <div class="section-icon">💧</div>
-        <div>
-          <div class="section-title">Genitálias e Eliminação Urinária</div>
-          <div class="section-subtitle">Integridade, secreção, CVD, balanço hídrico</div>
+          <div class="field">
+            <label>Quantidade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="fezes-quant" value="1/4"> 1 / 4</label>
+              <label><input type="radio" name="fezes-quant" value="2/4"> 2 / 4</label>
+              <label><input type="radio" name="fezes-quant" value="3/4"> 3 / 4</label>
+              <label><input type="radio" name="fezes-quant" value="4/4"> 4 / 4</label>
+            </div>
+          </div>
+          <div class="field">
+              <label><input type="checkbox" name="fezes-catalase" value="Realizado teste de catalase com resultado positivo"> Teste de catalase positivo</label>
+          </div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Genitálias</div>
+        <div class="card-title">Balanço Hídrico</div>
         <div class="grid-2">
-          <div class="field">
-            <label>Integridade</label>
-            <div class="radio-group">
-              <label><input type="radio" name="genitalia" value="íntegras"> Íntegras</label>
-              <label><input type="radio" name="genitalia" value="lesionadas"> Lesionadas</label>
-              <label><input type="radio" name="genitalia" value="apresentando Síndrome de Fournier"> S. Fournier</label>
-            </div>
-          </div>
-          <div class="field">
-            <label>Secreção Genital</label>
-            <div class="radio-group">
-              <label><input type="radio" name="secrecao-gen" value="Ausência"> Ausente</label>
-              <label><input type="radio" name="secrecao-gen" value="Presença"> Presente</label>
-            </div>
-          </div>
-          <div class="field">
-            <label>Coloração da Secreção</label>
-            <div class="radio-group">
-              <label><input type="radio" name="sec-gen-cor" value="translúcida"> Translúcida</label>
-              <label><input type="radio" name="sec-gen-cor" value="esbranquiçada"> Esbranquiçada</label>
-              <label><input type="radio" name="sec-gen-cor" value="amarelada"> Amarelada</label>
-              <label><input type="radio" name="sec-gen-cor" value="esverdeada"> Esverdeada</label>
-              <label><input type="radio" name="sec-gen-cor" value="avermelhada"> Avermelhada</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Eliminação Urinária</div>
-        <div class="grid-2">
-          <div class="field">
-            <label>Via de Eliminação</label>
-            <select id="elim-urin-via">
-              <option value="">Selecionar</option>
-              <option value="espontanea-fralda">Espontânea – fralda</option>
-              <option value="espontanea-patinho">Espontânea – patinho</option>
-              <option value="espontanea-comadre">Espontânea – comadre</option>
-              <option value="espontanea-banheiro">Espontânea – banheiro</option>
-              <option value="cvd">CVD – Cateter Vesical de Demora</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Coloração da Urina</label>
-            <div class="radio-group">
-              <label><input type="radio" name="urina-cor" value="citrina"> Citrina</label>
-              <label><input type="radio" name="urina-cor" value="âmbar"> Âmbar</label>
-              <label><input type="radio" name="urina-cor" value="acastanhada"> Acastanhada</label>
-              <label><input type="radio" name="urina-cor" value="hematúria"> Hematúria</label>
-              <label><input type="radio" name="urina-cor" value="colúria"> Colúria</label>
-            </div>
-          </div>
-          <div class="field">
-            <label>Volume Urinário (mL / 24h)</label>
-            <input type="number" id="vol-urina" min="0" placeholder="—" oninput="calcDU()">
-          </div>
-          <div class="field">
-            <label>Débito Urinário (mL/kg/h)</label>
-            <div class="calc-field" id="du-calc">—</div>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Balanço Hídrico (opcional)</div>
-        <div class="grid-3">
           <div class="field">
             <label>Entrada (mL / 24h)</label>
             <input type="number" id="bh-entrada" min="0" placeholder="—" oninput="calcBH()">
@@ -1800,6 +2075,21 @@
           <div class="field">
             <label>Saída (mL / 24h)</label>
             <input type="number" id="bh-saida" min="0" placeholder="—" oninput="calcBH()">
+          </div>
+          <div class="field">
+            <label>Volume Urinário (mL / 24h)</label>
+            <input type="number" id="vol-urina" min="0" placeholder="—" oninput="calcDU()">
+          </div>
+          <div class="field">
+            <label>Hemodiálise (mL / 24h)</label>
+            <input type="number" id="vol-HD" min="0" placeholder="—">
+          </div>
+          <div class="field">
+            <label>Débito Urinário (mL/kg/h)</label>
+            <div class="calc-field" id="du-calc">—</div>
+              <p style="font-size:11px;color:var(--text-muted);margin-left: 10px;">
+                Necessário informar peso
+              </p>
           </div>
           <div class="field">
             <label>Balanço Hídrico</label>
@@ -2248,7 +2538,7 @@
 </div>
 
 <script>
-  // ── Navigation ──────────────────────────────────────────────────────────────
+  // ── Navegação ──────────────────────────────────────────────────────────────
   const sections = [
     'identificacao','sinais-vitais','percepcao','cabeca', 'pescoco-torax',
     'cardiovascular','pulmonar','abdome','genitalia','pele','membros',
@@ -2284,19 +2574,19 @@
   }
   updateNav();
 
-  // Set today as default date/time
+  // ── Define data/hora padrão ────────────────────────────────────────────────────────
   const now = new Date();
   document.getElementById('data-evolucao').value = now.toISOString().split('T')[0];
   document.getElementById('hora-evolucao').value = now.toTimeString().slice(0,5);
 
-  // ── Device toggles ──────────────────────────────────────────────────────────
+  // ── Alternar setas ──────────────────────────────────────────────────────────
   function toggleDevice(header) {
     const body = header.nextElementSibling;
     body.classList.toggle('open');
     header.querySelector('span:last-child').textContent = body.classList.contains('open') ? '▴' : '▾';
   }
-
-  // ── Calculations ────────────────────────────────────────────────────────────
+  
+  // ── Cálculos ────────────────────────────────────────────────────────────
   function calcPesoPredito() {
     const altura = parseFloat(document.getElementById('altura').value);
     const sexo = document.getElementById('sexo').value;
@@ -2470,7 +2760,7 @@
     const peso = parseFloat(document.getElementById('peso').value);
     if (!isNaN(vol) && !isNaN(peso) && peso > 0) {
       const du = vol / (peso * 24);
-      let tag = du < 0.1 ? '⚠️ Anúrico' : du < 0.5 ? '⚠️ Oligúrico' : '✅ Adequado';
+      let tag = du < 0.1 ? '⚠️ Anúrico' : du < 0.5 ? '⚠️ Oligúrico' : du < 3 ? '✅ Adequado' : '⚠️ Poliúrico';
       document.getElementById('du-calc').textContent = du.toFixed(2) + ' mL/kg/h – ' + tag;
     }
   }
@@ -2500,7 +2790,7 @@
     }
   }
 
-  // Cabeça
+  // ── Cabeça ──────────────────────────────────────────────────────────────────
   document.getElementById('rg-cc-lesao').addEventListener('change', function(e) {
     const lesao = e.target.value;
     const exibe = lesao === 'lesionado em região' ? true : false;
@@ -2548,7 +2838,24 @@
     });
   });
 
-  // Cardiovascular
+  // ── Cardiovascular ──────────────────────────────────────────────────────────────
+  let contadorAvaliacao = 1;
+  function duplicarAvaliacoes() {
+    const cardAvaliacoes = document.getElementById('container-avaliacoes-pulso');
+    const primeiraAvaliacao = document.getElementById('avaliacoes-pulso');
+    const novaAvaliacao = primeiraAvaliacao.cloneNode(true);
+    novaAvaliacao.querySelectorAll('input[type="radio"]').forEach(input => {
+      const nomeOriginal = input.name;
+      input.name = nomeOriginal.replace(
+            /-\d+$/,
+            `-${contadorAvaliacao}`
+      );
+      input.checked = false;
+      cardAvaliacoes.appendChild(novaAvaliacao);
+    });
+    contadorAvaliacao++;
+  }
+
   document.getElementById('mc-situacao').addEventListener('change', function(e) {
     const situacao = e.target.value;
     const exibe = situacao === 'conectado a unidade geradora';
@@ -2610,7 +2917,7 @@
     calcEsq.textContent = e3 > 0 ? e3.toFixed(2) + ' — ' + condEsq : '—';
   }
 
-  // Pulmonar
+  // ── Pulmonar ───────────────────────────────────────────────────────────────────
   document.getElementById('suporte-o2').addEventListener('change', function(e) {
     const suporte = e.target.value;
     const exibe = suporte === 'suporte de O₂';
@@ -2656,7 +2963,72 @@
     });
   });
 
-  // BPS
+  // ── Abdome ───────────────────────────────────────────────────────────
+  document.getElementById('tipo-dieta').addEventListener('change', function(e) {
+    const tipoDieta = e.target.value;
+    const dietaOral = document.querySelector('.dieta-oral');
+    const dietaZero = document.querySelector('.dieta-zero');
+    const dietaSne = document.querySelector('.dieta-sne-npt');
+
+    tipoDieta === 'via oral' ? dietaOral.style.display = 'grid' : dietaOral.style.display = 'none';
+    tipoDieta === 'zero' ? dietaZero.style.display = 'grid' : dietaZero.style.display = 'none';
+    (tipoDieta === 'SNE' || tipoDieta === 'NPT') ? dietaSne.style.display = 'grid' : dietaSne.style.display = 'none';
+  });
+
+  document.querySelector('.dieta-zero').addEventListener('change', function(e) {
+    if (e.target.name !== 'tipo-dieta-zero')
+      return;
+
+    const selecao = e.target.value;
+    const zero = document.querySelector('.dieta-zero-zero');
+    const inicioPre = document.querySelector('.inicio-dieta-pre');
+    const inicioPos = document.querySelector('.selecao-dieta-pos');
+
+    selecao === 'zero' ? zero.style.display = 'grid' : zero.style.display = 'none';
+    selecao === 'pré-operatória' ? inicioPre.style.display = 'grid' : inicioPre.style.display = 'none';
+    selecao === 'pós-operatória' ? inicioPos.style.display = 'grid' : inicioPos.style.display = 'none';
+  });
+
+  document.querySelector('.selecao-dieta-pos').addEventListener('change', function(e) {
+    const selecao = e.target.value;
+    const inicioDietaPos = document.getElementById('inicio-dieta-pos');
+    inicioDietaPos.disabled = selecao !== 'com';
+  });
+
+  document.querySelector('.cicatriz-incisao').addEventListener('change', function(e) {
+    const selecao = e.target.value;
+    const incisaoRecente = document.querySelector('.incisao-recente');
+    selecao === 'recente' ? incisaoRecente.style.display = 'block' : incisaoRecente.style.display = 'none';
+  });
+
+  // ── Genitália ───────────────────────────────────────────────────────────
+  document.getElementById('secrecao-gen').addEventListener('change', function(e) {
+    const presente = e.target.value;
+    const exibe = presente === 'Presença';
+    const secrecaoGen = document.querySelectorAll('.sec-gen-pres');
+    secrecaoGen.forEach(element => {
+      element.style.display = exibe ? 'block' : 'none';
+    });
+  });
+
+  document.getElementById('elim-urin-via').addEventListener('change', function(e) {
+    const value = e.target.value;
+    const exibe = value === 'CVD';
+    const secrecaoGen = document.querySelectorAll('.elim-urin-cvd');
+    secrecaoGen.forEach(element => {
+      element.style.display = exibe ? 'block' : 'none';
+    });
+  });
+
+  function CalcPerdas() {
+    const peso = parseFloat(document.getElementById('peso').value);
+    const temperatura = parseFloat(document.getElementById('temp').value);
+    let x = peso * 0.5 * 24;
+    temperatura >= 40 ? (x = x * 1.4) : temperatura >= 39 ? (x = x * 1.3) : temperatura >= 38 ? (x = x * 1.2) : temperatura >= 37 ? (x = x * 1.1) : x;
+    return x;
+  }
+
+  // ── BPS ────────────────────────────────────────────────────────────────────────────────────────────
   ['bps-exp','bps-mmss','bps-vm'].forEach(id => {
     document.getElementById(id).addEventListener('change', () => {
       const e = parseInt(document.getElementById('bps-exp').value);
@@ -2666,14 +3038,14 @@
     });
   });
 
-  // EVA
+  // ── EVA ────────────────────────────────────────────────────────────────────────────────────────────
   function updateEVA() {
     const v = parseInt(document.getElementById('eva-score').value);
     let cls = v <= 2 ? 'Leve' : v <= 7 ? 'Moderada' : 'Intensa';
     document.getElementById('eva-display').textContent = v + ' – Dor ' + cls;
   }
 
-  // ── Helper functions ─────────────────────────────────────────────────────────
+  // ── Funções Auxiliares ─────────────────────────────────────────────────────────
   function getRadio(name) {
     const el = document.querySelector(`input[name="${name}"]:checked`);
     return el ? el.value : '';
@@ -2683,7 +3055,7 @@
   }
   function getVal(id) { return document.getElementById(id)?.value || ''; }
 
-  // ── Generate Evolution Text ───────────────────────────────────────────────────
+  // ── Gerar Texto de Evolução ───────────────────────────────────────────────────
   function gerarEvolucao() {
     const fmt = getRadio('formato-ev');
     let txt = '';
