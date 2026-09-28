@@ -2087,7 +2087,7 @@
           <div class="field">
             <label>Débito Urinário (mL/kg/h)</label>
             <div class="calc-field" id="du-calc">—</div>
-              <p style="font-size:11px;color:var(--text-muted);margin-left: 10px;">
+              <p style="font-size:11px;color:var(--text-muted);">
                 Necessário informar peso
               </p>
           </div>
@@ -2112,14 +2112,7 @@
         <div class="card-title">Inspeção da Pele</div>
         <div class="grid-2">
           <div class="field">
-            <label>Integridade</label>
-            <div class="radio-group">
-              <label><input type="radio" name="pele-integ" value="preservada"> Preservada</label>
-              <label><input type="radio" name="pele-integ" value="comprometida"> Comprometida</label>
-            </div>
-          </div>
-          <div class="field">
-            <label>Alterações Observadas (múltiplas)</label>
+            <label>Alterações Observadas</label>
             <div class="check-group">
               <label><input type="checkbox" name="pele-alt" value="anasarca"> Anasarca</label>
               <label><input type="checkbox" name="pele-alt" value="cianose"> Cianose</label>
@@ -2128,24 +2121,44 @@
               <label><input type="checkbox" name="pele-alt" value="icterícia"> Icterícia</label>
               <label><input type="checkbox" name="pele-alt" value="xerose cutânea"> Xerose</label>
               <label><input type="checkbox" name="pele-alt" value="exsudação"> Exsudação</label>
+              <label><input type="checkbox" name="pele-alt" value="xantoma eruptivo"> Xantoma Eruptivo</label>
+            </div>
+            <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+            </p>
+          </div>
+          <div class="field">
+            <label>Fragilidade Capilar</label>
+            <div class="check-group">
+              <label><input type="checkbox" name="pele-alt" value="equimose"> Equimose</label>
+              <label><input type="checkbox" name="pele-alt" value="scream tears"> Scream Tears</label>
+            </div>
+            <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+            </p>
+          </div>
+          <div class="field">
+            <label>Turgor Cutâneo</label>
+            <div class="radio-group">
+              <label><input type="radio" name="pele-turgor" value="preservado"> Preservado</label>
+              <label><input type="radio" name="pele-turgor" value="diminuído"> Diminuído</label>
+              <label><input type="radio" name="pele-turgor" value="alterado"> Alterado</label>
             </div>
           </div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Lesões (LPP / Feridas)</div>
+        <div class="card-title">Lesões Por Pressão (LPP)</div>
         <div class="field">
           <label>Tipo de Lesão</label>
           <select id="lpp-tipo">
             <option value="">Nenhuma lesão registrada</option>
-            <option value="lpp1">LPP Estágio 1 – Hiperemia não reativa</option>
-            <option value="lpp2">LPP Estágio 2 – Exposição de derme</option>
-            <option value="lpp3">LPP Estágio 3 – Exposição de tecido adiposo</option>
-            <option value="lpp4">LPP Estágio 4 – Exposição de estrutura óssea</option>
-            <option value="lpp-ne">LPP Não Estadiável</option>
-            <option value="lpp-ltp">Lesão Tissular Profunda</option>
-            <option value="dermatite">Dermatite</option>
-            <option value="queimadura">Queimadura</option>
+            <option value="LPP Estágio 1 com hiperemia não reativa">LPP Estágio 1 – Hiperemia não reativa</option>
+            <option value="LPP Estágio 2 com exposição de derme">LPP Estágio 2 – Exposição de derme</option>
+            <option value="LPP Estágio 3 com exposição de tecido adiposo">LPP Estágio 3 – Exposição de tecido adiposo</option>
+            <option value="LPP Estágio 4 com exposição de estrutura óssea">LPP Estágio 4 – Exposição de estrutura óssea</option>
+            <option value="LPP Não Estadiável">LPP Não Estadiável</option>
+            <option value="LPP Sugestiva de Dispositivo">LPP Sugestiva de Dispositivo</option>
           </select>
         </div>
         <div class="grid-2" style="margin-top:12px">
@@ -2162,6 +2175,14 @@
             </select>
           </div>
           <div class="field">
+            <label>Característica da Lesão</label>
+            <div class="check-group">
+              <label><input type="checkbox" name="pele-lpp" value="fibrina"> Fibrina</label>
+              <label><input type="checkbox" name="pele-lpp" value="necrose de liquefação"> Esfacelo</label>
+              <label><input type="checkbox" name="pele-lpp" value="necrose de coagulação"> Necrose</label>
+            </div>
+          </div>
+          <div class="field">
             <label>Exsudato</label>
             <div class="radio-group">
               <label><input type="radio" name="exsudato" value="seroso"> Seroso</label>
@@ -2170,10 +2191,318 @@
               <label><input type="radio" name="exsudato" value="sanguinolento"> Sanguinolento</label>
             </div>
           </div>
+          <div class="field">
+            <label>Quantidade do Exsudato</label>
+            <div class="radio-group">
+              <label><input type="radio" name="exsudato-qnt" value="pouca"> Pouca</label>
+              <label><input type="radio" name="exsudato-qnt" value="média"> Média</label>
+              <label><input type="radio" name="exsudato-qnt" value="grande"> Grande</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Odor do Exsudato</label>
+            <div class="radio-group">
+              <label><input type="radio" name="exsudato-odor" value="ausente"> Ausente</label>
+              <label><input type="radio" name="exsudato-odor" value="característico"> Característico</label>
+              <label><input type="radio" name="exsudato-odor" value="forte"> Forte</label>
+              <label><input type="radio" name="exsudato-odor" value="fétido"> Fétido</label>
+            </div>
+          </div>
         </div>
-        <div class="field" style="margin-top:12px">
-          <label>Cobertura Utilizada no Curativo</label>
-          <input type="text" id="cobertura" placeholder="Ex: Alginato de Cálcio + Gaze não aderente">
+        <div class="grid-2" style="margin-top:12px">
+          <div class="field">
+            <label>Cobertura Primária</label>
+            <select id="lpp-curativo-prim">
+              <option value="">Selecione o Tipo de Curativo</option>
+              <option value="AGE">AGE</option>
+              <option value="">Barreira</option>
+              <option value="">Espuma</option>
+              <option value="">Gaze</option>
+              <option value="">Hidrogel</option>
+              <option value="">Pomadas</option>
+              <option value="">Substituto Cutâneo</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-prim-slc">
+              <option value="">Aguardando Seleção</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-prim-barreira">
+              <option value="">Selecione o Curativo</option>
+              <option value="creme barreira">Creme</option>
+              <option value="spray barreira">Spray</option>
+              <option value="hidrocolóide">Hidrocolóide</option>
+              <option value="hidrocolóide em pó">Hidrocolóide em Pó</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-prim-espuma">
+              <option value="">Selecione o Curativo</option>
+              <option value="Allevyn">Allevyn</option>
+              <option value="espuma com prata">Prata</option>
+              <option value="espuma antimicrobiana">Antimicrobiana</option>
+              <option value="espuma hemoestática">Hemoestática</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-prim-gaze">
+              <option value="">Selecione o Curativo</option>
+              <option value="gaze não aderente">Não Aderente</option>
+              <option value="gaze não aderente com AGE">Não Aderente com AGE – Rayon</option>
+              <option value="gaze com emulsão de Petrolatum">Petrolatum</option>
+              <option value="gaze antimicrobiana">Antimicrobiana – Kerlix</option>
+              <option value="carvão ativado">Carvão Ativado</option>
+              <option value="hidrofibra com prata">Hidrofibra com Prata – Fibrosol</option>
+              <option value="alginato de cálcio">Alginato de Cálcio</option>
+              <option value="gaze de colágeno">Cruativo de Colágeno</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-prim-hidrogel">
+              <option value="">Selecione o Curativo</option>
+              <option value="hidrogel">Puro</option>
+              <option value="hidrogel com PHMB">PHMB</option>
+              <option value="hidrogel com AGE">AGE</option>
+              <option value="hidrogel com alginato">Alginato</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-prim-pomada">
+              <option value="">Selecione o Curativo</option>
+              <option value="colagenase">Colagenase</option>
+              <option value="óxido de zinco">Óxido de Zinco</option>
+              <option value="sulfadiazina de prata">Sulfadiazina de Prata</option>
+              <option value="papaína">Papaína</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-prim-cutaneo">
+              <option value="">Selecione o Curativo</option>
+              <option value="enxertia de pele">Enxertia</option>
+              <option value="pele de tilápia">Pele de Tilápia</option>
+              <option value="membrana de celulose">Membrana de Celulose</option>
+              <option value="matriz de colágeno">Matriz de Colágeno</option>
+              <option value="matriz de fibrina">Matriz de Fibrina</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:12px">
+          <div class="field">
+            <label>Cobertura Secundária</label>
+            <select id="lpp-curativo-sec">
+              <option value="">Selecione o Tipo de Curativo</option>
+              <option value="AGE">AGE</option>
+              <option value="">Barreira</option>
+              <option value="">Espuma</option>
+              <option value="">Gaze</option>
+              <option value="">Hidrogel</option>
+              <option value="">Pomadas</option>
+              <option value="">Substituto Cutâneo</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-sec-slc">
+              <option value="">Aguardando Seleção</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-sec-barreira">
+              <option value="">Selecione o Curativo</option>
+              <option value="creme barreira">Creme</option>
+              <option value="spray barreira">Spray</option>
+              <option value="hidrocolóide">Hidrocolóide</option>
+              <option value="hidrocolóide em pó">Hidrocolóide em Pó</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-sec-espuma">
+              <option value="">Selecione o Curativo</option>
+              <option value="Allevyn">Allevyn</option>
+              <option value="espuma com prata">Prata</option>
+              <option value="espuma antimicrobiana">Antimicrobiana</option>
+              <option value="espuma hemoestática">Hemoestática</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-sec-gaze">
+              <option value="">Selecione o Curativo</option>
+              <option value="gaze não aderente">Não Aderente</option>
+              <option value="gaze não aderente com AGE">Não Aderente com AGE – Rayon</option>
+              <option value="gaze com emulsão de Petrolatum">Petrolatum</option>
+              <option value="gaze antimicrobiana">Antimicrobiana – Kerlix</option>
+              <option value="carvão ativado">Carvão Ativado</option>
+              <option value="hidrofibra com prata">Hidrofibra com Prata – Fibrosol</option>
+              <option value="alginato de cálcio">Alginato de Cálcio</option>
+              <option value="gaze de colágeno">Cruativo de Colágeno</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-sec-hidrogel">
+              <option value="">Selecione o Curativo</option>
+              <option value="hidrogel">Puro</option>
+              <option value="hidrogel com PHMB">PHMB</option>
+              <option value="hidrogel com AGE">AGE</option>
+              <option value="hidrogel com alginato">Alginato</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-sec-pomada">
+              <option value="">Selecione o Curativo</option>
+              <option value="colagenase">Colagenase</option>
+              <option value="óxido de zinco">Óxido de Zinco</option>
+              <option value="sulfadiazina de prata">Sulfadiazina de Prata</option>
+              <option value="papaína">Papaína</option>
+            </select>
+          </div>
+          <div class="field">
+            <label style="color: transparent; user-select: none;">espaço em branco</label>
+            <select id="lpp-curativo-sec-cutaneo">
+              <option value="">Selecione o Curativo</option>
+              <option value="enxertia de pele">Enxertia</option>
+              <option value="pele de tilápia">Pele de Tilápia</option>
+              <option value="membrana de celulose">Membrana de Celulose</option>
+              <option value="matriz de colágeno">Matriz de Colágeno</option>
+              <option value="matriz de fibrina">Matriz de Fibrina</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label><input type="checkbox" style="margin-top: 16px;" name="lpp-limpeza" value="Realizada limpeza da ferida com PHMB"> Limpeza com PHMB</label>
+          </div>
+          <div class="field">
+            <label><input type="checkbox" style="margin-top: 16px;" name="lpp-curativo" value="Curativo estéril e contínuo devido a terapia por pressão negativa"> Curativo por pressão negativa</label>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          Lesões Gerais
+        </div>
+        <div class="field">
+          <label>Tipo de Lesão</label>
+          <select id="lesoes-gerais">
+            <option value="">Nenhuma lesão registrada</option>
+            <option value="lesão tissular profunda">Lesão Tissular Profunda</option>
+            <option value="flictena não rompido">Flictena Não Rompido</option>
+            <option value="dermatite">Dermatite</option>
+          </select>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          Queimaduras
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Tipo de Queimadura</label>
+            <div class="radio-group">
+              <label><input type="radio" name="queimadura-tipo" value="térmica"> Térmica</label>
+              <label><input type="radio" name="queimadura-tipo" value="elétrica"> Elétrica</label>
+              <label><input type="radio" name="queimadura-tipo" value="química"> Química</label>
+              <label><input type="radio" name="queimadura-tipo" value="radioativa"> Radioativa</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Grau da Queimadura</label>
+            <div class="radio-group">
+              <label><input type="radio" name="queimadura-grau" value="1º grau, atigindo profundidade cutânea superficial"> Superficial</label>
+              <label><input type="radio" name="queimadura-grau" value="2º grau, atigindo profundidade cutânea parcial"> Parcial</label>
+              <label><input type="radio" name="queimadura-grau" value="3º grau, atigindo profundidade total"> Total</label>
+              <label><input type="radio" name="queimadura-grau" value="4º grau, atigindo profundidade cutânea total com danos a tecidos subjacentes"> Tecidos Subjacentes</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          Machucados
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Tipo de Ferida</label>
+            <div class="radio-group">
+              <label><input type="radio" name="machucado-tipo" value="escoriação"> Escoriação</label>
+              <label><input type="radio" name="machucado-tipo" value="puntiforme"> Puntiforme</label>
+              <label><input type="radio" name="machucado-tipo" value="incisa"> Incisa</label>
+              <label><input type="radio" name="machucado-tipo" value="contusa"> Contusa</label>
+              <label><input type="radio" name="machucado-tipo" value="corto-contusa"> Corto-Contusa</label>
+              <label><input type="radio" name="machucado-tipo" value="lacero-cortante"> Lacero-Cortante</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Quantidade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="machucado-quant" value="única"> Única</label>
+              <label><input type="radio" name="machucado-quant" value="mútiplas"> Múltiplas</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Causa</label>
+            <div class="radio-group">
+              <label><input type="radio" name="machucado-causa" value="queda"> Queda</label>
+              <label><input type="radio" name="machucado-causa" value="agressão"> Agressão</label>
+              <label><input type="radio" name="machucado-causa" value="mordedura"> Morderuda</label>
+              <label><input type="radio" name="machucado-causa" value="prensagem"> Prensagem</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Local</label>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          Ferimentos por Arma
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Tipo de Arma</label>
+            <div class="radio-group">
+              <label><input type="radio" name="arma-tipo" value="arma branca"> Arma Branca</label>
+              <label><input type="radio" name="arma-tipo" value="arma de fogo"> Arma de Fogo</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Quantidade</label>
+            <div class="radio-group">
+              <label><input type="radio" name="arma-quant" value="única perfuração"> Única Perfuração</label>
+              <label><input type="radio" name="arma-quant" value="mútiplas perfurações"> Múltiplas Perfurações</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Orifício de Saída</label>
+            <div class="radio-group">
+              <label><input type="radio" name="arma-paf" value="sem"> Ausente</label>
+              <label><input type="radio" name="arma-paf" value="com"> Presente</label>
+              <label><input type="radio" name="arma-paf" value="não avaliado"> Não Avaliado</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Arma Branca</label>
+            <div class="radio-group">
+              <label><input type="radio" name="arma-pab" value="presente no local"> Presente no Local</label>
+              <label><input type="radio" name="arma-pab" value="préviamente removido do local"> Préviamente Removida</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Local</label>
+          </div>
         </div>
       </div>
     </div>
@@ -2191,22 +2520,42 @@
         <div class="card-title">MMSS – Membros Superiores</div>
         <div class="grid-2">
           <div class="field">
-            <label>Edemas MMSS</label>
+            <label>Edemas MSD</label>
             <div class="radio-group">
-              <label><input type="radio" name="edema-mmss" value="livre de edemas"> Sem edemas</label>
-              <label><input type="radio" name="edema-mmss" value="com edemas"> Com edemas</label>
+              <label><input type="radio" name="edema-msd" value="1/4"> 1/4</label>
+              <label><input type="radio" name="edema-msd" value="2/4"> 2/4</label>
+              <label><input type="radio" name="edema-msd" value="3/4"> 3/4</label>
+              <label><input type="radio" name="edema-msd" value="4/4"> 4/4</label>
             </div>
           </div>
           <div class="field">
-            <label>Extremidades MMSS (múltiplas)</label>
+            <label>Edemas MSE</label>
+            <div class="radio-group">
+              <label><input type="radio" name="edema-mse" value="1/4"> 1/4</label>
+              <label><input type="radio" name="edema-mse" value="2/4"> 2/4</label>
+              <label><input type="radio" name="edema-mse" value="3/4"> 3/4</label>
+              <label><input type="radio" name="edema-mse" value="4/4"> 4/4</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Extremidades MMSS</label>
             <div class="check-group">
               <label><input type="checkbox" name="ext-mmss" value="íntegras"> Íntegras</label>
               <label><input type="checkbox" name="ext-mmss" value="gélidas"> Gélidas</label>
               <label><input type="checkbox" name="ext-mmss" value="cianóticas"> Cianóticas</label>
               <label><input type="checkbox" name="ext-mmss" value="ictéricas"> Ictéricas</label>
               <label><input type="checkbox" name="ext-mmss" value="exsudativas"> Exsudativas</label>
-              <label><input type="checkbox" name="ext-mmss" value="com aquecimento"> Com aquecimento</label>
-              <label><input type="checkbox" name="ext-mmss" value="em contenção mecânica"> Contenção mecânica</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Dispositivos MMSS</label>
+            <div class="check-group">
+              <label><input type="checkbox" name="disp-mmss" value="com aquecimento"> Com aquecimento</label>
+              <label><input type="checkbox" name="disp-mmss" value="em contenção mecânica"> Contenção mecânica</label>
+              <label><input type="checkbox" name="disp-mmss" value="em uso de imobilizador de membro"> Imobilizador de Membro</label>
+              <label><input type="checkbox" name="disp-mmss" value="em uso de tipóia"> Tipóia</label>
+              <label><input type="checkbox" name="disp-mmss" value="em uso de aparelho gessado"> Aparelho Gessado</label>
+              <label><input type="checkbox" name="disp-mmss" value="em uso de fixador externo"> Fixador Externo</label>
             </div>
           </div>
         </div>
