@@ -425,8 +425,11 @@
     <div class="nav-item" data-section="membros"><span class="nav-icon">🦵</span>MMSS e MMII</div>
     <div class="sidebar-section">Dispositivos</div>
     <div class="nav-item" data-section="dispositivos"><span class="nav-icon">🔌</span>Dispositivos Médicos</div>
+    <div class="nav-item" data-section="medicacao"><span class="nav-icon">💊</span>Dripping</div>
     <div class="sidebar-section">Escalas</div>
     <div class="nav-item" data-section="escalas"><span class="nav-icon">📊</span>Escalas Clínicas</div>
+    <div class="sidebar-section">Adicionais</div>
+    <div class="nav-item" data-section="adicionais"><span class="nav-icon">📖</span>Condutas e Intercorrências</div>
     <div class="sidebar-section">Saída</div>
     <div class="nav-item" data-section="resumo"><span class="nav-icon">📝</span>Gerar Evolução</div>
   </nav>
@@ -2113,6 +2116,9 @@
         <div class="grid-2">
           <div class="field">
             <label>Alterações Observadas</label>
+            <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+            </p>
             <div class="check-group">
               <label><input type="checkbox" name="pele-alt" value="anasarca"> Anasarca</label>
               <label><input type="checkbox" name="pele-alt" value="cianose"> Cianose</label>
@@ -2123,19 +2129,16 @@
               <label><input type="checkbox" name="pele-alt" value="exsudação"> Exsudação</label>
               <label><input type="checkbox" name="pele-alt" value="xantoma eruptivo"> Xantoma Eruptivo</label>
             </div>
-            <p style="font-size:11px;color:var(--text-muted);">
-                É possível selecionar várias opções
-            </p>
           </div>
           <div class="field">
             <label>Fragilidade Capilar</label>
+            <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+            </p>
             <div class="check-group">
               <label><input type="checkbox" name="pele-alt" value="equimose"> Equimose</label>
               <label><input type="checkbox" name="pele-alt" value="scream tears"> Scream Tears</label>
             </div>
-            <p style="font-size:11px;color:var(--text-muted);">
-                É possível selecionar várias opções
-            </p>
           </div>
           <div class="field">
             <label>Turgor Cutâneo</label>
@@ -2517,7 +2520,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-title">MMSS – Membros Superiores</div>
+        <div class="card-title">Membros Superiores</div>
         <div class="grid-2">
           <div class="field">
             <label>Edemas MSD</label>
@@ -2539,6 +2542,9 @@
           </div>
           <div class="field">
             <label>Extremidades MMSS</label>
+            <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+            </p>
             <div class="check-group">
               <label><input type="checkbox" name="ext-mmss" value="íntegras"> Íntegras</label>
               <label><input type="checkbox" name="ext-mmss" value="gélidas"> Gélidas</label>
@@ -2549,6 +2555,9 @@
           </div>
           <div class="field">
             <label>Dispositivos MMSS</label>
+            <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+            </p>
             <div class="check-group">
               <label><input type="checkbox" name="disp-mmss" value="com aquecimento"> Com aquecimento</label>
               <label><input type="checkbox" name="disp-mmss" value="em contenção mecânica"> Contenção mecânica</label>
@@ -2558,40 +2567,82 @@
               <label><input type="checkbox" name="disp-mmss" value="em uso de fixador externo"> Fixador Externo</label>
             </div>
           </div>
+          <div class="field">
+            <label>Fístula Artériovenosa</label>
+            <div class="radio-group">
+              <label><input type="checkbox" name="mmss-fav" value="esquerda"> Esquerda</label>
+              <label><input type="checkbox" name="mmss-fav" value="direita"> Direita</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Amputação</label>
+          </div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">MMII – Membros Inferiores</div>
+        <div class="card-title">Membros Inferiores</div>
         <div class="grid-2">
           <div class="field">
-            <label>Edemas MMII</label>
+            <label>Edemas MID</label>
             <div class="radio-group">
-              <label><input type="radio" name="edema-mmii" value="livre de edemas"> Sem edemas</label>
-              <label><input type="radio" name="edema-mmii" value="com edemas"> Com edemas</label>
+              <label><input type="radio" name="edema-mid" value="1/4"> 1/4</label>
+              <label><input type="radio" name="edema-mid" value="2/4"> 2/4</label>
+              <label><input type="radio" name="edema-mid" value="3/4"> 3/4</label>
+              <label><input type="radio" name="edema-mid" value="4/4"> 4/4</label>
             </div>
           </div>
           <div class="field">
-            <label>Panturrilhas</label>
+            <label>Edemas MIE</label>
             <div class="radio-group">
-              <label><input type="radio" name="panturrilha" value="livres"> Livres</label>
-              <label><input type="radio" name="panturrilha" value="empastadas à direita"> Empastadas D</label>
-              <label><input type="radio" name="panturrilha" value="empastadas à esquerda"> Empastadas E</label>
-              <label><input type="radio" name="panturrilha" value="empastadas bilateralmente"> Empastadas bilat.</label>
+              <label><input type="radio" name="edema-mie" value="1/4"> 1/4</label>
+              <label><input type="radio" name="edema-mie" value="2/4"> 2/4</label>
+              <label><input type="radio" name="edema-mie" value="3/4"> 3/4</label>
+              <label><input type="radio" name="edema-mie" value="4/4"> 4/4</label>
             </div>
           </div>
-          <div class="field col-span-2">
-            <label>Extremidades MMII (múltiplas)</label>
+          <div class="field">
+            <label>Extremidades MMII</label>
+            <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+            </p>
             <div class="check-group">
               <label><input type="checkbox" name="ext-mmii" value="íntegras"> Íntegras</label>
               <label><input type="checkbox" name="ext-mmii" value="gélidas"> Gélidas</label>
               <label><input type="checkbox" name="ext-mmii" value="cianóticas"> Cianóticas</label>
               <label><input type="checkbox" name="ext-mmii" value="ictéricas"> Ictéricas</label>
               <label><input type="checkbox" name="ext-mmii" value="exsudativas"> Exsudativas</label>
-              <label><input type="checkbox" name="ext-mmii" value="com aquecimento"> Com aquecimento</label>
-              <label><input type="checkbox" name="ext-mmii" value="em contenção mecânica"> Contenção mecânica</label>
-              <label><input type="checkbox" name="ext-mmii" value="com sistema de compressão intermitente"> Compressão intermitente</label>
+              <label><input type="checkbox" name="ext-mmii" value="dermatite ocre"> Dermatite Ocre</label>
             </div>
           </div>
+          <div class="field">
+            <label>Dispositivos MMII</label>
+            <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+            </p>
+            <div class="check-group">
+              <label><input type="checkbox" name="disp-mmii" value="com aquecimento"> Com aquecimento</label>
+              <label><input type="checkbox" name="disp-mmii" value="em contenção mecânica"> Contenção mecânica</label>
+              <label><input type="checkbox" name="disp-mmii" value="em uso de sistema de compressão intermitente"> Sistema de Compressão Intermitente</label>
+              <label><input type="checkbox" name="disp-mmii" value="em uso de imobilizador de membro"> Imobilizador de Membro</label>
+              <label><input type="checkbox" name="disp-mmii" value="em uso de aparelho gessado"> Aparelho Gessado</label>
+              <label><input type="checkbox" name="disp-mmii" value="em uso de fixador externo"> Fixador Externo</label>
+              <label><input type="checkbox" name="disp-mmii" value="em uso de fixador externo"> Triangulo Abdutor</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Panturrilhas Empastadas</label>
+            <div class="radio-group">
+              <label><input type="radio" name="panturrilha" value="empastadas à direita"> Direita</label>
+              <label><input type="radio" name="panturrilha" value="empastadas à esquerda"> Esquerda</label>
+              <label><input type="radio" name="panturrilha" value="empastadas bilateralmente"> Bilateral</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Amputação</label>
+          </div>
+          <div class="field">
+            <label><input type="checkbox" style="margin-top: 16px;" name="lpp-limpeza" value="Sinal de Babinski positivo"> Babinski positivo</label>
+        </div>
         </div>
       </div>
     </div>
@@ -2618,8 +2669,8 @@
               <div class="radio-group">
                 <label><input type="radio" name="avp-local" value="MSD"> MSD</label>
                 <label><input type="radio" name="avp-local" value="MSE"> MSE</label>
-                <label><input type="radio" name="avp-local" value="VJD (jugular ext. D)"> VJ D</label>
-                <label><input type="radio" name="avp-local" value="VJE (jugular ext. E)"> VJ E</label>
+                <label><input type="radio" name="avp-local" value="VJED"> VJED</label>
+                <label><input type="radio" name="avp-local" value="VJEE"> VJEE</label>
               </div>
             </div>
             <div class="field">
@@ -2632,9 +2683,12 @@
             </div>
             <div class="field">
               <label>Sinais Flogísticos</label>
-              <div class="radio-group">
-                <label><input type="radio" name="avp-flog" value="ausência de sinais flogísticos"> Ausentes</label>
-                <label><input type="radio" name="avp-flog" value="presença de sinais flogísticos"> Presentes</label>
+              <div class="check-group">
+                <label><input type="checkbox" name="avp-flog" value="calor"> Calor</label>
+                <label><input type="checkbox" name="avp-flog" value="dor"> Dor</label>
+                <label><input type="checkbox" name="avp-flog" value="edema"> Edema</label>
+                <label><input type="checkbox" name="avp-flog" value="perda de função"> Perda de função</label>
+                <label><input type="checkbox" name="avp-flog" value="rubor"> Rubor</label>
               </div>
             </div>
           </div>
@@ -2758,6 +2812,53 @@
       </div>
     </div>
 
+    <!-- ====== MEDICAÇÃO ====== -->
+    <div class="form-section" id="sec-medicacao">
+      <div class="section-header">
+        <div class="section-icon">💊</div>
+        <div>
+          <div class="section-title">Dripping</div>
+          <div class="section-subtitle">Cálculo da vazão das drogas em ml e mcg/kg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Tipos de Drogas</div>
+        <div class="grid-3">
+          <div class="field">
+            <label>Selecio o Medicamento</label>
+            <select id="medicacao-tipos">
+              <option value="">Selecione</option>
+              <option value="noradrenalina">Noradrenlina</option>
+              <option value="dobutamina pura">Dobutamina – Puro</option>
+              <option value="dobutamina diluída">Dobutamina – Diluído</option>
+              <option value="midazolam puro">Midazolam – Puro</option>
+              <option value="midazolam diluído">Midazolam – Duluído</option>
+              <option value="fentanil puro">Fentanil – Puro</option>
+              <option value="fentanil diluído">Fentanil – Duluído</option>
+              <option value="nipride">Nipride</option>
+              <option value="propofol">Propofol</option>
+              <option value="precedex">Precedex</option>
+              <option value="morfina">Morfina</option>
+              <option value="rocurônio puro">Rocurônio – Puro</option>
+              <option value="rocurônio diluído">Rocurônio – Duluído</option>
+              <option value="amiodarona">Amiodarona</option>
+              <option value="vasopressina pura">Vasopressina – Puro</option>
+              <option value="vasopressina diluída">Vasopressina – Duluído</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Dosagem (ml/h)</label>
+            <input type="number" name="medicacao-dos" id="medicacao-dos" min="0" step="0.1" oninput="calcMed()">
+          </div>
+          <div class="field">
+            <label>Dosagem (mcg/kg/min)</label>
+            <input type="number" name="medicacao-quant" id="medicacao-calc" min="0" step="0.1">
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ====== ESCALAS ====== -->
     <div class="form-section" id="sec-escalas">
       <div class="section-header">
@@ -2769,7 +2870,7 @@
       </div>
       <!-- EVA -->
       <div class="card">
-        <div class="card-title">Escala de Dor – EVA (opcional)</div>
+        <div class="card-title">Escala de Dor – EVA</div>
         <div class="grid-2">
           <div class="field">
             <label>Pontuação EVA (0–10)</label>
@@ -2789,11 +2890,12 @@
       </div>
       <!-- BPS -->
       <div class="card">
-        <div class="card-title">Escala de Dor Comportamental – BPS (intubados)</div>
+        <div class="card-title">Escala de Dor Comportamental – BPS</div>
         <div class="grid-3">
           <div class="field">
             <label>Expressão Facial</label>
             <select id="bps-exp">
+              <option value="0">Selecione</option>
               <option value="1">1 – Relaxada</option>
               <option value="2">2 – Parcialmente tensa</option>
               <option value="3">3 – Totalmente tensa</option>
@@ -2803,6 +2905,7 @@
           <div class="field">
             <label>Membros Superiores</label>
             <select id="bps-mmss">
+              <option value="0">Selecione</option>
               <option value="1">1 – Sem movimento</option>
               <option value="2">2 – Flexão parcial</option>
               <option value="3">3 – Flexão total</option>
@@ -2810,8 +2913,9 @@
             </select>
           </div>
           <div class="field">
-            <label>Adaptação VM</label>
+            <label>Adaptação a Ventilação</label>
             <select id="bps-vm">
+              <option value="0">Selecione</option>
               <option value="1">1 – Tolera movimentos</option>
               <option value="2">2 – Tosse c/ movimentos</option>
               <option value="3">3 – Briga c/ ventilador</option>
@@ -2819,12 +2923,33 @@
             </select>
           </div>
           <div class="field">
+            <label>Adaptação a Ventilação</label>
+            <select id="bps-vm">
+              <option value="0">Selecione</option>
+              <option value="1">1 – Sem vocalização relacionada a dor</option>
+              <option value="2">2 – Gemidos ocasionais</option>
+              <option value="3">3 – Gemidos frequentes</option>
+              <option value="4">4 – Gritos, reclamações ou apnéia voluntária</option>
+            </select>
+          </div>
+          <div class="field">
             <label>Pontuação BPS</label>
-            <div class="calc-field" id="bps-total">3</div>
+            <div class="calc-field" id="bps-total">0</div>
           </div>
         </div>
       </div>
-      <!-- Observações Gerais -->
+    </div>
+
+    <!-- ====== ADICIONAIS ====== -->
+    <div class="form-section" id="sec-adicionais">
+      <div class="section-header">
+        <div class="section-icon">📖</div>
+        <div>
+          <div class="section-title">Condutas e Intercorrências</div>
+          <div class="section-subtitle">Anotação de enfermagem</div>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-title">Observações / Condutas Adicionais</div>
         <div class="field">
@@ -2833,6 +2958,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- ====== RESUMO / GERAR EVOLUÇÃO ====== -->
     <div class="form-section" id="sec-resumo">
@@ -2891,7 +3017,7 @@
   const sections = [
     'identificacao','sinais-vitais','percepcao','cabeca', 'pescoco-torax',
     'cardiovascular','pulmonar','abdome','genitalia','pele','membros',
-    'dispositivos','escalas','resumo'
+    'dispositivos', 'medicacao', 'escalas', 'adicionais', 'resumo'
   ];
   let current = 0;
 
@@ -3377,6 +3503,14 @@
     return x;
   }
 
+  // ── Medicação ────────────────────────────────────────────────────────────────────────────────────────────
+  function calcMed() {
+    const dosagem = parseFloat(document.getElementById('medicacao-dos').value);
+    if (isNaN(dosagem)) return;
+    // let c = dosagem * 
+    document.getElementById('medicacao-calc').textContent = c;
+  }
+
   // ── BPS ────────────────────────────────────────────────────────────────────────────────────────────
   ['bps-exp','bps-mmss','bps-vm'].forEach(id => {
     document.getElementById(id).addEventListener('change', () => {
@@ -3682,6 +3816,7 @@
         if (avpData) avp += `, puncionado em ${avpData}`;
         if (avpCat) avp += `, cateter n° ${avpCat}G`;
         if (avpFlog) avp += `, ${avpFlog}`;
+        else avp += ', ausência de sinais flogísticos'
         disp.push(avp);
       }
       if (cvcLumen && cvcLocal) {
