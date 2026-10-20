@@ -3414,77 +3414,96 @@
           <div class="section-subtitle">BPS, EVA, CAM-ICU, Ramsay</div>
         </div>
       </div>
+
       <!-- EVA -->
-      <div class="card">
-        <div class="card-title">Escala de Dor – EVA</div>
-        <div class="grid-2">
-          <div class="field">
-            <label>Pontuação EVA (0–10)</label>
-            <input type="range" id="eva-score" min="0" max="10" step="1" value="0" oninput="updateEVA()">
-            <div class="calc-field" id="eva-display">0 – Sem dor</div>
-          </div>
-          <div class="field">
-            <label>Região da Dor</label>
-            <select id="eva-regiao">
-              <option value="">Selecionar</option>
-              <option>Cirúrgica</option><option>Cefálica</option><option>Torácica</option>
-              <option>Abdominal</option><option>MSD</option><option>MSE</option>
-              <option>MID</option><option>MIE</option>
-            </select>
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Escala de Dor – EVA</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Pontuação EVA (0–10)</label>
+              <input type="range" id="eva-score" min="0" max="10" step="1" value="0" oninput="updateEVA()">
+              <div class="calc-field" id="eva-display">0 – Sem dor</div>
+            </div>
+            <div class="field">
+              <label>Região da Dor</label>
+              <select id="eva-regiao">
+                <option value="">Selecionar</option>
+                <option>Cirúrgica</option><option>Cefálica</option><option>Torácica</option>
+                <option>Abdominal</option><option>MSD</option><option>MSE</option>
+                <option>MID</option><option>MIE</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
+
       <!-- BPS -->
-      <div class="card">
-        <div class="card-title">Escala de Dor Comportamental – BPS</div>
-        <div class="grid-3">
-          <div class="field">
-            <label>Expressão Facial</label>
-            <select id="bps-exp">
-              <option value="0">Selecione</option>
-              <option value="1">1 – Relaxada</option>
-              <option value="2">2 – Parcialmente tensa</option>
-              <option value="3">3 – Totalmente tensa</option>
-              <option value="4">4 – Faz careta</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Membros Superiores</label>
-            <select id="bps-mmss">
-              <option value="0">Selecione</option>
-              <option value="1">1 – Sem movimento</option>
-              <option value="2">2 – Flexão parcial</option>
-              <option value="3">3 – Flexão total</option>
-              <option value="4">4 – Retração permanente</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Adaptação a Ventilação</label>
-            <select id="bps-vm">
-              <option value="0">Selecione</option>
-              <option value="1">1 – Tolera movimentos</option>
-              <option value="2">2 – Tosse c/ movimentos</option>
-              <option value="3">3 – Briga c/ ventilador</option>
-              <option value="4">4 – Incapaz de controlar</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Adaptação a Ventilação</label>
-            <select id="bps-vm">
-              <option value="0">Selecione</option>
-              <option value="1">1 – Sem vocalização relacionada a dor</option>
-              <option value="2">2 – Gemidos ocasionais</option>
-              <option value="3">3 – Gemidos frequentes</option>
-              <option value="4">4 – Gritos, reclamações ou apnéia voluntária</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Pontuação BPS</label>
-            <div class="calc-field" id="bps-total">0</div>
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Escala de Dor Comportamental – BPS</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-3">
+            <div class="field">
+              <label>Expressão Facial</label>
+              <select id="bps-exp">
+                <option value="0">Selecione</option>
+                <option value="1">1 – Relaxada</option>
+                <option value="2">2 – Parcialmente tensa</option>
+                <option value="3">3 – Totalmente tensa</option>
+                <option value="4">4 – Faz careta</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Membros Superiores</label>
+              <select id="bps-mmss">
+                <option value="0">Selecione</option>
+                <option value="1">1 – Sem movimento</option>
+                <option value="2">2 – Flexão parcial</option>
+                <option value="3">3 – Flexão total</option>
+                <option value="4">4 – Retração permanente</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Adaptação a Ventilação</label>
+              <select id="bps-vm">
+                <option value="0">Selecione</option>
+                <option value="1">1 – Tolera movimentos</option>
+                <option value="2">2 – Tosse c/ movimentos</option>
+                <option value="3">3 – Briga c/ ventilador</option>
+                <option value="4">4 – Incapaz de controlar</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Adaptação a Ventilação</label>
+              <select id="bps-vm">
+                <option value="0">Selecione</option>
+                <option value="1">1 – Sem vocalização relacionada a dor</option>
+                <option value="2">2 – Gemidos ocasionais</option>
+                <option value="3">3 – Gemidos frequentes</option>
+                <option value="4">4 – Gritos, reclamações ou apnéia voluntária</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Pontuação BPS</label>
+              <div class="calc-field" id="bps-total">0</div>
+            </div>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+
+
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Escala de Dor – EVA</span><span>▾</span>
+        </div>
+        <div class="device-body">
+        </div>
+      </div>
 
     <!-- ====== ADICIONAIS ====== -->
     <div class="form-section" id="sec-adicionais">
