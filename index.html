@@ -424,9 +424,11 @@
     <div class="nav-item" data-section="pele"><span class="nav-icon">🖐️</span>Pele e Integridade</div>
     <div class="nav-item" data-section="membros"><span class="nav-icon">🦵</span>MMSS e MMII</div>
     <div class="sidebar-section">Dispositivos</div>
-    <div class="nav-item" data-section="dispositivos"><span class="nav-icon">🔌</span>Dispositivos Médicos</div>
+    <div class="nav-item" data-section="circulatorio"><span class="nav-icon">🩸</span>Sistema Circulatório</div>
+    <div class="nav-item" data-section="digestivo"><span class="nav-icon">👄</span>Sistema Digestivo</div>
+    <div class="nav-item" data-section="gerais"><span class="nav-icon">🩺</span>Dispositivo Gerais</div>
+    <div class="sidebar-section">Dripping e Escalas</div>
     <div class="nav-item" data-section="medicacao"><span class="nav-icon">💊</span>Dripping</div>
-    <div class="sidebar-section">Escalas</div>
     <div class="nav-item" data-section="escalas"><span class="nav-icon">📊</span>Escalas Clínicas</div>
     <div class="sidebar-section">Adicionais</div>
     <div class="nav-item" data-section="adicionais"><span class="nav-icon">📖</span>Condutas e Intercorrências</div>
@@ -602,7 +604,7 @@
       </div>
       <div class="device-block">
         <div class="device-header" onclick="toggleDevice(this)">
-          <span>🩺 Alterações Pressóricas</span><span>▾</span>
+          <span>Alterações Pressóricas</span><span>▾</span>
         </div>
         <div class="device-body">
           <div class="grid-1">
@@ -787,9 +789,8 @@
           </select>
         </div>
       </div>
-    </div>
 
-    <!-- Ramsay -->
+      <!-- Ramsay -->
       <div class="card" id="c-ramsey">
         <div class="card-title">Escala de Ramsay</div>
         <div class="field">
@@ -805,6 +806,7 @@
           </select>
         </div>
       </div>
+    </div>
 
     <!-- ====== CABEÇA ====== -->
     <div class="form-section" id="sec-cabeca">
@@ -1466,6 +1468,7 @@
             <div class="check-group" style="margin-top: 5px;">
               <label><input type="checkbox" name="equipamento-vm" value="sistema de aspiração fechado"> TrakCare</label>
               <label><input type="checkbox" name="equipamento-vm" value="filtro bacteriológico"> Filtro Bacteriológico</label>
+              <label><input type="checkbox" name="equipamento-vm" value="aerocâmara"> Aerocâmara</label>
             </div>
           </div>
           <div class="field field-vm">
@@ -2150,6 +2153,7 @@
           </div>
         </div>
       </div>
+      <!-- Adicionar lógica de duplicação no card-->
       <div class="card">
         <div class="card-title">Lesões Por Pressão (LPP)</div>
         <div class="field">
@@ -2648,19 +2652,21 @@
     </div>
 
     <!-- ====== DISPOSITIVOS ====== -->
-    <div class="form-section" id="sec-dispositivos">
+     <!-- Sistema Circulatório -->
+    <div class="form-section" id="sec-circulatorio">
       <div class="section-header">
-        <div class="section-icon">🔌</div>
+        <div class="section-icon">🩸</div>
         <div>
-          <div class="section-title">Dispositivos Médicos</div>
-          <div class="section-subtitle">AVP, CVC, PAI, SNE, SNG, TOT/TQT e outros</div>
+          <div class="section-title">Sistema Circulatório</div>
+          <div class="section-subtitle">Dispositivos invasivos arterial ou venoso</div>
         </div>
       </div>
 
       <!-- AVP -->
+      <!-- Adicionar lógica de duplicação no device-block-->
       <div class="device-block">
         <div class="device-header" onclick="toggleDevice(this)">
-          <span>🩹 AVP – Acesso Venoso Periférico</span><span>▾</span>
+          <span>AVP – Acesso Venoso Periférico</span><span>▾</span>
         </div>
         <div class="device-body">
           <div class="grid-2">
@@ -2683,6 +2689,9 @@
             </div>
             <div class="field">
               <label>Sinais Flogísticos</label>
+              <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+              </p>
               <div class="check-group">
                 <label><input type="checkbox" name="avp-flog" value="calor"> Calor</label>
                 <label><input type="checkbox" name="avp-flog" value="dor"> Dor</label>
@@ -2692,24 +2701,33 @@
               </div>
             </div>
           </div>
+          <div class="field">
+            <label><input type="checkbox" style="margin-top: 16px;" name="avp-esteril" value="com cobertura estéril e óstio de inserção visível"> Uso de cobertura transparente estéril</label>
+          </div>
         </div>
       </div>
 
       <!-- CVC -->
+      <!-- Adicionar lógica de duplicação no device-block-->
       <div class="device-block">
         <div class="device-header" onclick="toggleDevice(this)">
-          <span>🔵 CVC – Cateter Venoso Central</span><span>▾</span>
+          <span>CVC – Cateter Venoso Central</span><span>▾</span>
         </div>
         <div class="device-body">
           <div class="grid-2">
             <div class="field">
               <label>Lúmen CVC</label>
               <div class="radio-group">
-                <label><input type="radio" name="cvc-lumen" value="uni"> Uni</label>
-                <label><input type="radio" name="cvc-lumen" value="duplo"> Duplo</label>
-                <label><input type="radio" name="cvc-lumen" value="triplo"> Triplo</label>
-                <label><input type="radio" name="cvc-lumen" value="quádruplo"> Quádruplo</label>
+                <label><input type="radio" name="cvc-lumen" value="mono"> 1</label>
+                <label><input type="radio" name="cvc-lumen" value="bi"> 2</label>
+                <label><input type="radio" name="cvc-lumen" value="tri"> 3</label>
+                <label><input type="radio" name="cvc-lumen" value="tetra"> 4</label>
+                <label><input type="radio" name="cvc-lumen" value="penta"> 5</label>
               </div>
+            </div>
+            <div class="field">
+              <label>Data da Punção CVC</label>
+              <input type="date" id="cvc-data">
             </div>
             <div class="field">
               <label>Localização CVC</label>
@@ -2723,10 +2741,16 @@
               </div>
             </div>
             <div class="field">
-              <label>Sinais Flogísticos CVC</label>
-              <div class="radio-group">
-                <label><input type="radio" name="cvc-flog" value="ausência de sinais flogísticos"> Ausentes</label>
-                <label><input type="radio" name="cvc-flog" value="presença de sinais flogísticos"> Presentes</label>
+              <label>Sinais Flogísticos</label>
+              <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+              </p>
+              <div class="check-group">
+                <label><input type="checkbox" name="cvc-flog" value="calor"> Calor</label>
+                <label><input type="checkbox" name="cvc-flog" value="dor"> Dor</label>
+                <label><input type="checkbox" name="cvc-flog" value="edema"> Edema</label>
+                <label><input type="checkbox" name="cvc-flog" value="perda de função"> Perda de função</label>
+                <label><input type="checkbox" name="cvc-flog" value="rubor"> Rubor</label>
               </div>
             </div>
             <div class="field">
@@ -2737,17 +2761,460 @@
               </div>
             </div>
             <div class="field">
-              <label>Data da Punção CVC</label>
-              <input type="date" id="cvc-data">
+              <label>Condição</label>
+              <div class="radio-group">
+                <label><input type="radio" name="cvc-uso" value="salinizado"> Salinizado</label>
+                <label><input type="radio" name="cvc-uso" value="fluindo dripping"> Fluindo dripping</label>
+              </div>
             </div>
           </div>
+          <div class="field">
+            <label><input type="checkbox" style="margin-top: 16px;" name="cvc-esteril" value="com cobertura estéril e óstio de inserção visível"> Uso de cobertura transparente estéril</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- PICC -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>PICC – Cateter Central de Inserção Periférica</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Lúmen PICC</label>
+              <div class="radio-group">
+                <label><input type="radio" name="picc-lumen" value="mono"> 1</label>
+                <label><input type="radio" name="picc-lumen" value="bi"> 2</label>
+                <label><input type="radio" name="picc-lumen" value="tri"> 3</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data da Punção PICC</label>
+              <input type="date" id="picc-data">
+            </div>
+            <div class="field">
+              <label>Localização PICC</label>
+              <div class="radio-group">
+                <label><input type="radio" name="picc-local" value="MSD"> MSD</label>
+                <label><input type="radio" name="picc-local" value="MSE"> MSE</label>
+                <label><input type="radio" name="picc-local" value="MID"> MID</label>
+                <label><input type="radio" name="picc-local" value="MIE"> MIE</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Sinais Flogísticos</label>
+              <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+              </p>
+              <div class="check-group">
+                <label><input type="checkbox" name="picc-flog" value="calor"> Calor</label>
+                <label><input type="checkbox" name="picc-flog" value="dor"> Dor</label>
+                <label><input type="checkbox" name="picc-flog" value="edema"> Edema</label>
+                <label><input type="checkbox" name="picc-flog" value="perda de função"> Perda de função</label>
+                <label><input type="checkbox" name="picc-flog" value="rubor"> Rubor</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Fixação</label>
+              <div class="radio-group">
+                <label><input type="radio" name="picc-fix" value="devidamente fixado"> Fixado</label>
+                <label><input type="radio" name="picc-fix" value="com fixação comprometida"> Comprometido</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Condição</label>
+              <div class="radio-group">
+                <label><input type="radio" name="picc-uso" value="salinizado"> Salinizado</label>
+                <label><input type="radio" name="picc-uso" value="fluindo dripping"> Fluindo dripping</label>
+                <label><input type="radio" name="picc-uso" value="fluindo hidratação"> Fluindo hidratação</label>
+                <label><input type="radio" name="picc-uso" value="fluindo antibiótico"> Fluindo antibiótico</label>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label><input type="checkbox" style="margin-top: 16px;" name="picc-esteril" value="com cobertura estéril e óstio de inserção visível"> Uso de cobertura transparente estéril</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- CDL -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>CDL – Cateter Duplo Lúmen</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Lúmen CDL</label>
+              <div class="radio-group">
+                <label><input type="radio" name="cdl-lumen" value="duplo"> Duplo</label>
+                <label><input type="radio" name="cdl-lumen" value="triplo"> Triplo</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data da Punção CDL</label>
+              <input type="date" id="cdl-data">
+            </div>
+            <div class="field">
+              <label>Localização CDL</label>
+              <div class="radio-group">
+                <label><input type="radio" name="cdl-local" value="VJID"> VJID</label>
+                <label><input type="radio" name="cdl-local" value="VJIE"> VJIE</label>
+                <label><input type="radio" name="cdl-local" value="VSCD"> VSCD</label>
+                <label><input type="radio" name="cdl-local" value="VSCE"> VSCE</label>
+                <label><input type="radio" name="cdl-local" value="VFD"> VFD</label>
+                <label><input type="radio" name="cdl-local" value="VFE"> VFE</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Sinais Flogísticos</label>
+              <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+              </p>
+              <div class="check-group">
+                <label><input type="checkbox" name="cdl-flog" value="calor"> Calor</label>
+                <label><input type="checkbox" name="cdl-flog" value="dor"> Dor</label>
+                <label><input type="checkbox" name="cdl-flog" value="edema"> Edema</label>
+                <label><input type="checkbox" name="cdl-flog" value="perda de função"> Perda de função</label>
+                <label><input type="checkbox" name="cdl-flog" value="rubor"> Rubor</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Fixação</label>
+              <div class="radio-group">
+                <label><input type="radio" name="cdl-fix" value="devidamente fixado"> Fixado</label>
+                <label><input type="radio" name="cdl-fix" value="apresentando pontos soltos"> Pontos soltos</label>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label><input type="checkbox" style="margin-top: 16px;" name="cdl-esteril" value="com cobertura estéril e óstio de inserção visível"> Uso de cobertura transparente estéril</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- PORT-A-CATH -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>PAC – Cateter Port-a-Cath</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Localização CDL</label>
+              <div class="radio-group">
+                <label><input type="radio" name="pac-local" value="VSCD"> VSCD</label>
+                <label><input type="radio" name="pac-local" value="VSCE"> VSCE</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data da Inserção</label>
+              <input type="date" id="pac-data">
+            </div>
+            <div class="field">
+              <label>Refluxo Sanguíneo</label>
+              <div class="radio-group">
+                <label><input type="radio" name="pac-ref" value="ausência de refluxo sanguíneo"> Ausente</label>
+                <label><input type="radio" name="pac-ref" value="presença de refluxo sanguíneo"> Presente</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Sinais Flogísticos</label>
+              <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+              </p>
+              <div class="check-group">
+                <label><input type="checkbox" name="pac-flog" value="calor"> Calor</label>
+                <label><input type="checkbox" name="pac-flog" value="dor"> Dor</label>
+                <label><input type="checkbox" name="pac-flog" value="edema"> Edema</label>
+                <label><input type="checkbox" name="pac-flog" value="perda de função"> Perda de função</label>
+                <label><input type="checkbox" name="pac-flog" value="rubor"> Rubor</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bainha Introdutora -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Bainha Introdutora</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Localização</label>
+              <div class="radio-group">
+                <label><input type="radio" name="bi-local" value="ARD"> ARD</label>
+                <label><input type="radio" name="bi-local" value="ARE"> ARE</label>
+                <label><input type="radio" name="bi-local" value="AFD"> AFD</label>
+                <label><input type="radio" name="bi-local" value="AFE"> AFE</label>
+                <label><input type="radio" name="bi-local" value="VJID"> VJID</label>
+                <label><input type="radio" name="bi-local" value="VJIE"> VJIE</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data da Inserção</label>
+              <input type="date" id="bi-data">
+            </div>
+            <div class="field">
+              <label>Condição</label>
+              <div class="radio-group">
+                <label><input type="radio" name="bi-fix" value="aguardando retirada pela equipe médica"> Aguardando retirada</label>
+                <label><input type="radio" name="bi-fix" value="em uso para terapia medicamentosa"> Terapia medicamentosa</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Sinais Flogísticos</label>
+              <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+              </p>
+              <div class="check-group">
+                <label><input type="checkbox" name="bi-flog" value="calor"> Calor</label>
+                <label><input type="checkbox" name="bi-flog" value="dor"> Dor</label>
+                <label><input type="checkbox" name="bi-flog" value="edema"> Edema</label>
+                <label><input type="checkbox" name="bi-flog" value="perda de função"> Perda de função</label>
+                <label><input type="checkbox" name="bi-flog" value="rubor"> Rubor</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sistema Digestivo -->
+    <div class="form-section" id="sec-digestivo">
+      <div class="section-header">
+        <div class="section-icon">👄</div>
+        <div>
+          <div class="section-title">Sistema Digestivo</div>
+          <div class="section-subtitle">Dispositivos de alimentação e de eliminação</div>
+        </div>
+      </div>
+
+      <!-- SNE -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>SNE – Sonda Nasoentérica</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Localização</label>
+              <div class="radio-group">
+                <label><input type="radio" name="sne-local" value="narina direita"> Narina D</label>
+                <label><input type="radio" name="sne-local" value="narina esquerda"> Narina E</label>
+                <label><input type="radio" name="sne-local" value="cavidade oral"> Cavidade oral</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data de Inserção</label>
+              <input type="date" id="sne-data">
+            </div>
+            <div class="field">
+              <label>Fixação (cm)</label>
+              <input type="number" id="sne-fix" min="0" placeholder="Ex: 55">
+            </div>
+            <div class="field">
+              <label>Condição</label>
+              <div class="radio-group">
+                <label><input type="radio" name="sne-cond" value="liberada para uso"> Liberada</label>
+                <label><input type="radio" name="sne-cond" value="aguardando liberação médica"> Aguardando Rx</label>
+                <label><input type="radio" name="sne-cond" value="fechada"> Fechada</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SNG -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>SNG – Sonda Nasogástrica</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Localização</label>
+              <div class="radio-group">
+                <label><input type="radio" name="sng-local" value="narina direita"> Narina D</label>
+                <label><input type="radio" name="sng-local" value="narina esquerda"> Narina E</label>
+                <label><input type="radio" name="sng-local" value="navidade oral"> Cavidade oral</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data de Inserção</label>
+              <input type="date" id="sng-data">
+            </div>
+            <div class="field">
+              <label>Condição</label>
+              <div class="radio-group">
+                <label><input type="radio" name="sng-cond" value="fechada"> Fechada</label>
+                <label><input type="radio" name="sng-cond" value="em sifonagem"> Sifonagem</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GTT -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>GTT – Gastrostomia</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Permeabilidade</label>
+              <div class="radio-group">
+                <label><input type="radio" name="gtt-perm" value="pérvia"> Pérvil</label>
+                <label><input type="radio" name="gtt-perm" value="apresentando resistência"> Resistência</label>
+                <label><input type="radio" name="gtt-perm" value="obstruída"> Obstruída</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data de Inserção</label>
+              <input type="date" id="gtt-data">
+            </div>
+            <div class="field">
+              <label>Pele Periestomal</label>
+              <div class="radio-group">
+                <label><input type="radio" name="gtt-pele" value="íntegra"> Íntegra</label>
+                <label><input type="radio" name="gtt-pele" value="lesionada"> Lesionada</label>
+                <label><input type="radio" name="gtt-pele" value="apresentando dermatite"> Dermatite</label>
+                <label><input type="radio" name="gtt-pele" value="com sinais de irritação"> Irritação</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Vazamento</label>
+              <div class="radio-group">
+                <label><input type="radio" name="gtt-vaza" value="ausência"> Ausência</label>
+                <label><input type="radio" name="gtt-vaza" value="presença"> Presença</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Sinais Flogísticos</label>
+              <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+              </p>
+              <div class="check-group">
+                <label><input type="checkbox" name="gtt-flog" value="calor"> Calor</label>
+                <label><input type="checkbox" name="gtt-flog" value="dor"> Dor</label>
+                <label><input type="checkbox" name="gtt-flog" value="edema"> Edema</label>
+                <label><input type="checkbox" name="gtt-flog" value="perda de função"> Perda de função</label>
+                <label><input type="checkbox" name="gtt-flog" value="rubor"> Rubor</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Uso de Barreira</label>
+              <p style="font-size:11px;color:var(--text-muted);">
+                Seleção opcional
+              </p>
+              <div class="radio-group">
+                <label><input type="radio" name="gtt-barreira" value="spray"> Spray</label>
+                <label><input type="radio" name="gtt-barreira" value="creme"> Creme</label>
+                <label><input type="radio" name="gtt-barreira" value="pó"> Pó</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colostomia -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Colostomia</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <!-- Inserir seleção por imagem -->
+              <label>Localização</label>
+            </div>
+            <div class="field">
+              <label>Pele Periestomal</label>
+              <div class="radio-group">
+                <label><input type="radio" name="colos-pele" value="íntegra"> Íntegra</label>
+                <label><input type="radio" name="colos-pele" value="lesionada"> Lesionada</label>
+                <label><input type="radio" name="colos-pele" value="apresentando dermatite"> Dermatite</label>
+                <label><input type="radio" name="colos-pele" value="com sinais de irritação"> Irritação</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Aparência do Estôma</label>
+              <div class="radio-group">
+                <label><input type="radio" name="colos-cor" value="hipocorado"> Hipocorado</label>
+                <label><input type="radio" name="colos-cor" value="normocorado"> Normocorado</label>
+                <label><input type="radio" name="colos-cor" value="hipercorado"> Hipercorado</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Uso de Barreira</label>
+              <div class="radio-group">
+                <label><input type="radio" name="colos-barreira" value="spray"> Spray</label>
+                <label><input type="radio" name="colos-barreira" value="creme"> Creme</label>
+                <label><input type="radio" name="colos-barreira" value="pó"> Pó</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Catéter Retal -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Catéter Retal com Balão</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Usabilidade</label>
+              <div class="radio-group">
+                <label><input type="radio" name="crb-usa" value="alívio de distenção gasosa"> Distenção gasosa</label>
+                <label><input type="radio" name="crb-usa" value="contenção de fezes líquidas"> Fezes líquidas</label>
+                <label><input type="radio" name="crb-usa" value="proteção de lesões da contaminação fecal"> Proteção de feridas</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Data de Inserção</label>
+              <input type="date" id="crb-data">
+            </div>
+            <div class="field">
+              <label>Pele Perianal</label>
+              <div class="radio-group">
+                <label><input type="radio" name="crb-pele" value="íntegra"> Íntegra</label>
+                <label><input type="radio" name="crb-pele" value="hiperemiada"> Hiperemiada</label>
+                <label><input type="radio" name="crb-pele" value="macerada"> Macerada</label>
+                <label><input type="radio" name="crb-pele" value="lesionada pelo dispositivo"> Lesionada pelo dispositivo</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Sistema</label>
+              <div class="radio-group">
+                <label><input type="radio" name="crb-vaza" value="íntegro"> Íntegro</label>
+                <label><input type="radio" name="crb-vaza" value="apresentando vazamento"> Vazamento</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dispositivos Gerais -->
+    <div class="form-section" id="sec-gerais">
+      <div class="section-header">
+        <div class="section-icon">🩺</div>
+        <div>
+          <div class="section-title">Dispositivos Gerais</div>
+          <div class="section-subtitle">Dispositivos respiratórios, pressóricos e de drenagem</div>
         </div>
       </div>
 
       <!-- TOT / TQT -->
       <div class="device-block">
         <div class="device-header" onclick="toggleDevice(this)">
-          <span>🌬️ TOT / TQT / Via Aérea Artificial</span><span>▾</span>
+          <span>TOT / TQT – Via Aérea Artificial</span><span>▾</span>
         </div>
         <div class="device-body">
           <div class="grid-2">
@@ -2756,14 +3223,14 @@
               <div class="radio-group">
                 <label><input type="radio" name="via-aerea" value="TOT"> TOT</label>
                 <label><input type="radio" name="via-aerea" value="TQT"> TQT</label>
-                <label><input type="radio" name="via-aerea" value="Máscara Laríngea"> M. Laríngea</label>
-                <label><input type="radio" name="via-aerea" value="Nenhum"> Nenhum</label>
+                <label><input type="radio" name="via-aerea" value="máscara laríngea"> Máscara Laríngea</label>
               </div>
             </div>
             <div class="field">
               <label>Data de Inserção</label>
               <input type="date" id="vaa-data">
             </div>
+            <!-- Adicionar lógica mostrar os campos abaixo apenas quando TOT selecionado -->
             <div class="field">
               <label>Numeração do Tubo</label>
               <input type="number" id="tot-num" min="4" max="10" step="0.5" placeholder="Ex: 7.5">
@@ -2776,36 +3243,115 @@
         </div>
       </div>
 
-      <!-- SNE / SNG -->
+      <!-- PNI -->
       <div class="device-block">
         <div class="device-header" onclick="toggleDevice(this)">
-          <span>🍽️ SNE / SNG – Sonda Nasoentérica / Nasogástrica</span><span>▾</span>
+          <span>PNI – Pressão Não Invasiva</span><span>▾</span>
         </div>
         <div class="device-body">
           <div class="grid-2">
             <div class="field">
-              <label>Tipo de Sonda</label>
+              <label>Localização da Braçadeira</label>
               <div class="radio-group">
-                <label><input type="radio" name="sonda-tipo" value="SNE"> SNE</label>
-                <label><input type="radio" name="sonda-tipo" value="SNG"> SNG</label>
-                <label><input type="radio" name="sonda-tipo" value="Nenhuma"> Nenhuma</label>
+                <label><input type="radio" name="pni-local" value="MSD"> MSD</label>
+                <label><input type="radio" name="pni-local" value="MSE"> MSE</label>
+                <label><input type="radio" name="pni-local" value="MID"> MID</label>
+                <label><input type="radio" name="pni-local" value="MIE"> MIE</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAI -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>PAI – Pressão Arterial Invasiva</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Localização da Punção</label>
+              <div class="radio-group">
+                <label><input type="radio" name="pai-local" value="ARD"> ARD</label>
+                <label><input type="radio" name="pai-local" value="ARE"> ARE</label>
+                <label><input type="radio" name="pai-local" value="AFD"> AFD</label>
+                <label><input type="radio" name="pai-local" value="AFE"> AFE</label>
+                <label><input type="radio" name="pai-local" value="ABD"> ABD</label>
+                <label><input type="radio" name="pai-local" value="ABE"> ABE</label>
               </div>
             </div>
             <div class="field">
-              <label>Localização / Narina</label>
+              <label>Data da Punção</label>
+              <input type="date" id="pai-data">
+            </div>
+            <div class="field">
+              <label>Fixação</label>
               <div class="radio-group">
-                <label><input type="radio" name="sonda-local" value="Narina Direita"> Narina D</label>
-                <label><input type="radio" name="sonda-local" value="Narina Esquerda"> Narina E</label>
-                <label><input type="radio" name="sonda-local" value="Cavidade Oral"> Cavidade oral</label>
+                <label><input type="radio" name="pai-fix" value="devidamente fixado"> Fixado</label>
+                <label><input type="radio" name="pai-fix" value="apresentando pontos soltos"> Pontos soltos</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Sinais Flogísticos</label>
+              <p style="font-size:11px;color:var(--text-muted);">
+                É possível selecionar várias opções
+              </p>
+              <div class="check-group">
+                <label><input type="checkbox" name="pai-flog" value="calor"> Calor</label>
+                <label><input type="checkbox" name="pai-flog" value="dor"> Dor</label>
+                <label><input type="checkbox" name="pai-flog" value="edema"> Edema</label>
+                <label><input type="checkbox" name="pai-flog" value="perda de função"> Perda de função</label>
+                <label><input type="checkbox" name="pai-flog" value="rubor"> Rubor</label>
+              </div>
+            </div>
+            <div class="field">
+            <label><input type="checkbox" style="margin-top: 16px;" name="pai-esteril" value="com cobertura estéril e óstio de inserção visível"> Uso de cobertura transparente estéril</label>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dreno -->
+      <!-- Adicionar lógica de duplicação no card -->
+      <div class="device-block">
+        <div class="device-header" onclick="toggleDevice(this)">
+          <span>Dreno</span><span>▾</span>
+        </div>
+        <div class="device-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Tipo</label>
+              <div class="radio-group">
+                <label><input type="radio" name="dreno-tipo" value="de tórax"> Tórax</label>
+                <label><input type="radio" name="dreno-tipo" value="de Blake"> Blake</label>
+                <label><input type="radio" name="dreno-tipo" value="de Penrose"> Penrose</label>
+                <label><input type="radio" name="dreno-tipo" value="portovac"> Portovac</label>
+                <label><input type="radio" name="dreno-tipo" value="de Kehr"> Kehr</label>
+                <label><input type="radio" name="dreno-tipo" value="a vácuo"> A vácuo</label>
+                <label><input type="radio" name="dreno-tipo" value="derivação ventricular externa"> DVE</label>
               </div>
             </div>
             <div class="field">
               <label>Data de Inserção</label>
-              <input type="date" id="sonda-data">
+              <input type="date" id="dreno-data">
             </div>
             <div class="field">
-              <label>Fixação (cm)</label>
-              <input type="number" id="sonda-cm" min="0" placeholder="Ex: 55">
+              <label>Secreção</label>
+              <div class="radio-group">
+                <label><input type="radio" name="dreno-sec" value="seroso"> Seroso</label>
+                <label><input type="radio" name="dreno-sec" value="purulento"> Purulento</label>
+                <label><input type="radio" name="dreno-sec" value="serosanguinolento"> Serossanguinolento</label>
+                <label><input type="radio" name="dreno-sec" value="sanguinolento"> Sanguinolento</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Quantidade Drenada Estimada (ml)</label>
+              <input type="number" min="0" step="1" id="dreno-quant">
+            </div>
+            <div class="field">
+              <!-- Inserir seleção por imagem -->
+              <label>Localização</label>
             </div>
           </div>
         </div>
@@ -3017,7 +3563,7 @@
   const sections = [
     'identificacao','sinais-vitais','percepcao','cabeca', 'pescoco-torax',
     'cardiovascular','pulmonar','abdome','genitalia','pele','membros',
-    'dispositivos', 'medicacao', 'escalas', 'adicionais', 'resumo'
+    'circulatorio', 'digestivo', 'gerais', 'medicacao', 'escalas', 'adicionais', 'resumo'
   ];
   let current = 0;
 
@@ -3642,19 +4188,70 @@
     const avpLocal = getRadio('avp-local');
     const avpData = getVal('avp-data');
     const avpCat = getVal('avp-cateter');
-    const avpFlog = getRadio('avp-flog');
+    const avpFlog = getChecks('avp-flog');
+    const avpEsteril = getChecks('avp-esteril');
     const cvcLumen = getRadio('cvc-lumen');
+    const cvcData = getVal('cvc-data');
     const cvcLocal = getRadio('cvc-local');
-    const cvcFlog = getRadio('cvc-flog');
+    const cvcFlog = getChecks('cvc-flog');
     const cvcFix = getRadio('cvc-fix');
+    const cvcUso = getRadio('cvc-uso');
+    const cvcEsteril = getChecks('cvc-esteril');
+    const piccLumen = getRadio('picc-lumen');
+    const piccData = getVal('picc-data');
+    const piccLocal = getRadio('picc-local');
+    const piccFlog = getChecks('picc-flog');
+    const piccFix = getRadio('picc-fix');
+    const piccUso = getRadio('picc-uso');
+    const piccEsteril = getChecks('picc-esteril');
+    const cdlLumen = getRadio('cdl-lumen');
+    const cdlData = getVal('cdl-data');
+    const cdlLocal = getRadio('cdl-local');
+    const cdlFlog = getChecks('cdl-flog');
+    const cdlFix = getRadio('cdl-fix');
+    const cdlEsteril = getChecks('cdl-esteril');
+    const pacLocal = getRadio('pac-local');
+    const pacData = getVal('pac-data');
+    const pacFlog = getChecks('pac-flog');
+    const pacRef = getRadio('pac-ref');
+    const biData = getVal('bi-data');
+    const biLocal = getRadio('bi-local');
+    const biFlog = getChecks('bi-flog');
+    const biFix = getRadio('bi-fix');
+    const pniLocal = getRadio('pni-local');
+    const paiLocal = getRadio('pai-local');
+    const paiData = getVal('pai-data');
+    const paiFix = getRadio('pai-fix');
+    const paiFlog = getChecks('pai-flog');
+    const paiEsteril = getChecks('pai-esteril');
     const viaAerea = getRadio('via-aerea');
     const vaaData = getVal('vaa-data');
     const totNum = getVal('tot-num');
     const totCom = getVal('tot-comissura');
-    const sondaTipo = getRadio('sonda-tipo');
-    const sondaLocal = getRadio('sonda-local');
-    const sondaData = getVal('sonda-data');
-    const sondaCm = getVal('sonda-cm');
+    const sneLocal = getRadio('sne-local');
+    const sneData = getVal('sne-data');
+    const sneFix = getVal('sne-fix');
+    const sneCond = getRadio('sne-cond');
+    const sngLocal = getRadio('sng-local');
+    const sngData = getRadio('sng-data');
+    const sngCond = getRadio('sng-cond');
+    const gttPerm = getRadio('gtt-perm');
+    const gttData = getVal('gtt-data');
+    const gttVaza = getRadio('gtt-vaza');
+    const gttFlog = getChecks('gtt-flog');
+    const gttPele = getRadio('gtt-pele');
+    const gttBarreira = getRadio('gtt-barreira');
+    const colosCor = getRadio('colos-cor');
+    const colosBarreira = getRadio('colos-barreira');
+    const colosPele = getRadio('colos-pele');
+    const crbData = getVal('crb-data');
+    const crbUsa = getRadio('crb-usa');
+    const crbPele = getRadio('crb-pele');
+    const crbVaza = getRadio('crb-vaza');
+    const drenoTipo = getRadio('dreno-tipo');
+    const drenoData = getVal('dreno-data');
+    const drenoSec = getRadio('dreno-sec');
+    const drenoQuant = getVal('dreno-quant');
 
     // EVA / BPS
     const evaScore = getVal('eva-score');
@@ -3813,17 +4410,71 @@
       const disp = [];
       if (avpLocal) {
         let avp = `AVP localizado em ${avpLocal}`;
-        if (avpData) avp += `, puncionado em ${avpData}`;
-        if (avpCat) avp += `, cateter n° ${avpCat}G`;
-        if (avpFlog) avp += `, ${avpFlog}`;
+        if (avpData) avp += `, puncionado no dia ${avpData}`;
+        if (avpCat) avp += `, utilizando cateter n° ${avpCat}G`;
+        if (avpFlog.length > 0) avp += `, presença de sinais flogísticos ${avpFlog.join(', ')}`;
         else avp += ', ausência de sinais flogísticos'
+        if (avpEsteril.length > 0) avp += `, ${avpEsteril}`;
         disp.push(avp);
       }
       if (cvcLumen && cvcLocal) {
-        let cvc = `CVC ${cvcLumen} lúmen localizado em ${cvcLocal}`;
-        if (cvcFlog) cvc += `, ${cvcFlog}`;
+        let cvc = `CVC ${cvcLumen}-lúmen localizado em ${cvcLocal}`;
+        if (cvcData) cvc += `, puncionado no dia ${cvcData}`;
+        if (cvcFlog) cvc += `, presença de sinais flogísticos (${cvcFlog.join(', ')})`;
+        else cvc += ', ausência de sinais flogísticos';
         if (cvcFix) cvc += `, ${cvcFix}`;
+        if (cvcUso) cvc += `, ${cvcUso}`;
+        if (cvcEsteril.length > 0) cvc += `, ${cvcEsteril}`;
         disp.push(cvc);
+      }
+      if (piccLumen && piccLocal) {
+        let picc = `PICC ${piccLumen}-lúmen localizado em ${piccLocal}`;
+        if (piccData) picc += `, puncionado no dia ${piccData}`;
+        if (piccFlog) picc += `, presença de sinais flogísticos (${piccFlog.join(', ')})`;
+        else picc += ', ausência de sinais flogísticos';
+        if (piccFix) picc += `, ${piccFix}`;
+        if (piccUso) picc += `, ${piccUso}`;
+        if (piccEsteril.length > 0) picc += `, ${piccEsteril}`;
+        disp.push(picc);
+      }
+      if (cdlLumen && cdlLocal) {
+        let cdl = `CDL ${cdlLumen}-lúmen localizado em ${cdlLocal}`;
+        if (cdlData) cdl += `, puncionado no dia ${cdlData}`;
+        if (cdlFlog) cdl += `, presença de sinais flogísticos (${cdlFlog.join(', ')})`;
+        else cdl += ', ausência de sinais flogísticos';
+        if (cdlFix) cdl += `, ${cdlFix}`;
+        if (cdlEsteril.length > 0) cdl += `, ${cdlEsteril}`;
+        disp.push(cdl);
+      }
+      if (pacLocal) {
+        let pac = `Cateter Port-a-Cath localizado em ${pacLocal}`;
+        if (pacData) pac += `, inserido no dia ${pacData}`;
+        if (pacFlog) pac += `, presença de sinais flogísticos (${pacFlog.join(', ')})`;
+        else pac += ', ausência de sinais flogísticos';
+        if (pacRef) pac += `, ${pacRef}`;
+        disp.push(pac);
+      }
+      if (biLocal) {
+        let bi = `Bainha Introdutora localizada em ${biLocal}`;
+        if (biData) bi += `, inserida no dia ${biData}`;
+        if (biFlog) bi += `, presença de sinais flogísticos (${biFlog.join(', ')})`;
+        else bi += ', ausência de sinais flogísticos';
+        if (biFix) bi += `, ${biFix}`;
+        disp.push(bi);
+      }
+      if (pniLocal) {
+        let pni = `PNI com braçadeira localizada em ${pniLocal}`;
+        disp.push(pni);
+      }
+      if (paiLocal) {
+        let pai = `PAI com sítio de punção em ${paiLocal}`;
+        if (paiData) pai += `, puncionado no dia ${paiData}`;
+        if (paiFlog) pai += `, presença de sinais flogísticos (${paiFlog.join(', ')})`;
+        else pai += ', ausência de sinais flogísticos';
+        if (paiFix) pai += `, ${paiFix}`;
+        if (paiEsteril.length > 0) pai += `, ${paiEsteril}`;
+        pai += ', mantendo bolsa pressórica nivelada a 300 mmHg com SF 0,9% devidamente datado'
+        disp.push(pai);
       }
       if (viaAerea && viaAerea !== 'Nenhum') {
         let va = `${viaAerea} inserido`;
@@ -3834,12 +4485,52 @@
         }
         disp.push(va);
       }
-      if (sondaTipo && sondaTipo !== 'Nenhuma') {
-        let snd = `${sondaTipo} inserida`;
-        if (sondaData) snd += ` em ${sondaData}`;
-        if (sondaLocal) snd += `, ${sondaLocal}`;
-        if (sondaCm) snd += `, fixada a ${sondaCm} cm`;
-        disp.push(snd);
+      if (sneLocal) {
+        let sne = `SNE inserida`;
+        if (sneLocal) sne += ` em ${sneLocal}`;
+        if (sneData) sne += `, no dia ${sneData}`;
+        if (sneFix) sne += `, fixada a ${sneFix} cm`;
+        if (sneCond) sne += `, ${sneCond}`;
+        disp.push(sne);
+      }
+      if (sngLocal) {
+        let sng = `SNG inserida`;
+        if (sngLocal) sng += ` em ${sngLocal}`;
+        if (sngData) sng += `, no dia ${sngData}`;
+        if (sngCond) sng += `, ${sngCond}`;
+        disp.push(sng);
+      }
+      if (gttPerm) {
+        let gtt = `Gastrostomia ${gttPerm}`;
+        if (gttData) gtt += `, instalada dia ${gttData}`;
+        if (gttFlog) gtt += `, com óstio de inserção apresentando sinais flogísticos (${gttFlog.join(', ')})`;
+        else gtt += `, com óstio de inserção íntegro`;
+        if (gttPele) gtt += `, pele periestomal ${gttPele}`;
+        if (gttVaza) gtt += `, ${gttVaza} de vazamentos de conteúdo estomacal`;
+        if (gttBarreira) gtt += `, ${gttBarreira} barreira aplicado em área périestomal`;
+        disp.push(gtt);
+      }
+      if (colosPele) {
+        let colos = `Colostomia em uso de bolsa de Karaya localizada em {colosLocal}`;
+        if (colosCor) colos += `, apresentando estoma ${colosCor}`;
+        if (colosPele) colos += `, pele peristomal ${colosPele}`;
+        if (colosBarreira) colos += `, ${colosBarreira} barreira aplicado em área périestomal`;
+        disp.push(colos);
+      }
+      if (crbVaza) {
+        let crb = `Catéter retal com balão com sistema ${crbVaza}`;
+        if (crbData) crb += `, instalado dia ${crbData}`;
+        if (crbUsa) crb += `, inserido para ${crbUsa}`;
+        if (crbPele) crb += `, apresentando pele perianal ${crbPele}`;
+        disp.push(crb);
+      }
+      if (drenoTipo) {
+        let dreno = `Uso de dreno ${drenoTipo}`;
+        if (drenoData) dreno += ` inserido no dia ${drenoData}`;
+        if (drenoSec) dreno += `, com secreção de aspecto ${drenoSec}`;
+        else dreno += `, ausência de secreção`;
+        if (drenoSec && drenoQuant) dreno += ` e quantidade estimada de ${drenoQuant} ml`;
+        disp.push(dreno);
       }
       if (disp.length > 0) {
         corpo += 'DISPOSITIVOS MÉDICOS:\n' + disp.map(d => '• ' + d + '.').join('\n') + '\n\n';
